@@ -345,7 +345,7 @@ function initCampaignModals() {
       <div style="margin-bottom: 20px;">
         <div class="m-label" style="margin-bottom: 8px;">Platforms & Stack</div>
         <div class="modal-tech-list">
-          ${data.technologies.map(t => `<span class="tech-tag" style="background: rgba(139, 92, 246, 0.14); color: #c084fc;">${t}</span>`).join('')}
+          ${data.technologies.map(t => `<span class="tech-tag" style="background: rgba(211, 171, 85, 0.14); color: #f4d685; border: 1px solid rgba(211, 171, 85, 0.3);">${t}</span>`).join('')}
         </div>
       </div>
 
