@@ -758,111 +758,79 @@ button, input, textarea, select {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 36px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
   align-items: stretch;
-}
-
-.about-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.story-content h3 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: 18px;
-  letter-spacing: -0.02em;
-}
-
-.story-content p {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  margin-bottom: 28px;
-}
-
-.story-highlights {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.highlight-item {
-  display: flex;
-  gap: 16px;
-}
-
-.highlight-check {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  flex-shrink: 0;
-  font-size: 0.85rem;
-}
-
-.highlight-item strong {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 2px;
-}
-
-.highlight-item p {
-  font-size: 0.925rem;
-  color: var(--text-secondary);
-  margin-bottom: 0;
-}
-
-.about-pillars {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .pillar-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 24px 28px;
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #fff5c5, #d3ab55, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .pillar-card:hover {
-  transform: translateX(6px);
+  transform: translateY(-5px);
   border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.pillar-card:hover::before {
+  opacity: 1;
 }
 
 .pillar-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
   background: rgba(211, 171, 85, 0.14);
   color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.pillar-card:hover .pillar-icon {
+  background: linear-gradient(135deg, #f4d685 0%, #d3ab55 100%);
+  color: #040506;
+  box-shadow: 0 4px 16px var(--primary-glow);
 }
 
 .pillar-card h4 {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
 }
 
 .pillar-card p {
-  font-size: 0.925rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
+  line-height: 1.65;
 }
 
 /* --- SERVICES SECTION --- */
@@ -1655,7 +1623,8 @@ button, input, textarea, select {
   }
 
   .about-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
   .services-grid {
@@ -1690,6 +1659,11 @@ button, input, textarea, select {
 
   .section-title {
     font-size: 2rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .stats-bar {
