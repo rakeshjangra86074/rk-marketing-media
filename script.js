@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletterForm();
   initDynamicYear();
   initFuturisticBackground();
+  initFloatingSocialCursorTracking();
 });
 
 /* --------------------------------------------------------------------------
@@ -771,6 +772,118 @@ function initFuturisticBackground() {
       if (animId) cancelAnimationFrame(animId);
     } else {
       animId = requestAnimationFrame(render);
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   12. Interactive Cursor Tracking for Floating Social Media Holograms
+   -------------------------------------------------------------------------- */
+function initFloatingSocialCursorTracking() {
+  const cards = document.querySelectorAll('.futuristic-social-card');
+  if (!cards.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Window dimensions & center
+  let centerX = window.innerWidth / 2;
+  let centerY = window.innerHeight / 2;
+
+  let mouseX = centerX;
+  let mouseY = centerY;
+  let targetMouseX = centerX;
+  let targetMouseY = centerY;
+
+  window.addEventListener('resize', () => {
+    centerX = window.innerWidth / 2;
+    centerY = window.innerHeight / 2;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    targetMouseX = e.clientX;
+    targetMouseY = e.clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      targetMouseX = e.touches[0].clientX;
+      targetMouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  // Individual physical attributes & parallax depths for each hologram
+  const cardData = [
+    { el: document.querySelector('.card-instagram'), depthX: -0.065, depthY: -0.055, speed: 0.0016, ampX: 20, ampY: 24, phase: 0 },
+    { el: document.querySelector('.card-youtube'),   depthX: 0.075,  depthY: 0.045,  speed: 0.0014, ampX: 24, ampY: 28, phase: 1.8 },
+    { el: document.querySelector('.card-facebook'),  depthX: -0.055, depthY: 0.065,  speed: 0.0015, ampX: 18, ampY: 22, phase: 3.2 },
+    { el: document.querySelector('.card-linkedin'),  depthX: 0.06,   depthY: -0.05,  speed: 0.0013, ampX: 22, ampY: 26, phase: 4.5 },
+    { el: document.querySelector('.card-twitter'),   depthX: -0.07,  depthY: -0.04,  speed: 0.0017, ampX: 16, ampY: 24, phase: 2.3 },
+    { el: document.querySelector('.card-viral'),     depthX: 0.055,  depthY: 0.06,   speed: 0.0015, ampX: 20, ampY: 22, phase: 5.1 }
+  ].filter(item => item.el !== null);
+
+  cardData.forEach(item => {
+    item.currentX = 0;
+    item.currentY = 0;
+    item.currentRotateX = 0;
+    item.currentRotateY = 0;
+  });
+
+  let startTime = performance.now();
+  let animId = null;
+
+  function animate(now) {
+    const time = now - startTime;
+
+    // Smooth lerp of mouse coordinates for silky responsiveness
+    mouseX += (targetMouseX - mouseX) * 0.08;
+    mouseY += (targetMouseY - mouseY) * 0.08;
+
+    const relMouseX = mouseX - centerX;
+    const relMouseY = mouseY - centerY;
+
+    cardData.forEach(item => {
+      // Natural ambient floating oscillation
+      const ambientX = Math.sin(time * item.speed + item.phase) * item.ampX;
+      const ambientY = Math.cos(time * item.speed * 0.85 + item.phase) * item.ampY;
+
+      // Dynamic cursor parallax offset
+      const parallaxX = relMouseX * item.depthX;
+      const parallaxY = relMouseY * item.depthY;
+
+      // 3D holographic tilt angles
+      const targetRotateX = (relMouseY / (centerY || 1)) * 12 * (item.depthY > 0 ? 1 : -1);
+      const targetRotateY = (relMouseX / (centerX || 1)) * -14 * (item.depthX > 0 ? 1 : -1);
+
+      // Target position
+      const targetX = ambientX + parallaxX;
+      const targetY = ambientY + parallaxY;
+
+      // Smooth inertia linear interpolation
+      item.currentX += (targetX - item.currentX) * 0.09;
+      item.currentY += (targetY - item.currentY) * 0.09;
+      item.currentRotateX += (targetRotateX - item.currentRotateX) * 0.09;
+      item.currentRotateY += (targetRotateY - item.currentRotateY) * 0.09;
+
+      item.el.style.transform = `translate3d(${item.currentX.toFixed(2)}px, ${item.currentY.toFixed(2)}px, 0) rotateX(${item.currentRotateX.toFixed(2)}deg) rotateY(${item.currentRotateY.toFixed(2)}deg)`;
+    });
+
+    if (!prefersReducedMotion) {
+      animId = requestAnimationFrame(animate);
+    }
+  }
+
+  if (prefersReducedMotion) {
+    animate(performance.now());
+    return;
+  }
+
+  animId = requestAnimationFrame(animate);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (animId) cancelAnimationFrame(animId);
+    } else {
+      animId = requestAnimationFrame(animate);
     }
   });
 }

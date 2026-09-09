@@ -125,7 +125,9 @@ body {
   color: #f4d685;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(211, 171, 85, 0.22);
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: opacity 0.3s ease;
 }
 
 /* Outer Rotating HUD Halo Ring */
@@ -182,86 +184,41 @@ body {
   filter: drop-shadow(0 0 8px rgba(181, 136, 50, 0.35));
 }
 
-/* Placements & Float Animations */
+/* Placements Across Viewport */
 .card-instagram {
   top: 13%;
   left: 3%;
   opacity: 0.52;
-  animation: socialFloat1 20s ease-in-out infinite alternate;
 }
 
 .card-youtube {
   top: 24%;
   right: 3%;
   opacity: 0.48;
-  animation: socialFloat2 24s ease-in-out infinite alternate;
 }
 
 .card-facebook {
   top: 46%;
   left: 3.5%;
   opacity: 0.46;
-  animation: socialFloat3 22s ease-in-out infinite alternate;
 }
 
 .card-linkedin {
   top: 64%;
   right: 3.5%;
   opacity: 0.5;
-  animation: socialFloat4 26s ease-in-out infinite alternate;
 }
 
 .card-twitter {
   top: 78%;
   left: 3%;
   opacity: 0.44;
-  animation: socialFloat5 21s ease-in-out infinite alternate;
 }
 
 .card-viral {
   top: 88%;
   right: 4%;
   opacity: 0.45;
-  animation: socialFloat6 23s ease-in-out infinite alternate;
-}
-
-/* Smooth Floating Trajectories */
-@keyframes socialFloat1 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(22px, -30px) rotate(6deg); }
-  66% { transform: translate(-18px, -50px) rotate(-5deg); }
-  100% { transform: translate(15px, -75px) rotate(8deg); }
-}
-
-@keyframes socialFloat2 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(-24px, 30px) rotate(-7deg); }
-  66% { transform: translate(16px, 55px) rotate(6deg); }
-  100% { transform: translate(-20px, 85px) rotate(-9deg); }
-}
-
-@keyframes socialFloat3 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(30px, -35px) rotate(9deg); }
-  100% { transform: translate(-22px, -65px) rotate(-6deg); }
-}
-
-@keyframes socialFloat4 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(-28px, -40px) rotate(-8deg); }
-  100% { transform: translate(20px, -70px) rotate(7deg); }
-}
-
-@keyframes socialFloat5 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(24px, 32px) rotate(-6deg); }
-  100% { transform: translate(-16px, 60px) rotate(8deg); }
-}
-
-@keyframes socialFloat6 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(-20px, -28px) rotate(7deg); }
-  100% { transform: translate(26px, -55px) rotate(-7deg); }
 }
 
 a {
