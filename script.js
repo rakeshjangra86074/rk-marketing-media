@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initNewsletterForm();
   initDynamicYear();
+  initFuturisticBackground();
 });
 
 /* --------------------------------------------------------------------------
@@ -536,4 +537,240 @@ function showToast(message, type = 'info') {
       }
     }, 300);
   }, 3800);
+}
+
+/* --------------------------------------------------------------------------
+   11. Futuristic Neural Constellation Background Canvas
+   -------------------------------------------------------------------------- */
+function initFuturisticBackground() {
+  const canvas = document.getElementById('futuristicBgCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Check prefers-reduced-motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  // Retina display support
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function setupCanvasSize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+  setupCanvasSize();
+
+  // Particle color palette derived from logo (Gold & Platinum)
+  const colors = [
+    'rgba(211, 171, 85, ',  // Primary gold
+    'rgba(244, 214, 133, ', // Light golden champagne
+    'rgba(255, 245, 197, ', // Bright gold highlight
+    'rgba(181, 136, 50, ',  // Deep antique gold
+    'rgba(226, 232, 240, '  // Subtle silver/platinum
+  ];
+
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 160,
+    active: false
+  };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', () => {
+    mouse.active = false;
+  });
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) {
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+      mouse.active = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    mouse.active = false;
+  });
+
+  class Particle {
+    constructor() {
+      this.reset(true);
+    }
+
+    reset(initial = false) {
+      this.x = initial ? Math.random() * width : (Math.random() > 0.5 ? 0 : width);
+      this.y = Math.random() * height;
+      const speed = Math.random() * 0.45 + 0.15;
+      const angle = Math.random() * Math.PI * 2;
+      this.vx = Math.cos(angle) * speed;
+      this.vy = Math.sin(angle) * speed;
+      this.baseRadius = Math.random() * 1.8 + 1.2;
+      this.radius = this.baseRadius;
+      this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+      this.alpha = Math.random() * 0.5 + 0.3;
+      this.pulseSpeed = Math.random() * 0.02 + 0.01;
+      this.pulseOffset = Math.random() * Math.PI * 2;
+      this.currentAlpha = this.alpha;
+    }
+
+    update(tick) {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Wrap-around screen bounds
+      if (this.x < -20) this.x = width + 20;
+      else if (this.x > width + 20) this.x = -20;
+      if (this.y < -20) this.y = height + 20;
+      else if (this.y > height + 20) this.y = -20;
+
+      // Subtle breathing pulse
+      this.currentAlpha = this.alpha + Math.sin(tick * this.pulseSpeed + this.pulseOffset) * 0.2;
+      if (this.currentAlpha < 0.1) this.currentAlpha = 0.1;
+
+      // Interactive mouse attraction / gentle deflection
+      if (mouse.active && mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distSq = dx * dx + dy * dy;
+        const radiusSq = mouse.radius * mouse.radius;
+
+        if (distSq < radiusSq) {
+          const dist = Math.sqrt(distSq);
+          const force = (1 - dist / mouse.radius) * 0.02;
+          this.x += dx * force;
+          this.y += dy * force;
+        }
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `${this.colorBase}${this.currentAlpha})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(211, 171, 85, 0.4)';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  // Determine particle density based on viewport width
+  function getParticleCount() {
+    if (window.innerWidth < 480) return 26;
+    if (window.innerWidth < 768) return 38;
+    if (window.innerWidth < 1200) return 55;
+    return 72;
+  }
+
+  let particles = [];
+  function createParticles() {
+    const count = getParticleCount();
+    particles = [];
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  }
+  createParticles();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      setupCanvasSize();
+      createParticles();
+    }, 180);
+  });
+
+  // Main animation loop
+  let tick = 0;
+  let animId = null;
+  const maxLineDist = 130;
+  const maxLineDistSq = maxLineDist * maxLineDist;
+
+  function render() {
+    tick++;
+    ctx.clearRect(0, 0, width, height);
+
+    const isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
+    const baseAlphaScale = isLightMode ? 0.7 : 1;
+
+    // Connect particles
+    for (let i = 0; i < particles.length; i++) {
+      const p1 = particles[i];
+      p1.update(tick);
+      p1.draw();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < maxLineDistSq) {
+          const dist = Math.sqrt(distSq);
+          const lineAlpha = (1 - dist / maxLineDist) * 0.22 * baseAlphaScale;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = `rgba(211, 171, 85, ${lineAlpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+
+      // Draw filament to cursor if in proximity
+      if (mouse.active && mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - p1.x;
+        const dy = mouse.y - p1.y;
+        const distSq = dx * dx + dy * dy;
+        const mouseDist = 140;
+        if (distSq < mouseDist * mouseDist) {
+          const dist = Math.sqrt(distSq);
+          const mouseLineAlpha = (1 - dist / mouseDist) * 0.45 * baseAlphaScale;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(244, 214, 133, ${mouseLineAlpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+
+    if (!prefersReducedMotion) {
+      animId = requestAnimationFrame(render);
+    }
+  }
+
+  // If user prefers reduced motion, render one static frame
+  if (prefersReducedMotion) {
+    render();
+    return;
+  }
+
+  render();
+
+  // Pause when tab is inactive to save battery and CPU cycles
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (animId) cancelAnimationFrame(animId);
+    } else {
+      animId = requestAnimationFrame(render);
+    }
+  });
 }

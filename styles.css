@@ -86,6 +86,19 @@ body {
   font-size: 16px;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* Futuristic Interactive Particle Canvas Background */
+.futuristic-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
 }
 
 a {
@@ -421,6 +434,57 @@ button, input, textarea, select {
   overflow: hidden;
 }
 
+/* Futuristic Cyber Grid Overlay */
+.cyber-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(211, 171, 85, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(211, 171, 85, 0.05) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 40%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 40%, black 20%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+  animation: cyberGridFloat 25s linear infinite;
+}
+
+@keyframes cyberGridFloat {
+  0% { background-position: 0 0; }
+  100% { background-position: 52px 52px; }
+}
+
+/* Holographic Cyber Scanline */
+.cyber-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(211, 171, 85, 0.15) 15%, rgba(244, 214, 133, 0.75) 50%, rgba(255, 245, 197, 0.95) 55%, rgba(211, 171, 85, 0.15) 85%, transparent 100%);
+  box-shadow: 0 0 16px rgba(244, 214, 133, 0.6), 0 0 32px rgba(211, 171, 85, 0.35);
+  pointer-events: none;
+  z-index: 1;
+  animation: scanlineSweep 9s ease-in-out infinite;
+}
+
+@keyframes scanlineSweep {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
 .hero-bg-glow {
   position: absolute;
   border-radius: 50%;
@@ -436,6 +500,7 @@ button, input, textarea, select {
   width: 520px;
   height: 520px;
   background: radial-gradient(circle, rgba(211, 171, 85, 0.22) 0%, transparent 70%);
+  animation: glowPulse 9s ease-in-out infinite alternate;
 }
 
 .glow-2 {
@@ -444,6 +509,13 @@ button, input, textarea, select {
   width: 460px;
   height: 460px;
   background: radial-gradient(circle, rgba(181, 136, 50, 0.18) 0%, transparent 70%);
+  animation: glowPulse 11s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes glowPulse {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.35; }
+  50% { transform: scale(1.15) translate(22px, 18px); opacity: 0.55; }
+  100% { transform: scale(0.92) translate(-18px, -12px); opacity: 0.35; }
 }
 
 .hero-container {
@@ -531,6 +603,50 @@ button, input, textarea, select {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+/* Sci-Fi Rotating Hologram HUD Rings */
+.hero-hud-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  margin-top: -260px;
+  margin-left: -260px;
+  border-radius: 50%;
+  border: 1px dashed rgba(211, 171, 85, 0.22);
+  pointer-events: none;
+  z-index: 0;
+  animation: hudRotate 40s linear infinite;
+}
+
+.hero-hud-ring::before {
+  content: '';
+  position: absolute;
+  inset: 36px;
+  border-radius: 50%;
+  border: 1px dotted rgba(244, 214, 133, 0.28);
+  animation: hudRotateRev 26s linear infinite;
+}
+
+.hero-hud-ring::after {
+  content: '';
+  position: absolute;
+  inset: 72px;
+  border-radius: 50%;
+  border: 1px solid rgba(211, 171, 85, 0.12);
+}
+
+@keyframes hudRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hudRotateRev {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 
 .hero-card-stack {
@@ -1680,6 +1796,14 @@ button, input, textarea, select {
 
   .hero-title {
     font-size: 2.5rem;
+  }
+
+  .hero-hud-ring {
+    width: 340px;
+    height: 340px;
+    margin-top: -170px;
+    margin-left: -170px;
+    opacity: 0.6;
   }
 
   .section-title {

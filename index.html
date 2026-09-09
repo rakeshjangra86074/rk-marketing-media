@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Futuristic Interactive Background Canvas -->
+  <canvas id="futuristicBgCanvas" class="futuristic-bg-canvas" aria-hidden="true"></canvas>
+
   <!-- Navigation Bar -->
   <header class="navbar-header" id="navbar">
     <div class="container nav-container">
@@ -78,6 +81,8 @@
   <main>
     <!-- HERO SECTION -->
     <section class="section hero-section" id="hero">
+      <div class="cyber-grid-overlay" aria-hidden="true"></div>
+      <div class="cyber-scanline" aria-hidden="true"></div>
       <div class="hero-bg-glow glow-1"></div>
       <div class="hero-bg-glow glow-2"></div>
       <div class="container hero-container">
@@ -118,6 +123,7 @@
         </div>
 
         <div class="hero-visual">
+          <div class="hero-hud-ring" aria-hidden="true"></div>
           <div class="hero-card-stack">
             <div class="dashboard-preview-card">
               <div class="card-header-bar">
