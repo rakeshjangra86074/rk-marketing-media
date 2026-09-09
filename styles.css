@@ -836,8 +836,20 @@ button, input, textarea, select {
 /* --- SERVICES SECTION --- */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 28px;
+}
+
+.services-grid .service-card {
+  grid-column: span 2;
+}
+
+.services-grid .service-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.services-grid .service-card:nth-child(5) {
+  grid-column: 4 / span 2;
 }
 
 .service-card {
@@ -1631,6 +1643,19 @@ button, input, textarea, select {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .services-grid .service-card,
+  .services-grid .service-card:nth-child(4),
+  .services-grid .service-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .services-grid .service-card:nth-child(5) {
+    grid-column: span 2;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
   .portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1679,6 +1704,14 @@ button, input, textarea, select {
 
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .services-grid .service-card,
+  .services-grid .service-card:nth-child(4),
+  .services-grid .service-card:nth-child(5) {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
   }
 
   .portfolio-grid {

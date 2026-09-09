@@ -243,29 +243,29 @@ const campaignData = {
     year: '2025',
     timeline: '60 Days',
     impact: '54% Reduction in CPL, 22,000+ Webinar Attendees',
-    description: 'Replaced traditional corporate promo videos with relatable, authentic UGC creator reviews showcasing student career transitions. Scripted 28 psychological hook variations on Instagram Reels and YouTube Shorts that drove a viral wave of inbound sign-ups.',
-    technologies: ['Instagram Reels Ads', 'YouTube Shorts', 'UGC Creator Studio', 'Typeform Funnels'],
+    description: 'Replaced traditional corporate promo videos with relatable, authentic video testimonials showcasing real career transitions. Scripted 28 psychological hook variations on Instagram Reels and YouTube Shorts that drove a viral wave of inbound sign-ups.',
+    technologies: ['Instagram Reels Ads', 'YouTube Shorts', 'Video Production Studio', 'Typeform Funnels'],
     features: [
       'Psychological 3-second hook scripting formula',
-      'Micro-influencer student case study testimonials',
+      'Student career transition video case studies',
       'High-converting mobile-first webinar registration page',
       'Automated SMS & WhatsApp reminder sequences'
     ]
   },
   4: {
-    category: 'Influencer & Creator Collaborations',
-    title: '125,000 Verified App Installs in 60 Days',
-    client: 'FinNest Banking App',
+    category: 'Content Writing & Brand Storytelling',
+    title: 'High-Impact Brand Copywriting & Thought Leadership',
+    client: 'Vanguard B2B Solutions',
     year: '2026',
-    timeline: '2 Months',
-    impact: '125,000+ KYC-Completed Installs at ₹42 CPI',
-    description: 'Executed an omnichannel creator campaign engaging 45 personal finance influencers across YouTube and Instagram. All creators were briefed with bespoke educational storylines highlighting zero-commission investing, tracked with individual referral links.',
-    technologies: ['AppsFlyer Attribution', 'YouTube Sponsor Integrations', 'Meta Influencer Whitelisting'],
+    timeline: '3 Months',
+    impact: '3.5x Lift in Engagement, 180% Inbound Inquiries',
+    description: 'Developed an authoritative, persuasive brand voice across website landing pages, in-depth thought-leadership articles, and a weekly executive newsletter that established industry credibility and consistently converted readers into qualified leads.',
+    technologies: ['Website Copywriting', 'Editorial Content', 'Email Newsletters', 'Conversion Storytelling'],
     features: [
-      'Rigorous fake-follower & engagement rate auditing',
-      'Influencer whitelisting ads running directly through creator handles',
-      'Dedicated landing page matching each creator’s audience tone',
-      'Real-time install and KYC verification tracking'
+      'Customer persona research and brand voice guidelines',
+      'High-converting landing page headlines and sales hooks',
+      'Educational industry articles and executive guides',
+      'Automated nurture email sequences and weekly newsletters'
     ]
   },
   5: {
@@ -285,16 +285,16 @@ const campaignData = {
     ]
   },
   6: {
-    category: 'B2B SEO & Growth Funnels',
+    category: 'B2B Funnels & Conversion Optimization',
     title: 'B2B SaaS: 240% Lift in Inbound Qualified Demos',
     client: 'Zenith Cloud SaaS',
     year: '2024',
     timeline: '5 Months',
-    impact: '240% Growth in Monthly Demos, 1st Page Google Rankings',
-    description: 'Conducted an exhaustive technical SEO overhaul, published 30 bottom-of-funnel comparison and alternative pages, and created an interactive ROI calculator that doubled conversion rates on demo request pages.',
-    technologies: ['Technical SEO', 'Semrush', 'Calendly Automated Routing', 'Hotjar Heatmaps'],
+    impact: '240% Growth in Monthly Demos, 2.8x Conversion Rate',
+    description: 'Conducted an exhaustive conversion-rate overhaul, designed 30 high-converting comparison and solution pages, and created an interactive ROI calculator that doubled demo request bookings from qualified visitors.',
+    technologies: ['Landing Page CRO', 'Interactive ROI Calculator', 'Calendly Automated Routing', 'Hotjar Heatmaps'],
     features: [
-      'High-intent competitor alternative keyword ranking',
+      'High-intent comparison and solution page messaging',
       'Interactive savings calculator embedded on landing page',
       'Automated instant Calendly self-booking workflow',
       'Frictionless 3-field demo request form optimization'
