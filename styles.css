@@ -106,7 +106,7 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -188,37 +188,37 @@ body {
 .card-instagram {
   top: 13%;
   left: 3%;
-  opacity: 0.52;
+  opacity: 0.65;
 }
 
 .card-youtube {
   top: 24%;
   right: 3%;
-  opacity: 0.48;
+  opacity: 0.62;
 }
 
 .card-facebook {
   top: 46%;
   left: 3.5%;
-  opacity: 0.46;
+  opacity: 0.60;
 }
 
 .card-linkedin {
   top: 64%;
   right: 3.5%;
-  opacity: 0.5;
+  opacity: 0.64;
 }
 
 .card-twitter {
   top: 78%;
   left: 3%;
-  opacity: 0.44;
+  opacity: 0.58;
 }
 
 .card-viral {
   top: 88%;
   right: 4%;
-  opacity: 0.45;
+  opacity: 0.60;
 }
 
 a {
@@ -262,7 +262,7 @@ button, input, textarea, select {
 
 .section > .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .section-header {
@@ -614,7 +614,7 @@ button, input, textarea, select {
 
 .hero-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   align-items: center;
@@ -912,7 +912,7 @@ button, input, textarea, select {
 /* --- STATS BAR --- */
 .stats-bar {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   background: var(--bg-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);

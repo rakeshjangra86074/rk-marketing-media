@@ -785,7 +785,7 @@ function initFloatingSocialCursorTracking() {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Window dimensions & center
+  // Viewport dimensions & center
   let centerX = window.innerWidth / 2;
   let centerY = window.innerHeight / 2;
 
@@ -793,32 +793,20 @@ function initFloatingSocialCursorTracking() {
   let mouseY = centerY;
   let targetMouseX = centerX;
   let targetMouseY = centerY;
+  let prevTargetMouseX = centerX;
+  let prevTargetMouseY = centerY;
+  let mouseVelocityX = 0;
+  let mouseVelocityY = 0;
+  let mouseActive = false;
 
-  window.addEventListener('resize', () => {
-    centerX = window.innerWidth / 2;
-    centerY = window.innerHeight / 2;
-  });
-
-  window.addEventListener('mousemove', (e) => {
-    targetMouseX = e.clientX;
-    targetMouseY = e.clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches && e.touches[0]) {
-      targetMouseX = e.touches[0].clientX;
-      targetMouseY = e.touches[0].clientY;
-    }
-  }, { passive: true });
-
-  // Individual physical attributes & parallax depths for each hologram
+  // Individual physical attributes & amplified parallax depths for each hologram
   const cardData = [
-    { el: document.querySelector('.card-instagram'), depthX: -0.065, depthY: -0.055, speed: 0.0016, ampX: 20, ampY: 24, phase: 0 },
-    { el: document.querySelector('.card-youtube'),   depthX: 0.075,  depthY: 0.045,  speed: 0.0014, ampX: 24, ampY: 28, phase: 1.8 },
-    { el: document.querySelector('.card-facebook'),  depthX: -0.055, depthY: 0.065,  speed: 0.0015, ampX: 18, ampY: 22, phase: 3.2 },
-    { el: document.querySelector('.card-linkedin'),  depthX: 0.06,   depthY: -0.05,  speed: 0.0013, ampX: 22, ampY: 26, phase: 4.5 },
-    { el: document.querySelector('.card-twitter'),   depthX: -0.07,  depthY: -0.04,  speed: 0.0017, ampX: 16, ampY: 24, phase: 2.3 },
-    { el: document.querySelector('.card-viral'),     depthX: 0.055,  depthY: 0.06,   speed: 0.0015, ampX: 20, ampY: 22, phase: 5.1 }
+    { el: document.querySelector('.card-instagram'), depthX: -0.16, depthY: -0.14, speed: 0.0016, ampX: 22, ampY: 26, phase: 0 },
+    { el: document.querySelector('.card-youtube'),   depthX: 0.20,  depthY: 0.16,  speed: 0.0014, ampX: 25, ampY: 30, phase: 1.8 },
+    { el: document.querySelector('.card-facebook'),  depthX: -0.18, depthY: 0.18,  speed: 0.0015, ampX: 20, ampY: 24, phase: 3.2 },
+    { el: document.querySelector('.card-linkedin'),  depthX: 0.17,  depthY: -0.17, speed: 0.0013, ampX: 24, ampY: 28, phase: 4.5 },
+    { el: document.querySelector('.card-twitter'),   depthX: -0.22, depthY: -0.14, speed: 0.0017, ampX: 18, ampY: 26, phase: 2.3 },
+    { el: document.querySelector('.card-viral'),     depthX: 0.18,  depthY: 0.20,  speed: 0.0015, ampX: 22, ampY: 25, phase: 5.1 }
   ].filter(item => item.el !== null);
 
   cardData.forEach(item => {
@@ -826,6 +814,46 @@ function initFloatingSocialCursorTracking() {
     item.currentY = 0;
     item.currentRotateX = 0;
     item.currentRotateY = 0;
+    item.currentScale = 1.0;
+    item.baseX = 0;
+    item.baseY = 0;
+  });
+
+  function recalculateBasePositions() {
+    centerX = window.innerWidth / 2;
+    centerY = window.innerHeight / 2;
+    cardData.forEach(item => {
+      const rect = item.el.getBoundingClientRect();
+      item.baseX = (rect.left - item.currentX) + rect.width / 2;
+      item.baseY = (rect.top - item.currentY) + rect.height / 2;
+    });
+  }
+
+  // Calculate base positions after paint
+  requestAnimationFrame(recalculateBasePositions);
+
+  window.addEventListener('resize', () => {
+    recalculateBasePositions();
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    targetMouseX = e.clientX;
+    targetMouseY = e.clientY;
+    mouseActive = true;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      targetMouseX = e.touches[0].clientX;
+      targetMouseY = e.touches[0].clientY;
+      mouseActive = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', () => {
+    targetMouseX = centerX;
+    targetMouseY = centerY;
+    mouseActive = false;
   });
 
   let startTime = performance.now();
@@ -834,37 +862,84 @@ function initFloatingSocialCursorTracking() {
   function animate(now) {
     const time = now - startTime;
 
-    // Smooth lerp of mouse coordinates for silky responsiveness
-    mouseX += (targetMouseX - mouseX) * 0.08;
-    mouseY += (targetMouseY - mouseY) * 0.08;
+    // Track cursor velocity for subtle kinetic impulse
+    mouseVelocityX = (targetMouseX - prevTargetMouseX) * 0.25;
+    mouseVelocityY = (targetMouseY - prevTargetMouseY) * 0.25;
+    prevTargetMouseX = targetMouseX;
+    prevTargetMouseY = targetMouseY;
+
+    // Smooth lerp of mouse coordinates for silky inertia
+    mouseX += (targetMouseX - mouseX) * 0.085;
+    mouseY += (targetMouseY - mouseY) * 0.085;
 
     const relMouseX = mouseX - centerX;
     const relMouseY = mouseY - centerY;
+    const isMobile = window.innerWidth < 768;
+    const baseScale = isMobile ? 0.68 : 1.0;
 
     cardData.forEach(item => {
-      // Natural ambient floating oscillation
+      // 1. Organic ambient floating oscillation
       const ambientX = Math.sin(time * item.speed + item.phase) * item.ampX;
       const ambientY = Math.cos(time * item.speed * 0.85 + item.phase) * item.ampY;
 
-      // Dynamic cursor parallax offset
+      // 2. Amplified parallax displacement driven by cursor movement
       const parallaxX = relMouseX * item.depthX;
       const parallaxY = relMouseY * item.depthY;
 
-      // 3D holographic tilt angles
-      const targetRotateX = (relMouseY / (centerY || 1)) * 12 * (item.depthY > 0 ? 1 : -1);
-      const targetRotateY = (relMouseX / (centerX || 1)) * -14 * (item.depthX > 0 ? 1 : -1);
+      // 3. Proximity repulsion & magnetic hover float
+      let proximityRepelX = 0;
+      let proximityRepelY = 0;
+      let proximityRotX = 0;
+      let proximityRotY = 0;
+      let targetExtraScale = 1.0;
 
-      // Target position
-      const targetX = ambientX + parallaxX;
-      const targetY = ambientY + parallaxY;
+      if (mouseActive) {
+        const visualCardX = item.baseX + item.currentX;
+        const visualCardY = item.baseY + item.currentY;
+        const distDx = visualCardX - mouseX;
+        const distDy = visualCardY - mouseY;
+        const dist = Math.hypot(distDx, distDy);
+        const proximityRadius = 260;
 
-      // Smooth inertia linear interpolation
-      item.currentX += (targetX - item.currentX) * 0.09;
-      item.currentY += (targetY - item.currentY) * 0.09;
-      item.currentRotateX += (targetRotateX - item.currentRotateX) * 0.09;
-      item.currentRotateY += (targetRotateY - item.currentRotateY) * 0.09;
+        if (dist < proximityRadius && dist > 1) {
+          const proximityFactor = Math.pow((proximityRadius - dist) / proximityRadius, 1.6);
+          const repelForce = proximityFactor * 65; // Up to 65px float push
+          proximityRepelX = (distDx / dist) * repelForce;
+          proximityRepelY = (distDy / dist) * repelForce;
 
-      item.el.style.transform = `translate3d(${item.currentX.toFixed(2)}px, ${item.currentY.toFixed(2)}px, 0) rotateX(${item.currentRotateX.toFixed(2)}deg) rotateY(${item.currentRotateY.toFixed(2)}deg)`;
+          // Holographic deflection tilt
+          proximityRotX = -(distDy / dist) * proximityFactor * 24;
+          proximityRotY = (distDx / dist) * proximityFactor * 24;
+
+          // Responsive scale pulse when cursor is near
+          targetExtraScale = 1.0 + proximityFactor * 0.16;
+        }
+      }
+
+      // 4. Parallax 3D holographic tilt angles
+      const generalRotateX = (relMouseY / (centerY || 1)) * 14 * (item.depthY > 0 ? 1 : -1);
+      const generalRotateY = (relMouseX / (centerX || 1)) * -16 * (item.depthX > 0 ? 1 : -1);
+
+      // Kinetic velocity wave impulse
+      const impulseX = mouseVelocityX * (item.depthX * 0.7);
+      const impulseY = mouseVelocityY * (item.depthY * 0.7);
+
+      // Target composite position
+      const targetX = ambientX + parallaxX + proximityRepelX + impulseX;
+      const targetY = ambientY + parallaxY + proximityRepelY + impulseY;
+      const targetRotateX = generalRotateX + proximityRotX;
+      const targetRotateY = generalRotateY + proximityRotY;
+
+      // Smooth inertia linear interpolation (lerp)
+      item.currentX += (targetX - item.currentX) * 0.085;
+      item.currentY += (targetY - item.currentY) * 0.085;
+      item.currentRotateX += (targetRotateX - item.currentRotateX) * 0.085;
+      item.currentRotateY += (targetRotateY - item.currentRotateY) * 0.085;
+      item.currentScale += (targetExtraScale - item.currentScale) * 0.085;
+
+      const finalScale = (baseScale * item.currentScale).toFixed(3);
+
+      item.el.style.transform = `translate3d(${item.currentX.toFixed(2)}px, ${item.currentY.toFixed(2)}px, 0) rotateX(${item.currentRotateX.toFixed(2)}deg) rotateY(${item.currentRotateY.toFixed(2)}deg) scale(${finalScale})`;
     });
 
     if (!prefersReducedMotion) {
