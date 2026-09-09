@@ -140,6 +140,11 @@ button, input, textarea, select {
   position: relative;
 }
 
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
 .section-header {
   max-width: 720px;
   margin: 0 auto 56px auto;
@@ -867,9 +872,87 @@ button, input, textarea, select {
 
 /* --- ABOUT SECTION --- */
 .about-section {
+  position: relative;
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* Futuristic Hexagonal Blueprint & Orbital Gyroscope */
+.about-bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.about-hex-mesh {
+  position: absolute;
+  inset: -80px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='84' viewBox='0 0 48 84'%3E%3Cpath d='M24 0l24 14v28L24 56 0 42V14zM0 84l24-14 24 14' fill='none' stroke='rgba(211,171,85,0.07)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 48px 84px;
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 50%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 50%, black 20%, transparent 80%);
+  animation: hexDrift 45s linear infinite;
+}
+
+@keyframes hexDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(48px, 84px); }
+}
+
+.about-orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 680px;
+  height: 380px;
+  margin-top: -190px;
+  margin-left: -340px;
+  border: 1px dashed rgba(211, 171, 85, 0.22);
+  border-radius: 50%;
+  transform: rotate(-12deg);
+  animation: orbitSpin 36s linear infinite;
+  pointer-events: none;
+}
+
+.about-orbit-ring::before {
+  content: '';
+  position: absolute;
+  inset: 26px;
+  border: 1px dotted rgba(244, 214, 133, 0.18);
+  border-radius: 50%;
+  animation: orbitSpinRev 24s linear infinite;
+}
+
+.orbit-planet {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: #f4d685;
+  border-radius: 50%;
+  box-shadow: 0 0 16px #f4d685, 0 0 32px rgba(211, 171, 85, 0.7);
+  animation: planetGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(-12deg) rotate(0deg); }
+  to { transform: rotate(-12deg) rotate(360deg); }
+}
+
+@keyframes orbitSpinRev {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes planetGlow {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.3); opacity: 1; }
 }
 
 .about-grid {
@@ -950,6 +1033,72 @@ button, input, textarea, select {
 }
 
 /* --- SERVICES SECTION --- */
+.services-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Futuristic Cybernetic Waveform & Laser Pulse Beams */
+.services-bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.services-waveform-bg {
+  position: absolute;
+  top: 35%;
+  left: -10%;
+  width: 120%;
+  height: 320px;
+  background: radial-gradient(ellipse 70% 45% at 50% 50%, rgba(211, 171, 85, 0.13) 0%, rgba(181, 136, 50, 0.03) 50%, transparent 75%);
+  filter: blur(55px);
+  animation: waveFloat 9s ease-in-out infinite alternate;
+}
+
+@keyframes waveFloat {
+  0% { transform: translateY(0) scale(0.96); opacity: 0.6; }
+  50% { transform: translateY(28px) scale(1.06); opacity: 0.95; }
+  100% { transform: translateY(-22px) scale(1); opacity: 0.6; }
+}
+
+.services-laser-beam {
+  position: absolute;
+  width: 240px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(211, 171, 85, 0.2), #f4d685, #fff5c5, #d3ab55, transparent);
+  box-shadow: 0 0 14px rgba(244, 214, 133, 0.85);
+  pointer-events: none;
+}
+
+.beam-top {
+  top: 0;
+  left: -25%;
+  animation: laserShootTop 6.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.beam-bottom {
+  bottom: 0;
+  left: 115%;
+  animation: laserShootBottom 7.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 2.5s;
+}
+
+@keyframes laserShootTop {
+  0% { left: -25%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 115%; opacity: 0; }
+}
+
+@keyframes laserShootBottom {
+  0% { left: 115%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: -25%; opacity: 0; }
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -1074,9 +1223,70 @@ button, input, textarea, select {
 
 /* --- PORTFOLIO SECTION --- */
 .portfolio-section {
+  position: relative;
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* Futuristic Digital Data Cascade & Nebula Glow */
+.portfolio-bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.portfolio-nebula-glow {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 650px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(211, 171, 85, 0.14) 0%, rgba(181, 136, 50, 0.04) 50%, transparent 75%);
+  filter: blur(75px);
+  animation: nebulaPulse 12s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaPulse {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+  50% { transform: scale(1.18) translate(30px, -20px); opacity: 0.85; }
+  100% { transform: scale(0.9) translate(-25px, 15px); opacity: 0.5; }
+}
+
+.portfolio-matrix-stream {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.stream-line {
+  position: absolute;
+  width: 1.5px;
+  background: linear-gradient(180deg, transparent 0%, rgba(211, 171, 85, 0.3) 30%, #f4d685 85%, transparent 100%);
+  box-shadow: 0 0 10px rgba(244, 214, 133, 0.7);
+  top: -200px;
+  opacity: 0;
+  border-radius: 2px;
+}
+
+.stream-line.s-1 { left: 7%; height: 130px; animation: streamFall 7s linear infinite 0.4s; }
+.stream-line.s-2 { left: 19%; height: 180px; animation: streamFall 9s linear infinite 2.1s; }
+.stream-line.s-3 { left: 34%; height: 110px; animation: streamFall 6.5s linear infinite 3.8s; }
+.stream-line.s-4 { left: 48%; height: 150px; animation: streamFall 8s linear infinite 1.3s; }
+.stream-line.s-5 { left: 63%; height: 120px; animation: streamFall 7.2s linear infinite 4.5s; }
+.stream-line.s-6 { left: 78%; height: 190px; animation: streamFall 10s linear infinite 0.7s; }
+.stream-line.s-7 { left: 89%; height: 140px; animation: streamFall 6.8s linear infinite 2.9s; }
+.stream-line.s-8 { left: 95%; height: 160px; animation: streamFall 8.4s linear infinite 5.2s; }
+
+@keyframes streamFall {
+  0% { top: -200px; opacity: 0; }
+  15% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% { top: 105%; opacity: 0; }
 }
 
 .filter-controls {
@@ -1240,6 +1450,53 @@ button, input, textarea, select {
 }
 
 /* --- CONTACT / AUDIT SECTION --- */
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Futuristic Concentric Sonar Radar Pulse */
+.contact-bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.contact-sonar-pulse {
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  width: 280px;
+  height: 280px;
+  margin-top: -140px;
+  margin-left: -140px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(211, 171, 85, 0.4);
+  box-shadow: 0 0 24px rgba(211, 171, 85, 0.25), inset 0 0 24px rgba(244, 214, 133, 0.15);
+  pointer-events: none;
+  animation: sonarRipple 6s cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+}
+
+.contact-sonar-pulse.pulse-1 { animation-delay: 0s; }
+.contact-sonar-pulse.pulse-2 { animation-delay: 2s; }
+.contact-sonar-pulse.pulse-3 { animation-delay: 4s; }
+
+@keyframes sonarRipple {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(3.4);
+    opacity: 0;
+  }
+}
+
 .contact-wrapper {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
@@ -1813,6 +2070,23 @@ button, input, textarea, select {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .about-orbit-ring {
+    width: 360px;
+    height: 220px;
+    margin-top: -110px;
+    margin-left: -180px;
+    opacity: 0.6;
+  }
+
+  .contact-sonar-pulse {
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    opacity: 0.7;
   }
 
   .stats-bar {
