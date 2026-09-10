@@ -1418,6 +1418,12 @@ button, input, textarea, select {
   gap: 30px;
 }
 
+.portfolio-grid.portfolio-grid-single {
+  grid-template-columns: 1fr;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
 .portfolio-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -1791,6 +1797,394 @@ button, input, textarea, select {
   border: 1px solid var(--border-color);
   padding: 3px 10px;
   border-radius: var(--radius-sm);
+}
+
+/* --- INSTAGRAM INSIGHTS & ANALYTICS SECTION --- */
+.insights-section {
+  position: relative;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.insights-bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.insights-nebula-glow {
+  position: absolute;
+  top: 30%;
+  right: 15%;
+  width: 580px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(211, 171, 85, 0.16) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 70%);
+  filter: blur(85px);
+  animation: insightsGlowDrift 14s ease-in-out infinite alternate;
+}
+
+@keyframes insightsGlowDrift {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.55; }
+  50% { transform: scale(1.15) translate(-40px, 30px); opacity: 0.85; }
+  100% { transform: scale(0.92) translate(30px, -25px); opacity: 0.55; }
+}
+
+.insights-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(211, 171, 85, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(211, 171, 85, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+  pointer-events: none;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.insight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.insight-card:hover,
+.insight-card:focus-visible {
+  transform: translateY(-8px);
+  border-color: rgba(211, 171, 85, 0.65);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(211, 171, 85, 0.22);
+  outline: none;
+}
+
+.insight-img-wrapper {
+  position: relative;
+  width: 100%;
+  background: #08090c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 20px 14px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.insight-img-wrapper img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.insight-card:hover .insight-img-wrapper img {
+  transform: scale(1.025);
+}
+
+.insight-zoom-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 17, 22, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(211, 171, 85, 0.45);
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff5c5;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  opacity: 0.85;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.insight-card:hover .insight-zoom-hint {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+  border-color: rgba(244, 214, 133, 0.9);
+  background: rgba(14, 17, 22, 0.95);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75), 0 0 20px rgba(211, 171, 85, 0.35);
+}
+
+.insight-badge-pill {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 5px 13px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.insight-badge-pill.reach-pill {
+  background: rgba(16, 185, 129, 0.16);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+.insight-badge-pill.interactions-pill {
+  background: rgba(244, 214, 133, 0.16);
+  color: #f4d685;
+  border: 1px solid rgba(211, 171, 85, 0.45);
+}
+
+.insight-badge-pill.profile-pill {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+}
+
+.insight-card-info {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.insight-metric-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.insight-stat-highlight {
+  font-size: 2.1rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff5c5 0%, #f4d685 40%, #d3ab55 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.insight-stat-sub {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.insight-card-info h4 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.insight-card-info p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+.insight-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
+}
+
+.insight-tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.insights-footer-note {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.insights-note-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid rgba(211, 171, 85, 0.3);
+  border-radius: var(--radius-full);
+  padding: 10px 24px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.insights-note-badge svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Lightbox Modal for Instagram Insights Screenshots */
+.insight-lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.insight-lightbox-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.insight-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 7, 10, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+.insight-lightbox-container {
+  position: relative;
+  z-index: 2;
+  max-width: 94vw;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxZoomIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes lightboxZoomIn {
+  from {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.insight-lightbox-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #151922;
+  border: 1.5px solid rgba(211, 171, 85, 0.55);
+  color: #fff5c5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.insight-lightbox-close:hover {
+  background: linear-gradient(135deg, #f4d685 0%, #d3ab55 100%);
+  color: #05070a;
+  transform: scale(1.1) rotate(90deg);
+  border-color: #f4d685;
+}
+
+.insight-lightbox-body {
+  max-width: 440px;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1.5px solid rgba(211, 171, 85, 0.4);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.9), 0 0 45px rgba(211, 171, 85, 0.25);
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.insight-lightbox-body img {
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  display: block;
+  object-fit: contain;
+}
+
+.insight-lightbox-caption {
+  margin-top: 14px;
+  color: #f1f5f9;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: center;
+  max-width: 520px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+@media (max-width: 992px) {
+  .insights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-lightbox-close {
+    top: -46px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+  }
+
+  .insight-lightbox-body {
+    max-width: 340px;
+    border-radius: 18px;
+  }
 }
 
 /* --- CONTACT / AUDIT SECTION --- */

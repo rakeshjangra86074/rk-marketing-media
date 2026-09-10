@@ -1,0 +1,64 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="igDarkBg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#0c0d10"/>
+    </linearGradient>
+    <linearGradient id="emeraldAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="goldAccent3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f4d685"/>
+      <stop offset="100%" stop-color="#d3ab55"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Phone Frame & Background -->
+  <rect width="400" height="700" rx="28" fill="url(#igDarkBg3)"/>
+  <rect x="1" y="1" width="398" height="698" rx="27" fill="none" stroke="#262626" stroke-width="2"/>
+
+  <!-- Top Status / Header -->
+  <text x="32" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Profile Activity & Conversions</text>
+  <text x="32" y="66" fill="#8e8e8e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Last 30 Days • Inbound Growth</text>
+  <line x1="24" y1="84" x2="376" y2="84" stroke="#1f1f1f" stroke-width="1"/>
+
+  <!-- Metric: Profile Visits -->
+  <text x="32" y="116" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Profile visits</text>
+  <text x="32" y="152" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800">38,940</text>
+  <rect x="225" y="128" width="82" height="24" rx="12" fill="rgba(16, 185, 129, 0.15)"/>
+  <text x="237" y="145" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">+294.1%</text>
+
+  <!-- External Link Taps / Website Clicks -->
+  <rect x="24" y="180" width="352" height="120" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="214" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">External Link / Bio Website Taps</text>
+  <text x="44" y="252" fill="#f4d685" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800">4,280</text>
+  <text x="230" y="246" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">▲ +198% vs Prev</text>
+  <text x="44" y="278" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Direct conversions from Viral Reels calls-to-action</text>
+
+  <!-- Follower Growth Breakdown -->
+  <rect x="24" y="318" width="352" height="160" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="350" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Net Follower Growth</text>
+  <text x="44" y="388" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="800">+15,480</text>
+  <text x="180" y="384" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">100% Organic Growth</text>
+
+  <rect x="44" y="408" width="312" height="12" rx="6" fill="#242730"/>
+  <rect x="44" y="408" width="270" height="12" rx="6" fill="url(#emeraldAccent)"/>
+
+  <text x="44" y="446" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Follows: <tspan fill="#fff" font-weight="700">16,920</tspan></text>
+  <text x="210" y="446" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Unfollows: <tspan fill="#fff" font-weight="700">1,440</tspan></text>
+  <text x="44" y="468" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">Retention rate: 91.5% sticky audience</text>
+
+  <!-- Contact Button Taps -->
+  <rect x="24" y="496" width="352" height="84" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="528" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">WhatsApp & Email Button Taps</text>
+  <text x="44" y="560" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800">1,142 Inquiries</text>
+  <text x="240" y="556" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">▲ +164%</text>
+
+  <!-- Verified Badge Seal -->
+  <rect x="24" y="600" width="352" height="70" rx="14" fill="rgba(211, 171, 85, 0.08)" stroke="rgba(211, 171, 85, 0.3)" stroke-width="1"/>
+  <circle cx="56" cy="635" r="16" fill="rgba(211, 171, 85, 0.2)"/>
+  <path d="M 50 635 L 54 639 L 63 630" fill="none" stroke="#f4d685" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="84" y="632" fill="#fff5c5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">RK Marketing Media Client Account</text>
+  <text x="84" y="650" fill="#d3ab55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Verified Inbound Lead Generation</text>
+</svg>

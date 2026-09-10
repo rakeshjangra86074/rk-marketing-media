@@ -1,0 +1,74 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="igDarkBg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#0c0d10"/>
+    </linearGradient>
+    <linearGradient id="roseAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff416c"/>
+      <stop offset="100%" stop-color="#ff4b2b"/>
+    </linearGradient>
+    <linearGradient id="goldAccent2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f4d685"/>
+      <stop offset="100%" stop-color="#d3ab55"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Phone Frame & Background -->
+  <rect width="400" height="700" rx="28" fill="url(#igDarkBg2)"/>
+  <rect x="1" y="1" width="398" height="698" rx="27" fill="none" stroke="#262626" stroke-width="2"/>
+
+  <!-- Top Status / Header -->
+  <text x="32" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Content Interactions</text>
+  <text x="32" y="66" fill="#8e8e8e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Last 30 Days • vs previous period</text>
+  <line x1="24" y1="84" x2="376" y2="84" stroke="#1f1f1f" stroke-width="1"/>
+
+  <!-- Metric 1: Content Interactions -->
+  <text x="32" y="116" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Total Interactions</text>
+  <text x="32" y="152" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800">482,910</text>
+  <rect x="235" y="128" width="82" height="24" rx="12" fill="rgba(16, 185, 129, 0.15)"/>
+  <text x="247" y="145" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">+346.2%</text>
+
+  <!-- Interaction Breakdown Bar Chart -->
+  <rect x="24" y="180" width="352" height="250" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="212" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Engagement Channels</text>
+
+  <!-- Reels Interactions -->
+  <text x="44" y="246" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Reels Interactions</text>
+  <text x="340" y="246" text-anchor="end" fill="#f4d685" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">388,410 (80.4%)</text>
+  <rect x="44" y="256" width="312" height="8" rx="4" fill="#242730"/>
+  <rect x="44" y="256" width="250" height="8" rx="4" fill="url(#goldAccent2)"/>
+
+  <!-- Post Likes -->
+  <text x="44" y="296" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Saves & Bookmarks</text>
+  <text x="340" y="296" text-anchor="end" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">54,120 (11.2%)</text>
+  <rect x="44" y="306" width="312" height="8" rx="4" fill="#242730"/>
+  <rect x="44" y="306" width="40" height="8" rx="4" fill="#ff4b2b"/>
+
+  <!-- Shares -->
+  <text x="44" y="346" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Direct Shares</text>
+  <text x="340" y="346" text-anchor="end" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">32,180 (6.7%)</text>
+  <rect x="44" y="356" width="312" height="8" rx="4" fill="#242730"/>
+  <rect x="44" y="356" width="26" height="8" rx="4" fill="#00c6ff"/>
+
+  <!-- Comments -->
+  <text x="44" y="396" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Comments</text>
+  <text x="340" y="396" text-anchor="end" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">8,200 (1.7%)</text>
+  <rect x="44" y="406" width="312" height="8" rx="4" fill="#242730"/>
+  <rect x="44" y="406" width="12" height="8" rx="4" fill="#10b981"/>
+
+  <!-- Top Reel Spotlight -->
+  <rect x="24" y="450" width="352" height="130" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="482" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Top Performing Viral Reel</text>
+  <text x="44" y="512" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="800">1.28M Plays • 142K Likes</text>
+  <text x="44" y="534" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Average watch time: 88% completion</text>
+  <rect x="44" y="546" width="108" height="22" rx="11" fill="rgba(211, 171, 85, 0.15)"/>
+  <text x="54" y="561" fill="#f4d685" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700">★ VIRAL WINNER</text>
+
+  <!-- Verified Badge Seal -->
+  <rect x="24" y="600" width="352" height="70" rx="14" fill="rgba(211, 171, 85, 0.08)" stroke="rgba(211, 171, 85, 0.3)" stroke-width="1"/>
+  <circle cx="56" cy="635" r="16" fill="rgba(211, 171, 85, 0.2)"/>
+  <path d="M 50 635 L 54 639 L 63 630" fill="none" stroke="#f4d685" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="84" y="632" fill="#fff5c5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">RK Marketing Media Client Account</text>
+  <text x="84" y="650" fill="#d3ab55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Verified High-Retention Production</text>
+</svg>

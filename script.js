@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioFilters();
   initPortfolioVideoPlayer();
   initCampaignModals();
+  initInsightsLightbox();
   initContactForm();
   initNewsletterForm();
   initDynamicYear();
@@ -527,6 +528,83 @@ function initCampaignModals() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('open')) {
       closeModal();
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   6b. Instagram Insights Screenshot Lightbox
+   -------------------------------------------------------------------------- */
+function initInsightsLightbox() {
+  const modal = document.getElementById('insightLightboxModal');
+  const backdrop = document.getElementById('insightLightboxBackdrop');
+  const closeBtn = document.getElementById('insightLightboxClose');
+  const img = document.getElementById('insightLightboxImg');
+  const caption = document.getElementById('insightLightboxCaption');
+  const insightCards = document.querySelectorAll('.insight-card');
+
+  if (!modal || !img) return;
+
+  function openLightbox(fullSrc, captionText) {
+    // Pause main portfolio video if playing
+    const mainVid = document.getElementById('portfolioMainVideo');
+    if (mainVid && !mainVid.paused) {
+      mainVid.pause();
+      const wrap = document.getElementById('portfolioVideoWrapper');
+      if (wrap) wrap.classList.remove('is-playing');
+      const pIcon = document.querySelector('.icon-play');
+      const paIcon = document.querySelector('.icon-pause');
+      if (pIcon) pIcon.style.display = 'block';
+      if (paIcon) paIcon.style.display = 'none';
+    }
+
+    img.src = fullSrc;
+    img.alt = captionText || 'Instagram Insight Screenshot';
+    if (caption) {
+      caption.textContent = captionText || '';
+    }
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  insightCards.forEach(card => {
+    const triggerOpen = () => {
+      const fullSrc = card.getAttribute('data-full') || card.querySelector('img')?.getAttribute('src');
+      const captionText = card.getAttribute('data-caption') || card.querySelector('h4')?.textContent;
+      if (fullSrc) {
+        openLightbox(fullSrc, captionText);
+      }
+    };
+
+    card.addEventListener('click', triggerOpen);
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        triggerOpen();
+      }
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeLightbox);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeLightbox);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeLightbox();
     }
   });
 }

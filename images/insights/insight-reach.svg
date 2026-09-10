@@ -1,0 +1,70 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="igDarkBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#0c0d10"/>
+    </linearGradient>
+    <linearGradient id="reachBarGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3897f0"/>
+      <stop offset="100%" stop-color="#00c6ff"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f4d685"/>
+      <stop offset="100%" stop-color="#d3ab55"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Phone Frame & Background -->
+  <rect width="400" height="700" rx="28" fill="url(#igDarkBg)"/>
+  <rect x="1" y="1" width="398" height="698" rx="27" fill="none" stroke="#262626" stroke-width="2"/>
+
+  <!-- Top Status / Header -->
+  <text x="32" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">Insights Overview</text>
+  <text x="32" y="66" fill="#8e8e8e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Last 30 Days • vs previous period</text>
+  <line x1="24" y1="84" x2="376" y2="84" stroke="#1f1f1f" stroke-width="1"/>
+
+  <!-- Metric 1: Accounts Reached -->
+  <text x="32" y="116" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600">Accounts reached</text>
+  <text x="32" y="152" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800">2,841,920</text>
+  <rect x="225" y="128" width="82" height="24" rx="12" fill="rgba(16, 185, 129, 0.15)"/>
+  <text x="237" y="145" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">+428.4%</text>
+
+  <!-- Graph representation -->
+  <path d="M 32 230 C 70 220, 110 215, 150 190 C 190 170, 230 185, 270 140 C 310 95, 340 105, 368 75" fill="none" stroke="url(#goldAccent)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 32 230 C 70 220, 110 215, 150 190 C 190 170, 230 185, 270 140 C 310 95, 340 105, 368 75 L 368 250 L 32 250 Z" fill="url(#reachBarGrad)" opacity="0.12"/>
+  <line x1="32" y1="250" x2="368" y2="250" stroke="#262626" stroke-width="1"/>
+
+  <text x="32" y="270" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Day 1</text>
+  <text x="185" y="270" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Day 15</text>
+  <text x="335" y="270" fill="#737373" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Day 30</text>
+
+  <!-- Reach Breakdown Card -->
+  <rect x="24" y="296" width="352" height="180" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="328" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700">Reach Breakdown</text>
+
+  <!-- Non-followers vs Followers -->
+  <text x="44" y="362" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Non-followers</text>
+  <text x="340" y="362" text-anchor="end" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">92.4% (2.62M)</text>
+  <rect x="44" y="374" width="312" height="8" rx="4" fill="#242730"/>
+  <rect x="44" y="374" width="288" height="8" rx="4" fill="url(#goldAccent)"/>
+
+  <text x="44" y="416" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13">Followers</text>
+  <text x="340" y="416" text-anchor="end" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">7.6% (215.9K)</text>
+  <rect x="44" y="428" width="312" height="8" rx="4" fill="#242730"/>
+  <rect x="44" y="428" width="24" height="8" rx="4" fill="#3897f0"/>
+
+  <text x="44" y="460" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600">✓ Viral algorithmic distribution enabled</text>
+
+  <!-- Impressions & Profile Activity -->
+  <rect x="24" y="492" width="352" height="92" rx="16" fill="#14161a" stroke="#22262d" stroke-width="1"/>
+  <text x="44" y="524" fill="#a8a8a8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12">Total Impressions</text>
+  <text x="44" y="556" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800">4,389,112</text>
+  <text x="240" y="546" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700">▲ +382% lift</text>
+
+  <!-- Verified Badge Seal -->
+  <rect x="24" y="600" width="352" height="70" rx="14" fill="rgba(211, 171, 85, 0.08)" stroke="rgba(211, 171, 85, 0.3)" stroke-width="1"/>
+  <circle cx="56" cy="635" r="16" fill="rgba(211, 171, 85, 0.2)"/>
+  <path d="M 50 635 L 54 639 L 63 630" fill="none" stroke="#f4d685" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="84" y="632" fill="#fff5c5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">RK Marketing Media Client Account</text>
+  <text x="84" y="650" fill="#d3ab55" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11">Verified Native Instagram Insights</text>
+</svg>
