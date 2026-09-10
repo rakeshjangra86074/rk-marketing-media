@@ -610,7 +610,7 @@ function initInsightsLightbox() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Contact & Free Growth Audit Form Validation
+   7. Contact Us Form Validation
    -------------------------------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById('contactForm');
@@ -671,7 +671,7 @@ function initContactForm() {
       submitBtn.disabled = false;
       const clientName = nameInput.value.trim();
       form.reset();
-      showToast(`Thank you, ${clientName}! Your Growth Audit request is received. We'll be in touch within 24 hours.`, 'success');
+      showToast(`Thank you, ${clientName}! Your message has been received. We'll be in touch within 24 hours.`, 'success');
     }, 1200);
   });
 
