@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
   initStatsCounter();
   initPortfolioFilters();
+  initPortfolioVideoPlayer();
   initCampaignModals();
   initContactForm();
   initNewsletterForm();
@@ -166,7 +167,7 @@ function initStatsCounter() {
 }
 
 /* --------------------------------------------------------------------------
-   5. Portfolio / Campaign Filtering
+   5. Portfolio / Creative Work Filtering
    -------------------------------------------------------------------------- */
 function initPortfolioFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -196,9 +197,166 @@ function initPortfolioFilters() {
           }, 30);
         } else {
           card.classList.add('hidden');
+          const videoEl = card.querySelector('video');
+          if (videoEl && !videoEl.paused) {
+            videoEl.pause();
+            const wrapper = card.querySelector('.portfolio-video-wrapper');
+            if (wrapper) wrapper.classList.remove('is-playing');
+            const playIcon = card.querySelector('.icon-play');
+            const pauseIcon = card.querySelector('.icon-pause');
+            if (playIcon) playIcon.style.display = 'block';
+            if (pauseIcon) pauseIcon.style.display = 'none';
+          }
         }
       });
     });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   5b. Portfolio Video Player Controls & State Management
+   -------------------------------------------------------------------------- */
+function initPortfolioVideoPlayer() {
+  const video = document.getElementById('portfolioMainVideo');
+  const wrapper = document.getElementById('portfolioVideoWrapper');
+  const playOverlay = document.getElementById('videoPlayOverlay');
+  const playToggleBtn = document.getElementById('vPlayToggle');
+  const progressBar = document.getElementById('vProgressBar');
+  const progressFilled = document.getElementById('vProgressFilled');
+  const timeDisplay = document.getElementById('vTimeDisplay');
+  const muteToggleBtn = document.getElementById('vMuteToggle');
+  const fullscreenBtn = document.getElementById('vFullscreenBtn');
+
+  if (!video || !wrapper) return;
+
+  const iconPlay = playToggleBtn ? playToggleBtn.querySelector('.icon-play') : null;
+  const iconPause = playToggleBtn ? playToggleBtn.querySelector('.icon-pause') : null;
+  const iconVol = muteToggleBtn ? muteToggleBtn.querySelector('.icon-vol') : null;
+  const iconMute = muteToggleBtn ? muteToggleBtn.querySelector('.icon-mute') : null;
+
+  function formatTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  function togglePlay() {
+    if (video.paused || video.ended) {
+      video.play().then(() => {
+        wrapper.classList.add('is-playing');
+        if (iconPlay) iconPlay.style.display = 'none';
+        if (iconPause) iconPause.style.display = 'block';
+      }).catch(() => {});
+    } else {
+      video.pause();
+      wrapper.classList.remove('is-playing');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+    }
+  }
+
+  if (playOverlay) {
+    playOverlay.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+    playOverlay.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        togglePlay();
+      }
+    });
+  }
+
+  if (playToggleBtn) {
+    playToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+  }
+
+  video.addEventListener('click', () => {
+    togglePlay();
+  });
+
+  video.addEventListener('timeupdate', () => {
+    if (!video.duration) return;
+    const pct = (video.currentTime / video.duration) * 100;
+    if (progressFilled) progressFilled.style.width = `${pct}%`;
+    if (timeDisplay) {
+      timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+    }
+  });
+
+  video.addEventListener('loadedmetadata', () => {
+    if (timeDisplay && video.duration) {
+      timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
+    }
+  });
+
+  video.addEventListener('ended', () => {
+    wrapper.classList.remove('is-playing');
+    if (iconPlay) iconPlay.style.display = 'block';
+    if (iconPause) iconPause.style.display = 'none';
+  });
+
+  if (progressBar) {
+    progressBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const rect = progressBar.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      if (video.duration) {
+        video.currentTime = Math.max(0, Math.min(pos * video.duration, video.duration));
+      }
+    });
+  }
+
+  if (muteToggleBtn) {
+    muteToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      if (iconVol && iconMute) {
+        if (video.muted) {
+          iconVol.style.display = 'none';
+          iconMute.style.display = 'block';
+        } else {
+          iconVol.style.display = 'block';
+          iconMute.style.display = 'none';
+        }
+      }
+    });
+  }
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!document.fullscreenElement) {
+        if (wrapper.requestFullscreen) wrapper.requestFullscreen();
+        else if (video.requestFullscreen) video.requestFullscreen();
+        else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    });
+  }
+
+  let controlsTimeout;
+  wrapper.addEventListener('mousemove', () => {
+    wrapper.classList.add('is-controls-active');
+    clearTimeout(controlsTimeout);
+    controlsTimeout = setTimeout(() => {
+      wrapper.classList.remove('is-controls-active');
+    }, 2800);
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && !video.paused) {
+      video.pause();
+      wrapper.classList.remove('is-playing');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+    }
   });
 }
 
@@ -207,54 +365,22 @@ function initPortfolioFilters() {
    -------------------------------------------------------------------------- */
 const campaignData = {
   1: {
-    category: 'Performance Paid Ads',
-    title: 'Scaling D2C Fashion from ₹6L to ₹42L/Month',
-    client: 'Aura D2C Fashion',
-    year: '2026',
-    timeline: '90 Days',
-    impact: '4.6x Blended ROAS, ₹42 Lakhs/Month Run-Rate',
-    description: 'Aura was struggling with high customer acquisition costs (CAC) of ₹850 per order. RK Marketing Media completely revamped their creative testing matrix with 14 bespoke short-form UGC video hooks and implemented an Advantage+ Shopping dynamic catalog funnel that decreased CAC to ₹310 while scaling daily ad spend 7x profitably.',
-    technologies: ['Meta Advantage+ Ads', 'Shopify Plus', 'Klaviyo Email Automations', 'Triple Whale Tracking'],
+    category: 'Reels, Shorts & Video Production',
+    title: 'High-Retention Viral Reels, Shorts & Video Editing Showcase',
+    client: 'RK Video Production Studio',
+    year: '2026 Showcase',
+    timeline: 'Master Compilation (10+ Mins)',
+    impact: 'Over 10M+ Organic Views, 85%+ 3-Second Hook Retention',
+    description: 'Our comprehensive video production showcase demonstrates our end-to-end capabilities across commercial video editing, Reels, YouTube Shorts, and high-converting creative ads. Every reel is engineered with psychology-backed pattern interrupt hooks, kinetic subtitle typography, color grading, sound design, and pacing tuned specifically for algorithmic reach and direct audience engagement.',
+    technologies: ['4K Video Production', 'Motion Graphics', 'Psychological 3s Hooks', 'Viral Sound FX', 'Vertical Video CRO'],
     features: [
-      'Multi-tier creative testing testing 40+ ad angles weekly',
-      'Dynamic product catalog retargeting abandoned carts',
-      'High-converting checkout upsell funnel setup',
-      'Post-purchase retention email sequences'
+      'Comprehensive 10+ minute master reel compilation featuring real client deliverables',
+      '3-second psychological hook formulas engineered to halt fast scrollers',
+      'Kinetic typography, animated sound effects & dynamic transitions',
+      'Multi-platform optimization for Instagram Reels, YouTube Shorts & Meta Video Ads'
     ]
   },
   2: {
-    category: 'High-Ticket Lead Generation',
-    title: 'Luxury Real Estate: ₹18Cr Property Sales',
-    client: 'Signature Heights Realty',
-    year: '2025',
-    timeline: '45 Days',
-    impact: '680+ Verified Buyer Leads, ₹18Cr Units Sold',
-    description: 'To sell luxury residential units priced at ₹2.5Cr+, generic lead forms were yielding poor quality contacts. We produced cinematic 4K video property tours paired with high-intent Google Search campaigns and an instant WhatsApp booking qualification funnel, filtering only high-net-worth buyers.',
-    technologies: ['Google Search PPC', 'Meta Video Walkthroughs', 'WhatsApp Business API', 'HubSpot CRM'],
-    features: [
-      'Interactive 3D virtual tour landing page',
-      'Instant automated WhatsApp concierge pre-qualification',
-      'Hyper-targeted geo-fencing targeting luxury residential zones',
-      'Custom CRM pipeline routing leads directly to sales executives'
-    ]
-  },
-  3: {
-    category: 'Viral UGC & Short-Form Video',
-    title: 'Slashing Student Acquisition Cost by 54%',
-    client: 'SkillMaster EdTech',
-    year: '2025',
-    timeline: '60 Days',
-    impact: '54% Reduction in CPL, 22,000+ Webinar Attendees',
-    description: 'Replaced traditional corporate promo videos with relatable, authentic video testimonials showcasing real career transitions. Scripted 28 psychological hook variations on Instagram Reels and YouTube Shorts that drove a viral wave of inbound sign-ups.',
-    technologies: ['Instagram Reels Ads', 'YouTube Shorts', 'Video Production Studio', 'Typeform Funnels'],
-    features: [
-      'Psychological 3-second hook scripting formula',
-      'Student career transition video case studies',
-      'High-converting mobile-first webinar registration page',
-      'Automated SMS & WhatsApp reminder sequences'
-    ]
-  },
-  4: {
     category: 'Content Writing & Brand Storytelling',
     title: 'High-Impact Brand Copywriting & Thought Leadership',
     client: 'Vanguard B2B Solutions',
@@ -262,7 +388,7 @@ const campaignData = {
     timeline: '3 Months',
     impact: '3.5x Lift in Engagement, 180% Inbound Inquiries',
     description: 'Developed an authoritative, persuasive brand voice across website landing pages, in-depth thought-leadership articles, and a weekly executive newsletter that established industry credibility and consistently converted readers into qualified leads.',
-    technologies: ['Website Copywriting', 'Editorial Content', 'Email Newsletters', 'Conversion Storytelling'],
+    technologies: ['Website Copywriting', 'Editorial Articles', 'Email Newsletters', 'Conversion Storytelling'],
     features: [
       'Customer persona research and brand voice guidelines',
       'High-converting landing page headlines and sales hooks',
@@ -270,36 +396,36 @@ const campaignData = {
       'Automated nurture email sequences and weekly newsletters'
     ]
   },
-  5: {
-    category: 'Hyperlocal Growth & Meta Ads',
-    title: 'Hyperlocal F&B Scale to 8 Locations',
-    client: 'Gourmet Bites Cloud Kitchen',
-    year: '2025',
-    timeline: '4 Months',
-    impact: '28,000+ Direct Orders, 3.8x ROAS on Delivery',
-    description: 'Helped a premier cloud kitchen expand from 2 to 8 operational kitchens by deploying 3km-radius targeted Instagram Story ads offering time-sensitive lunch and dinner promo codes, bypassing 30% aggregator commissions.',
-    technologies: ['Hyperlocal Radius Meta Ads', 'Direct WhatsApp Ordering', 'Food Motion Graphics'],
+  3: {
+    category: 'Content Writing & Video Scripting',
+    title: 'Viral Short-Form Scripting & Psychological Opening Hooks',
+    client: 'Digital Creators & Founders',
+    year: '2025 - 2026',
+    timeline: 'Ongoing',
+    impact: '85%+ Average View Duration, 2.4x Follower Growth',
+    description: 'Scripted retention-optimized short-form video concepts with calculated curiosity gaps, conversational language, and zero fluff. Designed to hook viewers in the first 3 seconds and keep them glued until the final call to action.',
+    technologies: ['Reel & Short Scripting', 'Story Arc Architecture', 'Pattern Interrupts', 'Retention Strategy'],
     features: [
-      'Mouthwatering macro food cinematography & reels',
-      'Lunch-hour and dinner-time dynamic ad scheduling',
-      'Zero-commission direct WhatsApp ordering engine',
-      'Automated repeat-order SMS loyalty triggers'
+      '3-second hook variations tested across targeted audience segments',
+      'Story arcs optimized for high algorithmic completion rate',
+      'Frictionless call-to-action scripts driving profile visits & bio clicks',
+      'Audience retention heat-mapping and continuous script iteration'
     ]
   },
-  6: {
-    category: 'B2B Funnels & Conversion Optimization',
-    title: 'B2B SaaS: 240% Lift in Inbound Qualified Demos',
-    client: 'Zenith Cloud SaaS',
-    year: '2024',
-    timeline: '5 Months',
-    impact: '240% Growth in Monthly Demos, 2.8x Conversion Rate',
-    description: 'Conducted an exhaustive conversion-rate overhaul, designed 30 high-converting comparison and solution pages, and created an interactive ROI calculator that doubled demo request bookings from qualified visitors.',
-    technologies: ['Landing Page CRO', 'Interactive ROI Calculator', 'Calendly Automated Routing', 'Hotjar Heatmaps'],
+  4: {
+    category: 'Content Writing & Funnel Copy',
+    title: 'High-Converting Landing Page & Sales Funnel Copy',
+    client: 'Growth Brands & Startups',
+    year: '2026',
+    timeline: '45 Days',
+    impact: '2.8x Lift in Form Submissions & Checkout Confidence',
+    description: 'Crafted persuasive sales copy, overcome-objection FAQs, and compelling value propositions that clearly communicate the transformation offered by the brand and convert cold traffic into paying customers.',
+    technologies: ['Sales Funnel Copywriting', 'Direct Response Copy', 'Landing Page Copy', 'Offer Positioning'],
     features: [
-      'High-intent comparison and solution page messaging',
-      'Interactive savings calculator embedded on landing page',
-      'Automated instant Calendly self-booking workflow',
-      'Frictionless 3-field demo request form optimization'
+      'Clear, punchy above-the-fold value propositions answering visitor questions in seconds',
+      'Psychological objection handling and strategic social proof placement',
+      'Friction-free checkout and contact form microcopy',
+      'A/B tested headline variations delivering up to 48% conversion lift'
     ]
   }
 };
@@ -313,6 +439,18 @@ function initCampaignModals() {
   if (!modal || !modalBody) return;
 
   function openModal(campaignId) {
+    // Pause main portfolio video if playing
+    const mainVid = document.getElementById('portfolioMainVideo');
+    if (mainVid && !mainVid.paused) {
+      mainVid.pause();
+      const wrap = document.getElementById('portfolioVideoWrapper');
+      if (wrap) wrap.classList.remove('is-playing');
+      const pIcon = document.querySelector('.icon-play');
+      const paIcon = document.querySelector('.icon-pause');
+      if (pIcon) pIcon.style.display = 'block';
+      if (paIcon) paIcon.style.display = 'none';
+    }
+
     const data = campaignData[campaignId];
     if (!data) return;
 

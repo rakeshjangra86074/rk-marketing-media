@@ -489,103 +489,86 @@
           <span class="stream-line s-5"></span>
           <span class="stream-line s-6"></span>
           <span class="stream-line s-7"></span>
-          <span class="stream-line s-8"></span>
+              <span class="stream-line s-8"></span>
         </div>
       </div>
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-tag">Proof of Performance</span>
+          <span class="section-tag">Featured Creative Work</span>
           <h2 class="section-title">Our Portfolio & Recent <span class="gradient-text">Work</span></h2>
           <p class="section-description">
-            Explore how RK Marketing Media turned advertising budgets into exponential revenue across diverse industries.
+            Explore our featured Reels, high-retention video productions, and conversion-driven content writing designed to scale modern brands.
           </p>
         </div>
 
         <!-- Filter Tabs -->
         <div class="filter-controls" role="tablist" aria-label="Portfolio Filters">
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Campaigns</button>
-          <button class="filter-btn" data-filter="ads" role="tab" aria-selected="false">Paid Ads (ROAS)</button>
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Work</button>
           <button class="filter-btn" data-filter="video" role="tab" aria-selected="false">Reels & Video</button>
           <button class="filter-btn" data-filter="content" role="tab" aria-selected="false">Content Writing</button>
-          <button class="filter-btn" data-filter="funnels" role="tab" aria-selected="false">Landing Pages & CRO</button>
         </div>
 
         <!-- Portfolio Grid -->
         <div class="portfolio-grid" id="portfolioGrid">
-          <!-- Item 1 -->
-          <article class="portfolio-card" data-category="ads" data-id="1">
-            <div class="portfolio-visual visual-grad-1">
-              <span class="project-tag">Paid Ads</span>
-              <div class="visual-mockup">
-                <div class="roas-pill">4.6x ROAS</div>
+          <!-- 1. Featured Video Showcase (Reels & Video) -->
+          <article class="portfolio-card portfolio-video-card" data-category="video" data-id="1">
+            <div class="portfolio-video-wrapper" id="portfolioVideoWrapper">
+              <video id="portfolioMainVideo" class="portfolio-video-element" poster="videos/video-poster.jpg" preload="metadata" playsinline>
+                <source src="videos/rk-reels-showcase.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="video-overlay-play" id="videoPlayOverlay" role="button" tabindex="0" aria-label="Play Reels Showcase Video">
+                <div class="play-pulse-ring"></div>
+                <div class="play-btn-circle">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                </div>
+                <span class="play-btn-text">Watch Reels Showcase</span>
+              </div>
+              <div class="video-hud-badge top-left">
+                <span class="live-pulse-dot"></span>
+                <span>LIVE REELS SHOWCASE</span>
+              </div>
+              <div class="video-hud-badge top-right">
+                <span>1080P HD / 10+ MINS</span>
+              </div>
+              <div class="video-custom-controls" id="videoCustomControls">
+                <button class="v-ctrl-btn" id="vPlayToggle" type="button" title="Play/Pause" aria-label="Play or Pause">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-play"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-pause" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </button>
+                <div class="v-progress-container" id="vProgressBar" role="slider" aria-label="Video Progress" tabindex="0">
+                  <div class="v-progress-filled" id="vProgressFilled"></div>
+                </div>
+                <span class="v-time" id="vTimeDisplay">0:00 / 10:22</span>
+                <button class="v-ctrl-btn" id="vMuteToggle" type="button" title="Mute/Unmute" aria-label="Mute or Unmute">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-vol"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-mute" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                </button>
+                <button class="v-ctrl-btn" id="vFullscreenBtn" type="button" title="Fullscreen" aria-label="Toggle Fullscreen">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                </button>
               </div>
             </div>
             <div class="portfolio-info">
               <div class="portfolio-meta">
-                <span class="client-name">Aura D2C Fashion</span>
-                <span class="project-year">2026</span>
+                <span class="client-name">RK Video Production Studio</span>
+                <span class="project-year">2026 Showcase</span>
               </div>
-              <h3 class="project-title">Scaling D2C Brand from ₹6L to ₹42L/Month</h3>
-              <p class="project-summary">Deployed multi-angle video ad creatives and dynamic catalog retargeting to achieve an exceptional 4.6x blended ROAS.</p>
+              <h3 class="project-title">High-Retention Viral Reels, Shorts & Video Editing Showcase</h3>
+              <p class="project-summary">Watch our comprehensive video portfolio highlighting viral short-form creative direction, 3-second psychological hooks, dynamic sound design, and pacing engineered for multi-million organic view reach.</p>
               <div class="tech-tags">
-                <span class="tech-tag">Meta Ads</span>
-                <span class="tech-tag">Shopify</span>
-                <span class="tech-tag">Dynamic Retargeting</span>
-              </div>
-              <button class="btn btn-outline btn-sm view-details-btn" data-id="1">View Campaign Breakdown</button>
-            </div>
-          </article>
-
-          <!-- Item 2 -->
-          <article class="portfolio-card" data-category="funnels" data-id="2">
-            <div class="portfolio-visual visual-grad-2">
-              <span class="project-tag">Lead Gen Funnel</span>
-              <div class="visual-mockup">
-                <div class="roas-pill">680+ Qualified Leads</div>
-              </div>
-            </div>
-            <div class="portfolio-info">
-              <div class="portfolio-meta">
-                <span class="client-name">Signature Heights Realty</span>
-                <span class="project-year">2025</span>
-              </div>
-              <h3 class="project-title">Luxury Real Estate: ₹18Cr Property Sales</h3>
-              <p class="project-summary">High-intent landing page paired with hyper-local geo-targeted Google Search & Meta video walkthroughs generating 680+ buyers.</p>
-              <div class="tech-tags">
-                <span class="tech-tag">Google Ads</span>
-                <span class="tech-tag">WhatsApp Funnel</span>
-                <span class="tech-tag">Landing Page CRO</span>
-              </div>
-              <button class="btn btn-outline btn-sm view-details-btn" data-id="2">View Campaign Breakdown</button>
-            </div>
-          </article>
-
-          <!-- Item 3 -->
-          <article class="portfolio-card" data-category="video" data-id="3">
-            <div class="portfolio-visual visual-grad-3">
-              <span class="project-tag">Viral Video & UGC</span>
-              <div class="visual-mockup">
-                <div class="roas-pill">-54% CAC</div>
-              </div>
-            </div>
-            <div class="portfolio-info">
-              <div class="portfolio-meta">
-                <span class="client-name">SkillMaster EdTech</span>
-                <span class="project-year">2025</span>
-              </div>
-              <h3 class="project-title">Slashing Student Acquisition Cost by 54%</h3>
-              <p class="project-summary">Engineered 28 authentic UGC testimonial ads that outperformed stock video creative across Instagram Reels and YouTube Shorts.</p>
-              <div class="tech-tags">
-                <span class="tech-tag">UGC Video</span>
-                <span class="tech-tag">Reels Ads</span>
+                <span class="tech-tag">Viral Reels</span>
+                <span class="tech-tag">YouTube Shorts</span>
+                <span class="tech-tag">Motion Editing</span>
                 <span class="tech-tag">Hook Scripting</span>
+                <span class="tech-tag">Sound Design</span>
               </div>
-              <button class="btn btn-outline btn-sm view-details-btn" data-id="3">View Campaign Breakdown</button>
+              <button class="btn btn-outline btn-sm view-details-btn" data-id="1">View Production Details</button>
             </div>
           </article>
 
-          <!-- Item 4 -->
-          <article class="portfolio-card" data-category="content" data-id="4">
+          <!-- 2. Content Writing Item 1 -->
+          <article class="portfolio-card" data-category="content" data-id="2">
             <div class="portfolio-visual visual-grad-4">
               <span class="project-tag">Content Writing</span>
               <div class="visual-mockup">
@@ -598,61 +581,64 @@
                 <span class="project-year">2026</span>
               </div>
               <h3 class="project-title">High-Impact Brand Copywriting & Thought Leadership</h3>
-              <p class="project-summary">Crafted compelling website copy, educational blog articles, and weekly email newsletters that established brand authority and increased inquiries.</p>
+              <p class="project-summary">Crafted authoritative website messaging, educational long-form industry guides, and weekly executive newsletters that increased organic engagement by 3.5x and inbound inquiries by 180%.</p>
               <div class="tech-tags">
-                <span class="tech-tag">Website Copy</span>
-                <span class="tech-tag">Editorial Content</span>
+                <span class="tech-tag">Website Copywriting</span>
+                <span class="tech-tag">Thought Leadership</span>
+                <span class="tech-tag">Editorial Articles</span>
                 <span class="tech-tag">Email Newsletters</span>
               </div>
+              <button class="btn btn-outline btn-sm view-details-btn" data-id="2">View Campaign Breakdown</button>
+            </div>
+          </article>
+
+          <!-- 3. Content Writing Item 2 -->
+          <article class="portfolio-card" data-category="content" data-id="3">
+            <div class="portfolio-visual visual-grad-3">
+              <span class="project-tag">Content Writing</span>
+              <div class="visual-mockup">
+                <div class="roas-pill">85%+ Watch-Through</div>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-meta">
+                <span class="client-name">Digital Creators & Founders</span>
+                <span class="project-year">2025 - 2026</span>
+              </div>
+              <h3 class="project-title">Viral Short-Form Scripting & Psychological Opening Hooks</h3>
+              <p class="project-summary">Engineered retention-focused video scripts with 3-second pattern interrupts, story curiosity gaps, and persuasive calls-to-action that convert casual viewers into dedicated subscribers.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Reel & Short Scripting</span>
+                <span class="tech-tag">3-Second Hooks</span>
+                <span class="tech-tag">Storytelling Frameworks</span>
+                <span class="tech-tag">Audience Retention</span>
+              </div>
+              <button class="btn btn-outline btn-sm view-details-btn" data-id="3">View Campaign Breakdown</button>
+            </div>
+          </article>
+
+          <!-- 4. Content Writing Item 3 -->
+          <article class="portfolio-card" data-category="content" data-id="4">
+            <div class="portfolio-visual visual-grad-2">
+              <span class="project-tag">Content Writing</span>
+              <div class="visual-mockup">
+                <div class="roas-pill">2.8x Conversion Rate</div>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-meta">
+                <span class="client-name">Growth Brands & Startups</span>
+                <span class="project-year">2026</span>
+              </div>
+              <h3 class="project-title">High-Converting Landing Page & Sales Funnel Copy</h3>
+              <p class="project-summary">Persuasive sales copy and frictionless value propositions designed to answer visitor objections instantly, boost checkout confidence, and double conversion rates.</p>
+              <div class="tech-tags">
+                <span class="tech-tag">Landing Page Copy</span>
+                <span class="tech-tag">Sales Psychology</span>
+                <span class="tech-tag">Email Sequences</span>
+                <span class="tech-tag">Offer Crafting</span>
+              </div>
               <button class="btn btn-outline btn-sm view-details-btn" data-id="4">View Campaign Breakdown</button>
-            </div>
-          </article>
-
-          <!-- Item 5 -->
-          <article class="portfolio-card" data-category="ads" data-id="5">
-            <div class="portfolio-visual visual-grad-5">
-              <span class="project-tag">Paid Ads</span>
-              <div class="visual-mockup">
-                <div class="roas-pill">28,000+ Orders</div>
-              </div>
-            </div>
-            <div class="portfolio-info">
-              <div class="portfolio-meta">
-                <span class="client-name">Gourmet Bites Cloud Kitchen</span>
-                <span class="project-year">2025</span>
-              </div>
-              <h3 class="project-title">Hyperlocal F&B Scale to 8 Locations</h3>
-              <p class="project-summary">Drive direct app orders through radius-targeted Instagram Stories with 1-click promo code redemption funnels.</p>
-              <div class="tech-tags">
-                <span class="tech-tag">Local Meta Ads</span>
-                <span class="tech-tag">Food Photography</span>
-                <span class="tech-tag">Geo-Targeting</span>
-              </div>
-              <button class="btn btn-outline btn-sm view-details-btn" data-id="5">View Campaign Breakdown</button>
-            </div>
-          </article>
-
-          <!-- Item 6 -->
-          <article class="portfolio-card" data-category="funnels" data-id="6">
-            <div class="portfolio-visual visual-grad-6">
-              <span class="project-tag">B2B Funnels & CRO</span>
-              <div class="visual-mockup">
-                <div class="roas-pill">+240% Demo Calls</div>
-              </div>
-            </div>
-            <div class="portfolio-info">
-              <div class="portfolio-meta">
-                <span class="client-name">Zenith Cloud SaaS</span>
-                <span class="project-year">2024</span>
-              </div>
-              <h3 class="project-title">B2B SaaS: 240% Lift in Inbound Qualified Demos</h3>
-              <p class="project-summary">Redesigned high-converting landing pages, integrated automated Calendly qualification funnels, and optimized Google Search PPC campaigns.</p>
-              <div class="tech-tags">
-                <span class="tech-tag">Landing Page CRO</span>
-                <span class="tech-tag">B2B Funnels</span>
-                <span class="tech-tag">Google Search</span>
-              </div>
-              <button class="btn btn-outline btn-sm view-details-btn" data-id="6">View Campaign Breakdown</button>
             </div>
           </article>
         </div>
