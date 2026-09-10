@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioVideoPlayer();
   initCampaignModals();
   initInsightsLightbox();
+  initAuditModal();
   initContactForm();
   initNewsletterForm();
   initDynamicYear();
@@ -607,6 +608,154 @@ function initInsightsLightbox() {
       closeLightbox();
     }
   });
+}
+
+/* --------------------------------------------------------------------------
+   6c. Free Growth Audit Modal Interaction
+   -------------------------------------------------------------------------- */
+function initAuditModal() {
+  const modal = document.getElementById('auditModal');
+  const closeBtn = document.getElementById('auditModalCloseBtn');
+  const form = document.getElementById('auditModalForm');
+  const submitBtn = document.getElementById('auditSubmitBtn');
+  const headerBtn = document.getElementById('headerAuditBtn');
+  const drawerBtn = document.getElementById('drawerAuditBtn');
+
+  if (!modal) return;
+
+  function openAuditModal() {
+    // Pause main portfolio video if playing
+    const mainVid = document.getElementById('portfolioMainVideo');
+    if (mainVid && !mainVid.paused) {
+      mainVid.pause();
+      const wrap = document.getElementById('portfolioVideoWrapper');
+      if (wrap) wrap.classList.remove('is-playing');
+      const pIcon = document.querySelector('.icon-play');
+      const paIcon = document.querySelector('.icon-pause');
+      if (pIcon) pIcon.style.display = 'block';
+      if (paIcon) paIcon.style.display = 'none';
+    }
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    const nameInput = document.getElementById('auditFullName');
+    if (nameInput) {
+      setTimeout(() => nameInput.focus(), 150);
+    }
+  }
+
+  function closeAuditModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (headerBtn) {
+    headerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAuditModal();
+    });
+  }
+
+  if (drawerBtn) {
+    drawerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      if (mobileDrawer) mobileDrawer.classList.remove('open');
+      if (hamburgerBtn) {
+        hamburgerBtn.classList.remove('active');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      }
+      openAuditModal();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeAuditModal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeAuditModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeAuditModal();
+    }
+  });
+
+  if (form) {
+    const nameInput = document.getElementById('auditFullName');
+    const emailInput = document.getElementById('auditEmail');
+    const phoneInput = document.getElementById('auditPhone');
+
+    const nameError = document.getElementById('auditNameError');
+    const emailError = document.getElementById('auditEmailError');
+    const phoneError = document.getElementById('auditPhoneError');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+
+      // Clear previous error states
+      [nameInput, emailInput, phoneInput].forEach(inp => inp && inp.classList.remove('is-invalid'));
+      [nameError, emailError, phoneError].forEach(err => err && (err.textContent = ''));
+
+      // Validate Name
+      if (!nameInput.value.trim()) {
+        showError(nameInput, nameError, 'Please enter your full name.');
+        isValid = false;
+      } else if (nameInput.value.trim().length < 2) {
+        showError(nameInput, nameError, 'Name must be at least 2 characters.');
+        isValid = false;
+      }
+
+      // Validate Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailInput.value.trim()) {
+        showError(emailInput, emailError, 'Please enter your email.');
+        isValid = false;
+      } else if (!emailRegex.test(emailInput.value.trim())) {
+        showError(emailInput, emailError, 'Please enter a valid email address.');
+        isValid = false;
+      }
+
+      // Validate Phone
+      const phoneVal = phoneInput.value.trim();
+      const digits = phoneVal.replace(/\D/g, '');
+      if (!phoneVal) {
+        showError(phoneInput, phoneError, 'Please enter your phone/WhatsApp number.');
+        isValid = false;
+      } else if (digits.length < 7) {
+        showError(phoneInput, phoneError, 'Please enter a valid phone number.');
+        isValid = false;
+      }
+
+      if (!isValid) return;
+
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        const clientName = nameInput.value.trim();
+        form.reset();
+        closeAuditModal();
+        showToast(`Thank you, ${clientName}! Your Free Audit request has been received. We'll analyze your profile and contact you within 24 hours.`, 'success');
+      }, 1000);
+    });
+
+    function showError(input, errorEl, message) {
+      input.classList.add('is-invalid');
+      if (errorEl) errorEl.textContent = message;
+    }
+  }
 }
 
 /* --------------------------------------------------------------------------

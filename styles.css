@@ -2575,6 +2575,56 @@ button, input, textarea, select {
   margin-bottom: 24px;
 }
 
+/* Free Growth Audit Modal Form */
+.audit-modal-card {
+  max-width: 600px;
+  border: 1.5px solid rgba(211, 171, 85, 0.4);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 35px rgba(211, 171, 85, 0.18);
+  padding: 36px;
+  background: var(--bg-secondary);
+}
+
+.audit-modal-header {
+  margin-bottom: 22px;
+}
+
+.audit-modal-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+.audit-modal-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.audit-form .form-group {
+  margin-bottom: 16px;
+}
+
+.audit-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .audit-modal-card {
+    padding: 28px 18px;
+  }
+  .audit-form .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .audit-modal-title {
+    font-size: 1.4rem;
+  }
+}
+
 /* --- TOAST NOTIFICATIONS --- */
 .toast-container {
   position: fixed;
