@@ -3173,3 +3173,55 @@ button, input, textarea, select {
   }
 }
 
+/* Home Page Specific Teaser Grids */
+.home-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.home-video-teaser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.home-video-teaser-content {
+  flex: 1 1 340px;
+}
+
+.home-video-teaser-preview {
+  flex: 0 0 340px;
+  max-width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid rgba(211, 171, 85, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+@media (max-width: 992px) {
+  .home-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-preview-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-video-teaser {
+    flex-direction: column;
+    text-align: center;
+  }
+  .home-video-teaser-preview {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+
