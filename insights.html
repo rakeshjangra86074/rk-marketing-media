@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inspect verified Instagram growth analytics, reach reports, and engagement metrics from client accounts scaled by RK Marketing Media.">
+  <title>Instagram Insights & Analytics Proof | RK Marketing Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3.0">
+</head>
+<body>
+  <!-- Interactive Futuristic Background Canvas -->
+  <canvas id="futuristicBgCanvas" class="futuristic-bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Futuristic Holographic Social Media Orbs -->
+  <div class="floating-social-bg" id="floatingSocialBg" aria-hidden="true">
+    <div class="futuristic-social-card card-instagram" title="Instagram">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-youtube" title="YouTube">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-linkedin" title="LinkedIn">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-facebook" title="Facebook">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-twitter" title="Twitter">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-viral" title="Viral Engagement">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-header" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RK Marketing Media Home">
+        <img src="logo.svg" alt="RK Marketing Media Logo" class="brand-logo-img">
+        <span class="logo-text">RK Marketing <span class="gradient-text">Media</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="insights.html" class="nav-link active" aria-current="page">Insights</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="contact.html" class="btn btn-primary nav-cta" id="headerAuditBtn">Get Free Audit</a>
+
+        <!-- Mobile Hamburger -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-content">
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link">Home</a>
+        <a href="about.html" class="drawer-link">About Us</a>
+        <a href="services.html" class="drawer-link">Services</a>
+        <a href="portfolio.html" class="drawer-link">Portfolio</a>
+        <a href="insights.html" class="drawer-link active" aria-current="page">Insights</a>
+        <a href="contact.html" class="drawer-link">Contact Us</a>
+      </nav>
+      <div class="drawer-footer">
+        <a href="contact.html" class="btn btn-primary btn-full drawer-cta" id="drawerAuditBtn">Get Free Audit</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- SUBPAGE HERO SECTION -->
+    <section class="page-hero">
+      <div class="cyber-grid-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-container">
+        <div class="page-hero-badge">
+          <span class="badge-dot"></span>
+          Data-Driven Transparency • Verified Account Analytics
+        </div>
+        <h1 class="page-hero-title">
+          Proof in Numbers: <br><span class="gradient-text">Instagram Insights & Growth</span>.
+        </h1>
+        <p class="page-hero-desc">
+          We let unfiltered client metrics speak for themselves. Inspect actual audience reach reports, engagement spikes, and profile conversion data from live accounts scaled by RK Marketing Media. Click any card to zoom in.
+        </p>
+        <div class="page-hero-actions">
+          <a href="#insightsProof" class="btn btn-primary btn-lg">
+            Inspect Growth Screenshots
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <button type="button" class="btn btn-secondary btn-lg" onclick="document.getElementById('headerAuditBtn').click()">
+            Get Free Account Audit
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM INSIGHTS & PROOF SECTION -->
+    <section class="section insights-section" id="insightsProof" style="padding-top: 50px;">
+      <div class="insights-bg-effects" aria-hidden="true">
+        <div class="insights-nebula-glow"></div>
+        <div class="insights-grid-overlay"></div>
+      </div>
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">VERIFIED CLIENT ANALYTICS</span>
+          <h2 class="section-title">Live Account Data: <span class="gradient-text">Reach, Interactions & Profile Traffic</span></h2>
+          <p class="section-description">
+            Unfiltered performance metrics and audience reach from real client accounts managed and scaled by RK Marketing Media.
+          </p>
+        </div>
+
+        <div class="insights-grid">
+          <!-- Card 1: Reach -->
+          <div class="insight-card" data-full="images/insights/insight-reach.svg" data-caption="Instagram Reach Analytics - 2,841,920 Accounts Reached (+428% Growth Spike)" tabindex="0" role="button" aria-label="View Instagram Reach Analytics Screenshot">
+            <div class="insight-img-wrapper">
+              <img src="images/insights/insight-reach.svg" alt="Instagram Reach Analytics - 2.84M Accounts Reached" loading="lazy">
+              <div class="insight-zoom-hint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+                <span>Click to Inspect Screenshot</span>
+              </div>
+              <span class="insight-badge-pill reach-pill">+428% Reach Surge</span>
+            </div>
+            <div class="insight-card-info">
+              <div class="insight-metric-row">
+                <div class="insight-stat-highlight">2,841,920</div>
+                <div class="insight-stat-sub">Accounts Reached</div>
+              </div>
+              <h4>Viral Discovery & Audience Expansion</h4>
+              <p>92.4% non-follower reach unlocked via algorithmic hook scripting and aggressive watch-time retention.</p>
+              <div class="insight-tags">
+                <span class="insight-tag">2.84M Reached</span>
+                <span class="insight-tag">92.4% Non-Followers</span>
+                <span class="insight-tag">+428% vs Prev 30D</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Interactions -->
+          <div class="insight-card" data-full="images/insights/insight-interactions.svg" data-caption="Instagram Content Interactions - 482,910 Total Engagements & 54.2K Saves" tabindex="0" role="button" aria-label="View Instagram Content Interactions Analytics Screenshot">
+            <div class="insight-img-wrapper">
+              <img src="images/insights/insight-interactions.svg" alt="Instagram Content Interactions - 482.9K Engagements" loading="lazy">
+              <div class="insight-zoom-hint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+                <span>Click to Inspect Screenshot</span>
+              </div>
+              <span class="insight-badge-pill interactions-pill">482K+ Engagements</span>
+            </div>
+            <div class="insight-card-info">
+              <div class="insight-metric-row">
+                <div class="insight-stat-highlight">482,910</div>
+                <div class="insight-stat-sub">Content Interactions</div>
+              </div>
+              <h4>High-Conversion Saves & Peer Shares</h4>
+              <p>Over 54K saves and 81K direct shares proving high content utility, algorithmic favor, and strong audience buy-in.</p>
+              <div class="insight-tags">
+                <span class="insight-tag">388K Reel Likes</span>
+                <span class="insight-tag">54K Saves</span>
+                <span class="insight-tag">81K Shares</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Profile Activity -->
+          <div class="insight-card" data-full="images/insights/insight-profile.svg" data-caption="Instagram Profile Activity - 38,940 Profile Visits, 4,280 Link Clicks, +15.4K Growth" tabindex="0" role="button" aria-label="View Instagram Profile Visits and Follower Growth Analytics Screenshot">
+            <div class="insight-img-wrapper">
+              <img src="images/insights/insight-profile.svg" alt="Instagram Profile Activity - 38.9K Profile Visits" loading="lazy">
+              <div class="insight-zoom-hint">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+                <span>Click to Inspect Screenshot</span>
+              </div>
+              <span class="insight-badge-pill profile-pill">+15.4K Followers</span>
+            </div>
+            <div class="insight-card-info">
+              <div class="insight-metric-row">
+                <div class="insight-stat-highlight">38,940</div>
+                <div class="insight-stat-sub">Profile Visits</div>
+              </div>
+              <h4>Traffic Conversion & Inbound DM Leads</h4>
+              <p>4,280 external bio link taps and 610 inbound inquiry DMs converting viral attention into direct revenue pipeline.</p>
+              <div class="insight-tags">
+                <span class="insight-tag">38.9K Visits</span>
+                <span class="insight-tag">4.28K Link Clicks</span>
+                <span class="insight-tag">+15.4K Growth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-footer-note">
+          <div class="insights-note-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>100% Organic & Meta-Verified Account Data • Live Case Studies</span>
+          </div>
+        </div>
+
+        <!-- Strategy Note Card -->
+        <div class="subpage-cta-banner" style="text-align: left; margin-top: 48px;">
+          <div style="display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 1;">
+            <span class="section-tag" style="align-self: flex-start; margin-bottom: 0;">OUR METHODOLOGY</span>
+            <h3 style="font-size: 1.85rem; font-weight: 800; line-height: 1.3;">Why Organic & Algorithmic Momentum Wins</h3>
+            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1.05rem;">
+              Paid ads provide instant speed, but organic video reach provides compounding brand authority. By combining our 3-second hook structure with high-retention editing, we train social algorithms to push your content directly to new prospective customers without paying for every single impression.
+            </p>
+          </div>
+        </div>
+
+        <!-- Subpage Bottom Call to Action -->
+        <div class="subpage-cta-banner">
+          <h3 class="subpage-cta-title">Ready to Achieve These Numbers on Your Business Profile?</h3>
+          <p class="subpage-cta-desc">
+            Let us audit your current Instagram and TikTok profile. We'll identify where you're losing viewers in the first 3 seconds and how to fix it.
+          </p>
+          <div class="subpage-cta-actions">
+            <button type="button" class="btn btn-primary btn-lg" onclick="document.getElementById('headerAuditBtn').click()">
+              Claim Free Growth Audit
+            </button>
+            <a href="contact.html" class="btn btn-secondary btn-lg">Start a Conversation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox Modal for Instagram Insights Screenshots -->
+  <div class="insight-lightbox-modal" id="insightLightboxModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="insight-lightbox-backdrop" id="insightLightboxBackdrop"></div>
+    <div class="insight-lightbox-container">
+      <button class="insight-lightbox-close" id="insightLightboxClose" aria-label="Close Lightbox">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="insight-lightbox-body">
+        <img id="insightLightboxImg" src="" alt="Instagram Insight Screenshot Fullscreen">
+      </div>
+      <div class="insight-lightbox-caption" id="insightLightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Free Growth Audit Modal Popup -->
+  <div class="modal-backdrop audit-modal-backdrop" id="auditModal" aria-hidden="true" role="dialog" aria-labelledby="auditModalTitle">
+    <div class="modal-card audit-modal-card">
+      <button class="modal-close-btn" id="auditModalCloseBtn" aria-label="Close Audit Modal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="audit-modal-header">
+        <span class="modal-header-tag">100% Free • No Obligation</span>
+        <h3 id="auditModalTitle" class="audit-modal-title">Get Your Free <span class="gradient-text">Growth Audit</span></h3>
+        <p class="audit-modal-desc">
+          Drop your details below. We'll analyze your current social media, reels & online presence, and send you a practical growth breakdown within 24 hours.
+        </p>
+      </div>
+
+      <form id="auditModalForm" class="audit-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="auditFullName">Your Full Name <span class="required">*</span></label>
+            <input type="text" id="auditFullName" name="auditFullName" placeholder="e.g. Rahul Sharma" required>
+            <span class="error-msg" id="auditNameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="auditEmail">Work / Personal Email <span class="required">*</span></label>
+            <input type="email" id="auditEmail" name="auditEmail" placeholder="rahul@mybrand.com" required>
+            <span class="error-msg" id="auditEmailError"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="auditPhone">Phone / WhatsApp Number <span class="required">*</span></label>
+            <input type="tel" id="auditPhone" name="auditPhone" placeholder="+91 95887 98848" required>
+            <span class="error-msg" id="auditPhoneError"></span>
+          </div>
+          <div class="form-group">
+            <label for="auditHandle">Website or Instagram Handle</label>
+            <input type="text" id="auditHandle" name="auditHandle" placeholder="e.g. @brand_handle or website.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="auditService">Primary Growth Focus</label>
+          <select id="auditService" name="auditService">
+            <option value="social" selected>Complete Social Media Management</option>
+            <option value="reels">Viral Reels & Video Production</option>
+            <option value="ads">Meta & Google Ads Scaling</option>
+            <option value="content">Content Writing & Brand Copywriting</option>
+            <option value="website">Website Designing & Landing Pages</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="auditNotes">What is your #1 goal or challenge right now?</label>
+          <textarea id="auditNotes" name="auditNotes" rows="3" placeholder="e.g. Need more views, struggling with consistency, want higher conversion..."></textarea>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary btn-lg submit-btn" id="auditSubmitBtn">
+            <span class="btn-text">Claim My Free Audit</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+          <p class="privacy-note">🔒 100% confidential. Zero spam guaranteed.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col footer-brand-col">
+        <a href="index.html" class="brand-logo footer-logo">
+          <img src="logo.svg" alt="RK Marketing Media Logo" class="brand-logo-img">
+          <span class="logo-text">RK Marketing <span class="gradient-text">Media</span></span>
+        </a>
+        <p class="footer-tagline">
+          Empowering modern brands with high-performance media buying, viral video production, and scalable growth architecture.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="insights.html">Instagram Insights</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">What Would You Like Help With?</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Meta & Google Ads</a></li>
+          <li><a href="services.html">Reels, Shorts & Video Content</a></li>
+          <li><a href="services.html">Social Media Management</a></li>
+          <li><a href="services.html">Content Writing</a></li>
+          <li><a href="services.html">Website Designing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4 class="footer-heading">What Would You Like to Improve?</h4>
+        <p>Tell us a little about your business, what’s been difficult, and what you’d like help with.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Your work email" required aria-label="Work email for newsletter">
+          <button type="submit" class="btn btn-primary btn-sm">Contact Us</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="currentYear">2026</span> RK Marketing Media. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <span class="sep">•</span>
+          <a href="#">Terms of Service</a>
+          <span class="sep">•</span>
+          <a href="#">Client Portal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=3.0"></script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Watch RK Marketing Media's featured video showcase. 1080p HD high-retention reels, viral hook mechanics, and cinematic production for top brands.">
+  <title>Portfolio | RK Marketing Media - High-Retention Video & Reels Production Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3.0">
+</head>
+<body>
+  <!-- Interactive Futuristic Background Canvas -->
+  <canvas id="futuristicBgCanvas" class="futuristic-bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Futuristic Holographic Social Media Orbs -->
+  <div class="floating-social-bg" id="floatingSocialBg" aria-hidden="true">
+    <div class="futuristic-social-card card-instagram" title="Instagram">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-youtube" title="YouTube">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-linkedin" title="LinkedIn">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-facebook" title="Facebook">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-twitter" title="Twitter">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="futuristic-social-card card-viral" title="Viral Engagement">
+      <div class="social-hud-ring"></div>
+      <div class="social-icon-wrapper">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-header" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RK Marketing Media Home">
+        <img src="logo.svg" alt="RK Marketing Media Logo" class="brand-logo-img">
+        <span class="logo-text">RK Marketing <span class="gradient-text">Media</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link active" aria-current="page">Portfolio</a>
+        <a href="insights.html" class="nav-link">Insights</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="contact.html" class="btn btn-primary nav-cta" id="headerAuditBtn">Get Free Audit</a>
+
+        <!-- Mobile Hamburger -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-content">
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link">Home</a>
+        <a href="about.html" class="drawer-link">About Us</a>
+        <a href="services.html" class="drawer-link">Services</a>
+        <a href="portfolio.html" class="drawer-link active" aria-current="page">Portfolio</a>
+        <a href="insights.html" class="drawer-link">Insights</a>
+        <a href="contact.html" class="drawer-link">Contact Us</a>
+      </nav>
+      <div class="drawer-footer">
+        <a href="contact.html" class="btn btn-primary btn-full drawer-cta" id="drawerAuditBtn">Get Free Audit</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- SUBPAGE HERO SECTION -->
+    <section class="page-hero">
+      <div class="cyber-grid-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-container">
+        <div class="page-hero-badge">
+          <span class="badge-dot"></span>
+          Featured Production • Reels & Viral Video
+        </div>
+        <h1 class="page-hero-title">
+          Visual Storytelling <br><span class="gradient-text">Built for Retention</span>.
+        </h1>
+        <p class="page-hero-desc">
+          Inspect our signature 1080p short-form video work. From 3-second psychological hook formulas to kinetic sound design and high-velocity pacing, we produce videos that capture attention and build lasting brand authority.
+        </p>
+        <div class="page-hero-actions">
+          <a href="#videoShowcase" class="btn btn-primary btn-lg">
+            Watch Featured Showcase
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <a href="contact.html" class="btn btn-secondary btn-lg">Discuss Your Project</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section class="section portfolio-section" id="videoShowcase" style="padding-top: 50px;">
+      <div class="portfolio-bg-effects" aria-hidden="true">
+        <div class="portfolio-nebula-glow"></div>
+        <div class="portfolio-matrix-stream">
+          <span class="stream-line s-1"></span>
+          <span class="stream-line s-2"></span>
+          <span class="stream-line s-3"></span>
+          <span class="stream-line s-4"></span>
+          <span class="stream-line s-5"></span>
+          <span class="stream-line s-6"></span>
+          <span class="stream-line s-7"></span>
+          <span class="stream-line s-8"></span>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">FEATURED MASTER SHOWCASE</span>
+          <h2 class="section-title">Our Portfolio: <span class="gradient-text">Reels & Video Showcase</span></h2>
+          <p class="section-description">
+            High-retention short-form video production, cinematic editing, and algorithmic storytelling crafted to drive millions of views and build brand authority.
+          </p>
+        </div>
+
+        <!-- Portfolio Single Hero Grid -->
+        <div class="portfolio-grid portfolio-grid-single" id="portfolioGrid">
+          <article class="portfolio-card portfolio-video-card" data-category="video" data-id="1">
+            <div class="portfolio-video-wrapper" id="portfolioVideoWrapper">
+              <video id="portfolioMainVideo" class="portfolio-video-element" poster="videos/video-poster.jpg" preload="metadata" playsinline>
+                <source src="videos/rk-reels-showcase.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="video-overlay-play" id="videoPlayOverlay" role="button" tabindex="0" aria-label="Play Reels Showcase Video">
+                <div class="play-pulse-ring"></div>
+                <div class="play-btn-circle">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                </div>
+                <span class="play-btn-text">Watch Reels Showcase</span>
+              </div>
+              <div class="video-hud-badge top-left">
+                <span class="live-pulse-dot"></span>
+                <span>LIVE REELS SHOWCASE</span>
+              </div>
+              <div class="video-hud-badge top-right">
+                <span>1080P HD / 10+ MINS</span>
+              </div>
+              <div class="video-custom-controls" id="videoCustomControls">
+                <button class="v-ctrl-btn" id="vPlayToggle" type="button" title="Play/Pause" aria-label="Play or Pause">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-play"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-pause" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </button>
+                <div class="v-progress-container" id="vProgressBar" role="slider" aria-label="Video Progress" tabindex="0">
+                  <div class="v-progress-filled" id="vProgressFilled"></div>
+                </div>
+                <span class="v-time" id="vTimeDisplay">0:00 / 10:22</span>
+                <button class="v-ctrl-btn" id="vMuteToggle" type="button" title="Mute/Unmute" aria-label="Mute or Unmute">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-vol"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-mute" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                </button>
+                <button class="v-ctrl-btn" id="vFullscreenBtn" type="button" title="Fullscreen" aria-label="Toggle Fullscreen">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Anatomy of a Viral Video (Capabilities) -->
+        <div style="margin-top: 64px;">
+          <div class="section-header text-center" style="margin-bottom: 24px;">
+            <span class="section-tag">PRODUCTION METHODOLOGY</span>
+            <h3 class="section-title">Anatomy of a <span class="gradient-text">High-Retention Reel</span></h3>
+            <p class="section-description">
+              Every second of video content we produce is engineered to maximize audience watch time and algorithmic momentum.
+            </p>
+          </div>
+
+          <div class="capabilities-grid">
+            <div class="capability-card">
+              <div class="capability-number">01</div>
+              <h4>The 3-Second Hook</h4>
+              <p>Visual and auditory pattern interrupts that prevent the swipe-away and grip viewer interest instantly.</p>
+            </div>
+            <div class="capability-card">
+              <div class="capability-number">02</div>
+              <h4>Micro-Cut Pacing</h4>
+              <p>Strategic B-roll transitions, zoom-ins, and dynamic camera angles keeping visual rhythm fast and engaging.</p>
+            </div>
+            <div class="capability-card">
+              <div class="capability-number">03</div>
+              <h4>Kinetic Sound & SFX</h4>
+              <p>Curated sound effects, rising swells, and custom beat-matched audio cues to drive emotional response.</p>
+            </div>
+            <div class="capability-card">
+              <div class="capability-number">04</div>
+              <h4>Seamless Conversion</h4>
+              <p>Natural calls-to-action that funnel viral viewers directly into saves, profile visits, and DM inquiries.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subpage Bottom Call to Action -->
+        <div class="subpage-cta-banner">
+          <h3 class="subpage-cta-title">Want High-Retention Reels Produced for Your Brand?</h3>
+          <p class="subpage-cta-desc">
+            Let's plan your upcoming batch of short-form videos. From scripting and framing to final 1080p color grading, we handle everything.
+          </p>
+          <div class="subpage-cta-actions">
+            <button type="button" class="btn btn-primary btn-lg" onclick="document.getElementById('headerAuditBtn').click()">
+              Claim Free Growth Audit
+            </button>
+            <a href="contact.html" class="btn btn-secondary btn-lg">Inquire About Video Production</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Free Growth Audit Modal Popup -->
+  <div class="modal-backdrop audit-modal-backdrop" id="auditModal" aria-hidden="true" role="dialog" aria-labelledby="auditModalTitle">
+    <div class="modal-card audit-modal-card">
+      <button class="modal-close-btn" id="auditModalCloseBtn" aria-label="Close Audit Modal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="audit-modal-header">
+        <span class="modal-header-tag">100% Free • No Obligation</span>
+        <h3 id="auditModalTitle" class="audit-modal-title">Get Your Free <span class="gradient-text">Growth Audit</span></h3>
+        <p class="audit-modal-desc">
+          Drop your details below. We'll analyze your current social media, reels & online presence, and send you a practical growth breakdown within 24 hours.
+        </p>
+      </div>
+
+      <form id="auditModalForm" class="audit-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="auditFullName">Your Full Name <span class="required">*</span></label>
+            <input type="text" id="auditFullName" name="auditFullName" placeholder="e.g. Rahul Sharma" required>
+            <span class="error-msg" id="auditNameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="auditEmail">Work / Personal Email <span class="required">*</span></label>
+            <input type="email" id="auditEmail" name="auditEmail" placeholder="rahul@mybrand.com" required>
+            <span class="error-msg" id="auditEmailError"></span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="auditPhone">Phone / WhatsApp Number <span class="required">*</span></label>
+            <input type="tel" id="auditPhone" name="auditPhone" placeholder="+91 95887 98848" required>
+            <span class="error-msg" id="auditPhoneError"></span>
+          </div>
+          <div class="form-group">
+            <label for="auditHandle">Website or Instagram Handle</label>
+            <input type="text" id="auditHandle" name="auditHandle" placeholder="e.g. @brand_handle or website.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="auditService">Primary Growth Focus</label>
+          <select id="auditService" name="auditService">
+            <option value="reels" selected>Viral Reels & Video Production</option>
+            <option value="ads">Meta & Google Ads Scaling</option>
+            <option value="social">Complete Social Media Management</option>
+            <option value="content">Content Writing & Brand Copywriting</option>
+            <option value="website">Website Designing & Landing Pages</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="auditNotes">What is your #1 goal or challenge right now?</label>
+          <textarea id="auditNotes" name="auditNotes" rows="3" placeholder="e.g. Need more views, struggling with consistency, want higher conversion..."></textarea>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary btn-lg submit-btn" id="auditSubmitBtn">
+            <span class="btn-text">Claim My Free Audit</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+          <p class="privacy-note">🔒 100% confidential. Zero spam guaranteed.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col footer-brand-col">
+        <a href="index.html" class="brand-logo footer-logo">
+          <img src="logo.svg" alt="RK Marketing Media Logo" class="brand-logo-img">
+          <span class="logo-text">RK Marketing <span class="gradient-text">Media</span></span>
+        </a>
+        <p class="footer-tagline">
+          Empowering modern brands with high-performance media buying, viral video production, and scalable growth architecture.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="insights.html">Instagram Insights</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">What Would You Like Help With?</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Meta & Google Ads</a></li>
+          <li><a href="services.html">Reels, Shorts & Video Content</a></li>
+          <li><a href="services.html">Social Media Management</a></li>
+          <li><a href="services.html">Content Writing</a></li>
+          <li><a href="services.html">Website Designing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4 class="footer-heading">What Would You Like to Improve?</h4>
+        <p>Tell us a little about your business, what’s been difficult, and what you’d like help with.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Your work email" required aria-label="Work email for newsletter">
+          <button type="submit" class="btn btn-primary btn-sm">Contact Us</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="currentYear">2026</span> RK Marketing Media. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <span class="sep">•</span>
+          <a href="#">Terms of Service</a>
+          <span class="sep">•</span>
+          <a href="#">Client Portal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=3.0"></script>
+</body>
+</html>

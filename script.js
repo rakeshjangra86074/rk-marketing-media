@@ -7,6 +7,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initMobileMenu();
+  initActiveNav();
   initScrollSpy();
   initStatsCounter();
   initPortfolioFilters();
@@ -92,12 +93,46 @@ function initMobileMenu() {
 }
 
 /* --------------------------------------------------------------------------
-   3. ScrollSpy & Navigation Highlighting
+   3. Active Page Navigation & ScrollSpy
    -------------------------------------------------------------------------- */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
+function initActiveNav() {
+  const currentPath = window.location.pathname.toLowerCase();
+  let pageName = currentPath.split('/').pop() || 'index.html';
+  if (pageName === '' || pageName === '/' || pageName === 'index') {
+    pageName = 'index.html';
+  }
+
   const navLinks = document.querySelectorAll('.nav-link');
   const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  function updateLinks(links) {
+    links.forEach(link => {
+      const href = (link.getAttribute('href') || '').toLowerCase();
+      if (!href) return;
+      const cleanHref = href.split('#')[0].split('/').pop() || 'index.html';
+
+      const isCurrent = (cleanHref === pageName) || 
+                        (pageName === 'index.html' && (cleanHref === 'index.html' || cleanHref === ''));
+
+      if (isCurrent) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  updateLinks(navLinks);
+  updateLinks(drawerLinks);
+}
+
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  const drawerLinks = document.querySelectorAll('.drawer-link[href^="#"]');
+  if (!navLinks.length && !drawerLinks.length) return;
 
   window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset;
