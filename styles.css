@@ -4791,25 +4791,184 @@ body.page-entering {
   }
 }
 
-/* 4. Scroll-Triggered Reveal Animations */
+/* 4. Bidirectional Scroll-Triggered Reveal Animations (Scroll Up & Down) */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  will-change: opacity, transform, filter;
+  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(5px);
+}
+
+.reveal-on-scroll.enter-from-bottom {
+  transform: translateY(44px) scale(0.96) perspective(900px) rotateX(3.5deg);
+}
+
+.reveal-on-scroll.enter-from-top {
+  transform: translateY(-44px) scale(0.96) perspective(900px) rotateX(-3.5deg);
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
-  transform: translateY(0);
+  filter: blur(0px);
+  transform: translateY(0) scale(1) perspective(900px) rotateX(0deg);
 }
 
 /* Staggered Delay Helpers */
-.reveal-on-scroll.delay-1 { transition-delay: 0.08s; }
-.reveal-on-scroll.delay-2 { transition-delay: 0.16s; }
-.reveal-on-scroll.delay-3 { transition-delay: 0.24s; }
-.reveal-on-scroll.delay-4 { transition-delay: 0.32s; }
-.reveal-on-scroll.delay-5 { transition-delay: 0.40s; }
+.reveal-on-scroll.delay-1 { transition-delay: 0.07s; }
+.reveal-on-scroll.delay-2 { transition-delay: 0.14s; }
+.reveal-on-scroll.delay-3 { transition-delay: 0.21s; }
+.reveal-on-scroll.delay-4 { transition-delay: 0.28s; }
+.reveal-on-scroll.delay-5 { transition-delay: 0.35s; }
+
+/* Navbar Header Dynamics on Scroll Up vs Down */
+body.scrolling-down .navbar-header {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+  border-bottom-color: rgba(211, 171, 85, 0.22);
+}
+
+body.scrolling-up .navbar-header {
+  transform: translateY(0);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75), 0 0 20px rgba(211, 171, 85, 0.24);
+  border-bottom-color: var(--primary);
+}
+
+/* Kinetic Parallax Tilt on Cards during Scroll Up & Down */
+body.scrolling-down .portfolio-card,
+body.scrolling-down .service-card,
+body.scrolling-down .advantage-card,
+body.scrolling-down .framework-card,
+body.scrolling-down .roi-controls-card,
+body.scrolling-down .roi-results-card,
+body.scrolling-down .comparison-card {
+  transform: translateY(-2.5px) scale(0.995);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.scrolling-up .portfolio-card,
+body.scrolling-up .service-card,
+body.scrolling-up .advantage-card,
+body.scrolling-up .framework-card,
+body.scrolling-up .roi-controls-card,
+body.scrolling-up .roi-results-card,
+body.scrolling-up .comparison-card {
+  transform: translateY(2.5px) scale(0.995);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Floating Scroll Direction & Velocity Indicator Widget */
+.scroll-direction-indicator {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(12, 14, 18, 0.90);
+  border: 1px solid rgba(211, 171, 85, 0.42);
+  border-radius: var(--radius-full);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 18px rgba(211, 171, 85, 0.2);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.9);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.28s ease,
+              border-color 0.28s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+[data-theme="light"] .scroll-direction-indicator {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(181, 136, 50, 0.4);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12), 0 0 16px rgba(181, 136, 50, 0.22);
+}
+
+.scroll-direction-indicator.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-direction-indicator:hover {
+  border-color: var(--primary);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65), 0 0 24px rgba(211, 171, 85, 0.35);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.scroll-indicator-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  animation: scrollIndicatorGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes scrollIndicatorGlow {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 14px var(--primary); }
+}
+
+.scroll-indicator-icon {
+  color: var(--primary);
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.scroll-direction-indicator.down .icon-down {
+  animation: scrollIconBounceDown 0.9s ease-in-out infinite;
+}
+
+.scroll-direction-indicator.up .icon-up {
+  animation: scrollIconBounceUp 0.9s ease-in-out infinite;
+}
+
+@keyframes scrollIconBounceDown {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(3px); }
+}
+
+@keyframes scrollIconBounceUp {
+  0%, 100% { transform: translateY(2px); }
+  50% { transform: translateY(-3px); }
+}
+
+.scroll-indicator-text {
+  font-size: 0.70rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+[data-theme="light"] .scroll-indicator-text {
+  color: #0a0b0d;
+}
+
+@media (max-width: 640px) {
+  .scroll-direction-indicator {
+    bottom: 20px;
+    left: 16px;
+    padding: 6px 12px;
+  }
+  .scroll-indicator-text {
+    font-size: 0.64rem;
+  }
+}
+
+/* Enhanced Scroll Progress Bar */
+body.is-scrolling .scroll-progress-bar {
+  height: 3.5px;
+  box-shadow: 0 0 18px rgba(211, 171, 85, 0.95), 0 0 32px rgba(244, 214, 133, 0.65);
+}
 
 /* 5. Circular Back-to-Top Floating Widget */
 .back-to-top-btn {

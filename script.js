@@ -4,6 +4,10 @@
  * Portfolio Filters, Campaign Detail Modals, Form Validation, and Toasts.
  */
 
+// Global physical inertia variables for scroll up & down animations
+let globalScrollDriftY = 0;
+let globalScrollInertiaY = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initMobileMenu();
@@ -31,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageTransitions();
   initVideoScrollTextReveal();
   initSiteWideTextRevealOnScroll();
+  initBidirectionalScrollAnimations();
 });
 
 /* --------------------------------------------------------------------------
@@ -1042,7 +1047,7 @@ function initFuturisticBackground() {
 
     update(tick) {
       this.x += this.vx;
-      this.y += this.vy;
+      this.y += this.vy + globalScrollDriftY;
 
       // Wrap-around screen bounds
       if (this.x < -20) this.x = width + 20;
@@ -1117,6 +1122,10 @@ function initFuturisticBackground() {
   function render() {
     tick++;
     ctx.clearRect(0, 0, width, height);
+
+    // Smoothly decay scroll drift velocity
+    globalScrollDriftY *= 0.88;
+    if (Math.abs(globalScrollDriftY) < 0.01) globalScrollDriftY = 0;
 
     const isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
     const baseAlphaScale = isLightMode ? 0.7 : 1;
@@ -1335,10 +1344,13 @@ function initFloatingSocialCursorTracking() {
       const impulseX = mouseVelocityX * (item.depthX * 0.7);
       const impulseY = mouseVelocityY * (item.depthY * 0.7);
 
-      // Target composite position
+      // Target composite position with scroll up/down physical inertia
+      globalScrollInertiaY *= 0.88;
+      if (Math.abs(globalScrollInertiaY) < 0.01) globalScrollInertiaY = 0;
+
       const targetX = ambientX + parallaxX + proximityRepelX + impulseX;
-      const targetY = ambientY + parallaxY + proximityRepelY + impulseY;
-      const targetRotateX = generalRotateX + proximityRotX;
+      const targetY = ambientY + parallaxY + proximityRepelY + impulseY + (globalScrollInertiaY * (item.depthY > 0 ? 0.8 : -0.8));
+      const targetRotateX = generalRotateX + proximityRotX + (globalScrollInertiaY * 0.35);
       const targetRotateY = generalRotateY + proximityRotY;
 
       // Smooth inertia linear interpolation (lerp)
@@ -1733,7 +1745,7 @@ function initScrollReveal() {
   const parentGroups = new Map();
 
   elements.forEach(el => {
-    el.classList.add('reveal-on-scroll');
+    el.classList.add('reveal-on-scroll', 'enter-from-bottom');
     const parent = el.parentElement;
     if (parent) {
       const count = parentGroups.get(parent) || 0;
@@ -1744,22 +1756,27 @@ function initScrollReveal() {
     }
   });
 
-  // Bidirectional reveal: reveals on scroll down AND scroll up
+  // Bidirectional reveal: reveals on scroll down AND scroll up with dynamic directional momentum
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      const el = entry.target;
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-revealed');
+        el.classList.add('is-revealed');
       } else {
         // Reset when scrolled outside viewport so scrolling back up/down re-reveals
         const rect = entry.boundingClientRect;
-        if (rect.top > window.innerHeight + 50 || rect.bottom < -50) {
-          entry.target.classList.remove('is-revealed');
+        if (rect.top > window.innerHeight + 30) {
+          el.classList.remove('is-revealed', 'enter-from-top');
+          el.classList.add('enter-from-bottom');
+        } else if (rect.bottom < -30) {
+          el.classList.remove('is-revealed', 'enter-from-bottom');
+          el.classList.add('enter-from-top');
         }
       }
     });
   }, {
     threshold: 0.08,
-    rootMargin: '20px 0px 20px 0px'
+    rootMargin: '25px 0px 25px 0px'
   });
 
   elements.forEach(el => observer.observe(el));
@@ -2430,3 +2447,105 @@ function initSiteWideTextRevealOnScroll() {
   // Initial calculation on load
   updateTextReveal();
 }
+
+/* --------------------------------------------------------------------------
+   25. Bidirectional Scroll Direction & Motion Animation Engine
+   -------------------------------------------------------------------------- */
+function initBidirectionalScrollAnimations() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let lastScrollY = window.scrollY || window.pageYOffset;
+  let scrollIdleTimer = null;
+  let isTicking = false;
+
+  // Create floating scroll direction indicator if not present
+  let indicator = document.getElementById('scrollDirectionIndicator');
+  if (!indicator) {
+    indicator = document.createElement('div');
+    indicator.id = 'scrollDirectionIndicator';
+    indicator.className = 'scroll-direction-indicator';
+    indicator.setAttribute('aria-hidden', 'true');
+    indicator.setAttribute('title', 'Scroll direction indicator - Click to navigate');
+    indicator.innerHTML = `
+      <div class="scroll-indicator-pulse"></div>
+      <svg class="scroll-indicator-icon icon-down" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
+      </svg>
+      <svg class="scroll-indicator-icon icon-up" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+      <span class="scroll-indicator-text">SCROLLING DOWN</span>
+    `;
+    document.body.appendChild(indicator);
+  }
+
+  const iconDown = indicator.querySelector('.icon-down');
+  const iconUp = indicator.querySelector('.icon-up');
+  const textSpan = indicator.querySelector('.scroll-indicator-text');
+
+  // Click on indicator to jump in direction
+  indicator.addEventListener('click', () => {
+    if (indicator.classList.contains('up')) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollBy({ top: window.innerHeight * 0.75, behavior: 'smooth' });
+    }
+  });
+
+  function updateScrollDirection() {
+    const currentScrollY = window.scrollY || window.pageYOffset;
+    const delta = currentScrollY - lastScrollY;
+
+    if (Math.abs(delta) > 2) {
+      document.body.classList.add('is-scrolling');
+
+      if (delta > 0) {
+        // Scrolling DOWN
+        document.body.classList.add('scrolling-down');
+        document.body.classList.remove('scrolling-up');
+        indicator.classList.remove('up');
+        indicator.classList.add('down', 'is-visible');
+        if (iconDown) iconDown.style.display = 'block';
+        if (iconUp) iconUp.style.display = 'none';
+        if (textSpan) textSpan.textContent = 'SCROLLING DOWN';
+
+        if (!prefersReduced) {
+          globalScrollDriftY = Math.max(globalScrollDriftY - 1.8, -12);
+          globalScrollInertiaY = Math.max(globalScrollInertiaY - 1.5, -10);
+        }
+      } else {
+        // Scrolling UP
+        document.body.classList.add('scrolling-up');
+        document.body.classList.remove('scrolling-down');
+        indicator.classList.remove('down');
+        indicator.classList.add('up', 'is-visible');
+        if (iconDown) iconDown.style.display = 'none';
+        if (iconUp) iconUp.style.display = 'block';
+        if (textSpan) textSpan.textContent = 'SCROLLING UP';
+
+        if (!prefersReduced) {
+          globalScrollDriftY = Math.min(globalScrollDriftY + 1.8, 12);
+          globalScrollInertiaY = Math.min(globalScrollInertiaY + 1.5, 10);
+        }
+      }
+
+      clearTimeout(scrollIdleTimer);
+      scrollIdleTimer = setTimeout(() => {
+        document.body.classList.remove('is-scrolling', 'scrolling-down', 'scrolling-up');
+        indicator.classList.remove('is-visible');
+      }, 550);
+    }
+
+    lastScrollY = currentScrollY;
+    isTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(updateScrollDirection);
+      isTicking = true;
+    }
+  }, { passive: true });
+}
+
