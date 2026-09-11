@@ -4439,7 +4439,7 @@ button, input, textarea, select {
 
 .roadmap-timeline {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 45px;
   position: relative;
@@ -4493,6 +4493,9 @@ button, input, textarea, select {
 
 .roadmap-content {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .step-timing {
@@ -4512,6 +4515,7 @@ button, input, textarea, select {
   margin-bottom: 10px;
   color: var(--text-primary);
   text-align: left;
+  line-height: 1.35;
 }
 
 .roadmap-content p {
@@ -4520,6 +4524,70 @@ button, input, textarea, select {
   line-height: 1.55;
   margin-bottom: 16px;
   text-align: left;
+}
+
+.step-checklist {
+  list-style: none;
+  padding: 0;
+  margin: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+}
+
+.step-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  text-align: left;
+}
+
+.step-checklist .check-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.roadmap-footer-banner {
+  margin-top: 40px;
+  padding: 24px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  text-align: left;
+  backdrop-filter: blur(14px);
+}
+
+.roadmap-promise-text {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1 1 340px;
+  line-height: 1.6;
+}
+
+.roadmap-promise-text strong {
+  color: var(--primary);
+}
+
+[data-theme="light"] .roadmap-footer-banner {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .step-checklist li {
+  color: #4b5563;
 }
 
 .step-tag {
@@ -4892,13 +4960,23 @@ button, input, textarea, select {
   }
 
   .roadmap-timeline {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 640px) {
   .roadmap-timeline {
     grid-template-columns: 1fr;
+  }
+
+  .roadmap-footer-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .roadmap-promise-text {
+    text-align: center;
   }
 
   .partners-platforms-row {
