@@ -5079,5 +5079,252 @@ p.reveal-text-container {
   }
 }
 
+/* ==========================================================================
+   SCROLL VIDEO SHOWCASE — Digital Marketing Video Switcher (v4.2)
+   ========================================================================== */
 
+.scroll-video-showcase {
+  padding: 90px 0 100px;
+  background: var(--bg-primary);
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-video-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(var(--accent-rgb, 212, 175, 55), 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.svs-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.svs-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+  position: relative;
+}
+
+/* Sticky video pane */
+.svs-video-pane {
+  position: sticky;
+  top: 100px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255,255,255,0.06);
+  background: #000;
+}
+
+.svs-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.svs-video-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.55s ease;
+}
+
+.svs-video-el.svs-fade-out {
+  opacity: 0;
+}
+
+.svs-video-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.svs-video-badge .pulse-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #d4af37;
+  animation: svsLivePulse 1.6s ease-in-out infinite;
+}
+
+@keyframes svsLivePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.svs-video-caption {
+  padding: 18px 20px;
+  background: var(--bg-secondary, #111);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.svs-caption-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary, #fff);
+  margin: 0 0 3px;
+}
+
+.svs-caption-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary, rgba(255,255,255,0.55));
+  margin: 0;
+}
+
+/* Chapter list pane */
+.svs-chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.svs-chapter {
+  padding: 28px 24px 28px 32px;
+  border-left: 3px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: border-color 0.35s ease, background 0.35s ease;
+  border-radius: 0 14px 14px 0;
+  position: relative;
+}
+
+.svs-chapter:hover {
+  background: rgba(255,255,255,0.03);
+  border-left-color: rgba(212, 175, 55, 0.4);
+}
+
+.svs-chapter.svs-active {
+  border-left-color: #d4af37;
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.svs-chapter.svs-active .svs-chapter-num {
+  color: #d4af37;
+}
+
+.svs-chapter.svs-active .svs-chapter-title {
+  color: var(--text-primary, #fff);
+}
+
+.svs-chapter-num {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary, rgba(255,255,255,0.38));
+  margin-bottom: 6px;
+  display: block;
+  transition: color 0.35s ease;
+}
+
+.svs-chapter-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-secondary, rgba(255,255,255,0.7));
+  margin: 0 0 6px;
+  transition: color 0.35s ease;
+}
+
+.svs-chapter-body {
+  font-size: 0.84rem;
+  color: var(--text-secondary, rgba(255,255,255,0.5));
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Progress bar inside active chapter */
+.svs-chapter-progress {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.svs-chapter.svs-active .svs-chapter-progress::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  background: #d4af37;
+  animation: svsProgress 8s linear infinite;
+}
+
+@keyframes svsProgress {
+  from { transform: scaleY(0); transform-origin: top; }
+  to { transform: scaleY(1); transform-origin: top; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .svs-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .svs-video-pane {
+    position: static;
+  }
+
+  .svs-chapters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .svs-chapter {
+    border-left: none;
+    border-bottom: 3px solid rgba(255,255,255,0.08);
+    border-radius: 14px 14px 0 0;
+    flex: 1 1 calc(50% - 6px);
+    padding: 18px 18px 18px 18px;
+  }
+
+  .svs-chapter.svs-active {
+    border-bottom-color: #d4af37;
+    border-left: none;
+  }
+
+  .svs-chapter-progress {
+    width: 100%; height: 3px;
+    top: auto; left: 0; right: 0; bottom: 0;
+  }
+
+  .svs-chapter.svs-active .svs-chapter-progress::after {
+    animation: svsProgressH 8s linear infinite;
+  }
+
+  @keyframes svsProgressH {
+    from { transform: scaleX(0); transform-origin: left; }
+    to { transform: scaleX(1); transform-origin: left; }
+  }
+}
+
+@media (max-width: 540px) {
+  .svs-chapter {
+    flex: 1 1 100%;
+  }
+}
 

@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageTransitions();
   initVideoScrollTextReveal();
   initSiteWideTextRevealOnScroll();
+  initScrollVideoShowcase();
 });
 
 /* --------------------------------------------------------------------------
@@ -2172,4 +2173,75 @@ function initSiteWideTextRevealOnScroll() {
 
   // Initial calculation on load
   updateTextReveal();
+}
+
+/* --------------------------------------------------------------------------
+   SCROLL VIDEO SHOWCASE — switches digital marketing video on scroll (v4.2)
+   -------------------------------------------------------------------------- */
+function initScrollVideoShowcase() {
+  const showcases = document.querySelectorAll('.scroll-video-showcase');
+  if (!showcases.length) return;
+
+  showcases.forEach(showcase => {
+    const videoEl    = showcase.querySelector('.svs-video-el');
+    const chapters   = showcase.querySelectorAll('.svs-chapter');
+    const captTitle  = showcase.querySelector('.svs-caption-title');
+    const captDesc   = showcase.querySelector('.svs-caption-desc');
+
+    if (!videoEl || !chapters.length) return;
+
+    let currentIndex = -1;
+    let switchTimeout = null;
+
+    function activateChapter(idx) {
+      if (idx === currentIndex) return;
+      currentIndex = idx;
+
+      const ch = chapters[idx];
+      const newSrc   = ch.dataset.videoSrc  || '';
+      const newTitle = ch.dataset.capTitle  || '';
+      const newDesc  = ch.dataset.capDesc   || '';
+
+      // Fade out, swap src, fade in
+      videoEl.classList.add('svs-fade-out');
+      clearTimeout(switchTimeout);
+      switchTimeout = setTimeout(() => {
+        if (videoEl.src !== newSrc) {
+          videoEl.src = newSrc;
+          videoEl.load();
+          videoEl.play().catch(() => {});
+        }
+        if (captTitle) captTitle.textContent = newTitle;
+        if (captDesc)  captDesc.textContent  = newDesc;
+        videoEl.classList.remove('svs-fade-out');
+      }, 280);
+
+      // Update active state on chapters
+      chapters.forEach((c, i) => {
+        c.classList.toggle('svs-active', i === idx);
+      });
+    }
+
+    // Click to jump to chapter manually
+    chapters.forEach((ch, idx) => {
+      ch.addEventListener('click', () => activateChapter(idx));
+    });
+
+    // IntersectionObserver — activate chapter when it crosses the viewport midline
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const idx = Array.from(chapters).indexOf(entry.target);
+        if (idx !== -1) activateChapter(idx);
+      });
+    }, {
+      rootMargin: '-30% 0px -30% 0px',
+      threshold: 0
+    });
+
+    chapters.forEach(ch => io.observe(ch));
+
+    // Activate first chapter immediately
+    activateChapter(0);
+  });
 }
