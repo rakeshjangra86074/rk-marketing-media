@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initDynamicYear();
   initFuturisticBackground();
   initFloatingSocialCursorTracking();
+  initHeroTicker();
+  initHeroHudToggles();
+  initRoiSimulator();
+  initGrowthEnginesTabs();
+  initFaqAccordion();
 });
 
 /* --------------------------------------------------------------------------
@@ -1360,5 +1365,299 @@ function initFloatingSocialCursorTracking() {
     } else {
       animId = requestAnimationFrame(animate);
     }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   14. Hero Kinetic Dynamic Ticker
+   -------------------------------------------------------------------------- */
+function initHeroTicker() {
+  const tickerEl = document.getElementById('heroTickerText');
+  if (!tickerEl) return;
+
+  const benchmarks = [
+    '4.62x Average Client ROAS',
+    '+428% Organic Reach Surge',
+    '150+ Master Viral Reels Produced',
+    '₹1.5Cr+ Scaled Ad Spend Pipeline',
+    '0% Vanity Fluff Metrics',
+    '98% Verified Client Retention'
+  ];
+
+  let idx = 0;
+  setInterval(() => {
+    tickerEl.style.opacity = '0';
+    tickerEl.style.transform = 'translateY(6px)';
+    setTimeout(() => {
+      idx = (idx + 1) % benchmarks.length;
+      tickerEl.textContent = benchmarks[idx];
+      tickerEl.style.opacity = '1';
+      tickerEl.style.transform = 'translateY(0)';
+    }, 300);
+  }, 3400);
+}
+
+/* --------------------------------------------------------------------------
+   15. Hero Cyber HUD Channel Toggles
+   -------------------------------------------------------------------------- */
+function initHeroHudToggles() {
+  const pills = document.querySelectorAll('.hud-tab-pill');
+  const valEl = document.getElementById('hudMetricValue');
+  const descEl = document.getElementById('hudMetricDesc');
+  const tagEl = document.getElementById('hudMetricTag');
+  if (!pills.length || !valEl) return;
+
+  const channelData = {
+    meta: {
+      val: '4.62x',
+      desc: 'Blended Meta Campaign ROAS (Last 30 Days)',
+      tag: 'Live Meta Engine'
+    },
+    reels: {
+      val: '+2.84M',
+      desc: 'Organic Viral Reels Discovery & Views',
+      tag: 'Viral Video Studio'
+    },
+    google: {
+      val: '5.14x',
+      desc: 'Search & High-Intent Shopping ROAS',
+      tag: 'Google Scaling Engine'
+    }
+  };
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const ch = pill.getAttribute('data-hud-channel');
+      const data = channelData[ch] || channelData.meta;
+      if (valEl) valEl.textContent = data.val;
+      if (descEl) descEl.textContent = data.desc;
+      if (tagEl) tagEl.textContent = data.tag;
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   16. Interactive Brand Growth & ROI Simulator
+   -------------------------------------------------------------------------- */
+function initRoiSimulator() {
+  const budgetSlider = document.getElementById('roiBudgetSlider');
+  const reachSlider = document.getElementById('roiReachSlider');
+  const budgetVal = document.getElementById('roiBudgetValue');
+  const reachVal = document.getElementById('roiReachValue');
+  const projectedReach = document.getElementById('roiProjectedReach');
+  const projectedRoas = document.getElementById('roiProjectedRoas');
+  const projectedCac = document.getElementById('roiProjectedCac');
+  const projectedGmv = document.getElementById('roiProjectedGmv');
+  const surgeBadge = document.getElementById('roiReachSurgeBadge');
+  const pillBtns = document.querySelectorAll('.roi-pill-btn');
+  const claimBtn = document.getElementById('roiClaimRoadmapBtn');
+
+  if (!budgetSlider || !reachSlider) return;
+
+  let selectedModel = 'd2c';
+
+  const modelConfigs = {
+    d2c: {
+      name: 'D2C E-Commerce',
+      minRoas: 4.2,
+      maxRoas: 5.8,
+      reachMult: 4.5,
+      cacDrop: '-42%',
+      serviceId: 'ads'
+    },
+    creator: {
+      name: 'Creator / Personal Brand',
+      minRoas: 6.0,
+      maxRoas: 8.5,
+      reachMult: 6.2,
+      cacDrop: '-55%',
+      serviceId: 'reels'
+    },
+    b2b: {
+      name: 'B2B & High-Ticket',
+      minRoas: 3.8,
+      maxRoas: 5.0,
+      reachMult: 3.2,
+      cacDrop: '-35%',
+      serviceId: 'ads'
+    },
+    startup: {
+      name: 'Startup & Scaleup',
+      minRoas: 3.6,
+      maxRoas: 5.2,
+      reachMult: 4.8,
+      cacDrop: '-38%',
+      serviceId: 'ads'
+    }
+  };
+
+  function formatINR(amount) {
+    if (amount >= 10000000) {
+      return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+    }
+    if (amount >= 100000) {
+      return '₹' + (amount / 100000).toFixed(1) + 'L';
+    }
+    return '₹' + amount.toLocaleString('en-IN');
+  }
+
+  function formatReach(views) {
+    if (views >= 1000000) {
+      return (views / 1000000).toFixed(2) + 'M+';
+    }
+    if (views >= 100000) {
+      return (views / 100000).toFixed(1) + 'L+';
+    }
+    if (views >= 1000) {
+      return (views / 1000).toFixed(0) + 'K+';
+    }
+    return views.toLocaleString();
+  }
+
+  function recalculate() {
+    const budget = parseInt(budgetSlider.value, 10) || 100000;
+    const reach = parseInt(reachSlider.value, 10) || 150000;
+    const config = modelConfigs[selectedModel] || modelConfigs.d2c;
+
+    if (budgetVal) {
+      budgetVal.textContent = `₹${budget.toLocaleString('en-IN')} / mo`;
+    }
+    if (reachVal) {
+      reachVal.textContent = `${reach >= 100000 ? (reach / 100000).toFixed(1) + 'L' : (reach / 1000).toFixed(0) + 'K'} Views / mo`;
+    }
+
+    const reachBoost = Math.round(reach * (config.reachMult * 0.7) + (budget / 8));
+    const percentageSurge = Math.round(((reachBoost - reach) / Math.max(reach, 1)) * 100);
+
+    const gmvLow = budget * config.minRoas;
+    const gmvHigh = budget * config.maxRoas;
+
+    if (projectedReach) projectedReach.textContent = formatReach(reachBoost);
+    if (surgeBadge) surgeBadge.textContent = `+${Math.max(percentageSurge, 120)}% Expansion`;
+    if (projectedRoas) projectedRoas.textContent = `${config.minRoas.toFixed(1)}x – ${config.maxRoas.toFixed(1)}x`;
+    if (projectedCac) projectedCac.textContent = config.cacDrop;
+    if (projectedGmv) projectedGmv.textContent = `${formatINR(gmvLow)} – ${formatINR(gmvHigh)}`;
+  }
+
+  budgetSlider.addEventListener('input', recalculate);
+  reachSlider.addEventListener('input', recalculate);
+
+  pillBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pillBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-checked', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-checked', 'true');
+      selectedModel = btn.getAttribute('data-model') || 'd2c';
+      recalculate();
+    });
+  });
+
+  if (claimBtn) {
+    claimBtn.addEventListener('click', () => {
+      const config = modelConfigs[selectedModel] || modelConfigs.d2c;
+      const budget = parseInt(budgetSlider.value, 10) || 100000;
+      const reach = parseInt(reachSlider.value, 10) || 150000;
+
+      const auditService = document.getElementById('auditService');
+      const auditNotes = document.getElementById('auditNotes');
+      const auditModal = document.getElementById('auditModal');
+
+      if (auditService) {
+        auditService.value = config.serviceId;
+      }
+      if (auditNotes) {
+        auditNotes.value = `Simulated Growth Plan for ${config.name} | Monthly Media Budget: ₹${budget.toLocaleString('en-IN')} | Current Reach: ${reach.toLocaleString()} views.`;
+      }
+
+      const headerAuditBtn = document.getElementById('headerAuditBtn');
+      if (headerAuditBtn) {
+        headerAuditBtn.click();
+      } else if (auditModal) {
+        auditModal.classList.add('open');
+        auditModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  }
+
+  recalculate();
+}
+
+/* --------------------------------------------------------------------------
+   17. The 4 Proprietary Growth Engines (Interactive Tabs)
+   -------------------------------------------------------------------------- */
+function initGrowthEnginesTabs() {
+  const tabs = document.querySelectorAll('.engine-tab-btn');
+  const panes = document.querySelectorAll('.engine-pane');
+  if (!tabs.length || !panes.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetEngine = tab.getAttribute('data-engine');
+      if (!targetEngine) return;
+
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      panes.forEach(pane => {
+        const paneId = pane.getAttribute('id');
+        const expectedId = `pane${targetEngine.charAt(0).toUpperCase() + targetEngine.slice(1)}`;
+        if (paneId === expectedId) {
+          pane.classList.add('active');
+          pane.removeAttribute('hidden');
+        } else {
+          pane.classList.remove('active');
+          pane.setAttribute('hidden', '');
+        }
+      });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   18. Interactive FAQ Accordion
+   -------------------------------------------------------------------------- */
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('#faqAccordion .faq-item');
+  if (!faqItems.length) return;
+
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    const ans = item.querySelector('.faq-answer');
+    if (!btn || !ans) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+
+      // Close all other items for a clean accordion effect
+      faqItems.forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          const otherBtn = other.querySelector('.faq-question');
+          const otherAns = other.querySelector('.faq-answer');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          if (otherAns) otherAns.setAttribute('hidden', '');
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('active');
+        btn.setAttribute('aria-expanded', 'false');
+        ans.setAttribute('hidden', '');
+      } else {
+        item.classList.add('active');
+        btn.setAttribute('aria-expanded', 'true');
+        ans.removeAttribute('hidden');
+      }
+    });
   });
 }
