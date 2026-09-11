@@ -4662,12 +4662,12 @@ body.page-entering {
 
 .reveal-word {
   display: inline-block;
-  opacity: 0.2;
-  filter: blur(2.5px);
-  transform: translateY(6px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.18;
+  filter: blur(2px);
+  transform: translateY(5px);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform, filter;
   white-space: pre;
 }

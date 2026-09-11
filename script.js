@@ -1744,16 +1744,22 @@ function initScrollReveal() {
     }
   });
 
-  const observer = new IntersectionObserver((entries, obs) => {
+  // Bidirectional reveal: reveals on scroll down AND scroll up
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-revealed');
-        obs.unobserve(entry.target);
+      } else {
+        // Reset when scrolled outside viewport so scrolling back up/down re-reveals
+        const rect = entry.boundingClientRect;
+        if (rect.top > window.innerHeight + 50 || rect.bottom < -50) {
+          entry.target.classList.remove('is-revealed');
+        }
       }
     });
   }, {
     threshold: 0.08,
-    rootMargin: '0px 0px -40px 0px'
+    rootMargin: '20px 0px 20px 0px'
   });
 
   elements.forEach(el => observer.observe(el));
@@ -2004,7 +2010,7 @@ function initVideoScrollTextReveal() {
 }
 
 /* --------------------------------------------------------------------------
-   24. Site-Wide Text Reveal on Scroll (Word-by-Word One-by-One)
+   24. Site-Wide Text Reveal on Scroll (Bidirectional: Up Scroll & Down Scroll)
    -------------------------------------------------------------------------- */
 function initSiteWideTextRevealOnScroll() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2020,7 +2026,15 @@ function initSiteWideTextRevealOnScroll() {
     '.subpage-cta-title',
     '.engine-heading',
     '.capability-card h4',
-    '.capability-card p'
+    '.capability-card p',
+    '.advantage-card h4',
+    '.advantage-card p',
+    '.framework-card h4',
+    '.framework-card p',
+    '.industry-card h4',
+    '.industry-card p',
+    '.comparison-title',
+    '.roadmap-content h4'
   ];
 
   const elements = document.querySelectorAll(targetSelectors.join(', '));
@@ -2080,23 +2094,77 @@ function initSiteWideTextRevealOnScroll() {
     el.classList.add('reveal-text-container');
   });
 
-  // IntersectionObserver to reveal words one by one as they scroll into view
-  const revealObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const words = entry.target.querySelectorAll('.reveal-word');
-        words.forEach((word, idx) => {
-          setTimeout(() => {
-            word.classList.add('is-revealed');
-          }, idx * 28);
-        });
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -30px 0px'
-  });
+  let ticking = false;
 
-  elements.forEach(el => revealObserver.observe(el));
+  // Real-time continuous bidirectional calculation on every scroll (up or down)
+  function updateTextReveal() {
+    const winH = window.innerHeight;
+
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const words = el.querySelectorAll('.reveal-word');
+      if (!words.length) return;
+
+      // 1. Outside viewport entirely (either far below or far above)
+      if (rect.top > winH + 50 || rect.bottom < -50) {
+        words.forEach(w => w.classList.remove('is-revealed'));
+        return;
+      }
+
+      // 2. Centered in reading sweet spot
+      if (rect.top <= winH * 0.58 && rect.bottom >= winH * 0.15) {
+        words.forEach(w => w.classList.add('is-revealed'));
+        return;
+      }
+
+      // 3. Entering from bottom (down scroll): scrub words one-by-one
+      if (rect.top > winH * 0.58 && rect.top <= winH * 0.96) {
+        const enterLimit = winH * 0.96;
+        const fullLimit = winH * 0.58;
+        const ratio = Math.min(Math.max((enterLimit - rect.top) / (enterLimit - fullLimit), 0), 1);
+        const count = Math.ceil(ratio * words.length);
+
+        words.forEach((w, idx) => {
+          if (idx < count) {
+            w.classList.add('is-revealed');
+          } else {
+            w.classList.remove('is-revealed');
+          }
+        });
+        return;
+      }
+
+      // 4. Entering from top (up scroll): scrub words one-by-one
+      if (rect.bottom >= -50 && rect.bottom < winH * 0.30) {
+        const topEnter = -50;
+        const topFull = winH * 0.30;
+        const ratio = Math.min(Math.max((rect.bottom - topEnter) / (topFull - topEnter), 0), 1);
+        const count = Math.ceil(ratio * words.length);
+
+        words.forEach((w, idx) => {
+          if (idx < count) {
+            w.classList.add('is-revealed');
+          } else {
+            w.classList.remove('is-revealed');
+          }
+        });
+        return;
+      }
+
+      // 5. Default fallback if visible
+      words.forEach(w => w.classList.add('is-revealed'));
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateTextReveal);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial calculation on load
+  updateTextReveal();
 }
