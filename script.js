@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initRoiSimulator();
   initGrowthEnginesTabs();
   initFaqAccordion();
+  initScrollProgressBar();
+  initScrollReveal();
+  initBackToTop();
+  initPageTransitions();
 });
 
 /* --------------------------------------------------------------------------
@@ -1659,5 +1663,245 @@ function initFaqAccordion() {
         ans.removeAttribute('hidden');
       }
     });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   19. Fiber-Optic Cyber Scroll Progress Bar
+   -------------------------------------------------------------------------- */
+function initScrollProgressBar() {
+  let progressBar = document.getElementById('scrollProgressBar');
+  if (!progressBar) {
+    progressBar = document.createElement('div');
+    progressBar.id = 'scrollProgressBar';
+    progressBar.className = 'cyber-scroll-progress';
+    progressBar.setAttribute('aria-hidden', 'true');
+    document.body.prepend(progressBar);
+  }
+
+  let ticking = false;
+
+  function updateProgress() {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    progressBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateProgress();
+}
+
+/* --------------------------------------------------------------------------
+   20. Scroll-Triggered Reveal Animations
+   -------------------------------------------------------------------------- */
+function initScrollReveal() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const selectorTargets = [
+    '.section-header',
+    '.roi-controls-card',
+    '.roi-results-card',
+    '.engine-pane-grid',
+    '.comparison-card',
+    '.roadmap-step',
+    '.faq-item',
+    '.subpage-cta-banner',
+    '.portfolio-card',
+    '.service-card',
+    '.insight-card',
+    '.pillar-card',
+    '.contact-card',
+    '.advantage-card',
+    '.framework-card',
+    '.industry-card'
+  ];
+
+  const elements = document.querySelectorAll(selectorTargets.join(', '));
+  if (!elements.length) return;
+
+  // Assign staggered delays for sibling cards in the same grid/parent
+  const parentGroups = new Map();
+
+  elements.forEach(el => {
+    el.classList.add('reveal-on-scroll');
+    const parent = el.parentElement;
+    if (parent) {
+      const count = parentGroups.get(parent) || 0;
+      if (count < 5) {
+        el.classList.add(`delay-${count + 1}`);
+      }
+      parentGroups.set(parent, count + 1);
+    }
+  });
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+/* --------------------------------------------------------------------------
+   21. Circular Back-to-Top Floating Progress Widget
+   -------------------------------------------------------------------------- */
+function initBackToTop() {
+  let btn = document.getElementById('backToTopBtn');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'backToTopBtn';
+    btn.className = 'back-to-top-btn';
+    btn.setAttribute('aria-label', 'Scroll back to top');
+    btn.innerHTML = `
+      <svg class="back-to-top-progress-ring" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="16" pathLength="100"></circle>
+      </svg>
+      <svg class="back-to-top-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    `;
+    document.body.appendChild(btn);
+  }
+
+  const ringCircle = btn.querySelector('circle');
+  let ticking = false;
+
+  function updateBackToTop() {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+
+    if (scrollY > 280) {
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+
+    if (ringCircle) {
+      const offset = 100 - Math.min(Math.max(progress, 0), 100);
+      ringCircle.style.strokeDashoffset = offset;
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateBackToTop);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  updateBackToTop();
+}
+
+/* --------------------------------------------------------------------------
+   22. Seamless High-Velocity Page Transitions
+   -------------------------------------------------------------------------- */
+function initPageTransitions() {
+  // 1. Create top cyber beam and transition curtain
+  let curtain = document.getElementById('pageTransitionCurtain');
+  if (!curtain) {
+    curtain = document.createElement('div');
+    curtain.id = 'pageTransitionCurtain';
+    curtain.className = 'page-transition-curtain';
+    curtain.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(curtain);
+  }
+
+  let beam = document.getElementById('pageTransitionBeam');
+  if (!beam) {
+    beam = document.createElement('div');
+    beam.id = 'pageTransitionBeam';
+    beam.className = 'page-transition-beam';
+    beam.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(beam);
+  }
+
+  // Smooth entry animation on initial page load
+  document.body.classList.add('page-entering');
+  setTimeout(() => {
+    document.body.classList.remove('page-entering');
+  }, 400);
+
+  // 2. Intercept internal page navigation links
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    // Ignore non-internal links
+    if (
+      href.startsWith('#') ||
+      href.startsWith('http://') ||
+      href.startsWith('https://') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:') ||
+      href.startsWith('javascript:') ||
+      link.getAttribute('target') === '_blank' ||
+      link.classList.contains('nav-cta') ||
+      link.id === 'headerAuditBtn' ||
+      link.id === 'drawerAuditBtn'
+    ) {
+      return;
+    }
+
+    const cleanHref = href.split('?')[0].split('#')[0];
+    const currentClean = window.location.pathname.split('/').pop() || 'index.html';
+
+    // If clicking current page link, just smoothly scroll to top
+    if (cleanHref === currentClean) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    e.preventDefault();
+
+    // Trigger high-speed cyber data beam and exit fade
+    curtain.classList.add('active');
+    beam.style.width = '100%';
+    document.body.classList.add('page-exiting');
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 220);
+  });
+
+  // 3. Reset on browser back/forward navigation (bfcache)
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      curtain.classList.remove('active');
+      beam.style.width = '0%';
+      document.body.classList.remove('page-exiting');
+      document.body.classList.add('page-entering');
+      setTimeout(() => {
+        document.body.classList.remove('page-entering');
+      }, 350);
+    }
   });
 }

@@ -4431,5 +4431,225 @@ button, input, textarea, select {
   }
 }
 
+/* ==========================================================================
+   INTERNET SCROLL ANIMATIONS & SEAMLESS PAGE TRANSITIONS
+   ========================================================================== */
+
+/* 1. Native View Transitions (Supported Browsers) */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: 240ms cubic-bezier(0.4, 0, 1, 1) both fadeOutAndScale;
+}
+
+::view-transition-new(root) {
+  animation: 280ms cubic-bezier(0, 0, 0.2, 1) both fadeInAndGlide;
+}
+
+@keyframes fadeOutAndScale {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.985); }
+}
+
+@keyframes fadeInAndGlide {
+  from { opacity: 0; transform: translateY(12px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 2. Fiber-Optic Cyber Scroll Progress Bar */
+.cyber-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, #b58832 0%, #d3ab55 35%, #f4d685 70%, #38bdf8 100%);
+  background-size: 200% 100%;
+  animation: cyberGradientFlow 3s linear infinite;
+  z-index: 10000;
+  pointer-events: none;
+  transition: width 0.12s cubic-bezier(0.1, 0.9, 0.2, 1);
+  box-shadow: 0 0 10px rgba(211, 171, 85, 0.6), 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.cyber-scroll-progress::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 14px 4px #38bdf8, 0 0 24px 8px rgba(211, 171, 85, 0.8);
+}
+
+@keyframes cyberGradientFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* 3. Universal High-Speed Page Transition Overlay */
+.page-transition-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(4, 5, 6, 0.35);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+[data-theme="light"] .page-transition-curtain {
+  background: rgba(252, 251, 247, 0.4);
+}
+
+.page-transition-curtain.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.page-transition-beam {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), #f4d685, #38bdf8, #818cf8);
+  box-shadow: 0 0 16px rgba(211, 171, 85, 0.8), 0 0 30px rgba(56, 189, 248, 0.6);
+  z-index: 100000;
+  pointer-events: none;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.page-exiting {
+  opacity: 0.88;
+  transform: translateY(-6px) scale(0.995);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+body.page-entering {
+  animation: pageEnterGlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnterGlide {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 4. Scroll-Triggered Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delay Helpers */
+.reveal-on-scroll.delay-1 { transition-delay: 0.08s; }
+.reveal-on-scroll.delay-2 { transition-delay: 0.16s; }
+.reveal-on-scroll.delay-3 { transition-delay: 0.24s; }
+.reveal-on-scroll.delay-4 { transition-delay: 0.32s; }
+.reveal-on-scroll.delay-5 { transition-delay: 0.40s; }
+
+/* 5. Circular Back-to-Top Floating Widget */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.85);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(211, 171, 85, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.back-to-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  border-color: var(--primary);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(211, 171, 85, 0.35);
+  color: #fff;
+}
+
+[data-theme="light"] .back-to-top-btn:hover {
+  color: #0a0b0d;
+}
+
+.back-to-top-progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.back-to-top-progress-ring circle {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.back-to-top-icon {
+  width: 18px;
+  height: 18px;
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+
+.back-to-top-btn:hover .back-to-top-icon {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .back-to-top-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
 
 
