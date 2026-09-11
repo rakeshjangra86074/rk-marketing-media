@@ -2094,6 +2094,9 @@ function initSiteWideTextRevealOnScroll() {
     });
 
     el.classList.add('reveal-text-container');
+    el.style.display = 'block';
+    el.style.clear = 'both';
+    el.style.width = '100%';
   });
 
   let ticking = false;

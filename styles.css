@@ -275,11 +275,15 @@ button, input, textarea, select {
   max-width: 760px;
   margin: 0 auto 56px auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .section-header.text-left {
   text-align: left;
   margin-left: 0;
+  align-items: flex-start;
 }
 
 .section-tag {
@@ -672,9 +676,15 @@ button, input, textarea, select {
 
 .hero-content {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .hero-title {
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
   font-size: 3.5rem;
   font-weight: 900;
   letter-spacing: -0.035em;
@@ -691,6 +701,9 @@ button, input, textarea, select {
 }
 
 .hero-subtitle {
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
   font-size: 1.18rem;
   color: var(--text-secondary);
   line-height: 1.65;
@@ -3128,6 +3141,10 @@ button, input, textarea, select {
   z-index: 2;
   max-width: 900px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .page-hero-badge {
@@ -3143,7 +3160,7 @@ button, input, textarea, select {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
@@ -3156,6 +3173,9 @@ button, input, textarea, select {
 }
 
 .page-hero-title {
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
   font-size: 3.25rem;
   font-weight: 900;
   line-height: 1.2;
@@ -3166,6 +3186,9 @@ button, input, textarea, select {
 }
 
 .page-hero-desc {
+  display: block !important;
+  width: 100% !important;
+  clear: both !important;
   font-size: 1.15rem;
   color: var(--text-secondary);
   line-height: 1.7;
@@ -3431,7 +3454,7 @@ button, input, textarea, select {
   border: 1px solid rgba(211, 171, 85, 0.35);
   border-radius: var(--radius-full);
   padding: 6px 16px;
-  margin: 16px 0 20px 0;
+  margin: 0 0 24px 0;
   backdrop-filter: blur(10px);
   max-width: 100%;
 }
@@ -4876,8 +4899,10 @@ body.page-entering {
 
 /* Word-by-word reveal container */
 .reveal-text-container {
-  /* Retain natural display so text-align: center / left, line-height, and block margins work identically */
-  position: relative;
+  display: block !important;
+  position: relative !important;
+  clear: both !important;
+  width: 100% !important;
 }
 
 h1.reveal-text-container,
@@ -4887,7 +4912,9 @@ h4.reveal-text-container,
 h5.reveal-text-container,
 h6.reveal-text-container,
 p.reveal-text-container {
-  display: block;
+  display: block !important;
+  clear: both !important;
+  width: 100% !important;
 }
 
 .reveal-word {
