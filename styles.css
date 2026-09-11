@@ -266,8 +266,14 @@ button, input, textarea, select {
 }
 
 .section-header {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto 56px auto;
+  text-align: center;
+}
+
+.section-header.text-left {
+  text-align: left;
+  margin-left: 0;
 }
 
 .section-tag {
@@ -282,20 +288,34 @@ button, input, textarea, select {
   border-radius: var(--radius-full);
   margin-bottom: 16px;
   border: 1px solid rgba(211, 171, 85, 0.28);
+  text-align: center;
+}
+
+.section-header .section-tag {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-title {
   font-size: 2.6rem;
   font-weight: 800;
   letter-spacing: -0.025em;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-bottom: 18px;
+  text-align: center;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-description {
   font-size: 1.125rem;
   color: var(--text-secondary);
   line-height: 1.65;
+  text-align: center;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* --- Buttons --- */
@@ -644,12 +664,17 @@ button, input, textarea, select {
   box-shadow: 0 0 10px #f4d685;
 }
 
+.hero-content {
+  text-align: left;
+}
+
 .hero-title {
   font-size: 3.5rem;
   font-weight: 900;
   letter-spacing: -0.035em;
   line-height: 1.15;
   margin-bottom: 22px;
+  text-align: left;
 }
 
 .hero-subtitle {
@@ -658,6 +683,7 @@ button, input, textarea, select {
   line-height: 1.65;
   margin-bottom: 36px;
   max-width: 550px;
+  text-align: left;
 }
 
 .hero-cta-group {
@@ -665,7 +691,8 @@ button, input, textarea, select {
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-  margin-bottom: 44px;
+  margin-bottom: 36px;
+  justify-content: flex-start;
 }
 
 .hero-trust {
@@ -674,6 +701,59 @@ button, input, textarea, select {
   gap: 12px;
   font-size: 0.85rem;
   color: var(--text-muted);
+  text-align: left;
+}
+
+/* Trust Avatars & Social Proof */
+.trust-avatars {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-pill {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  background: var(--bg-card);
+  border: 2px solid var(--bg-main);
+  margin-left: -10px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
+}
+
+.avatar-pill:first-child {
+  margin-left: 0;
+}
+
+.avatar-pill:hover {
+  transform: translateY(-2px) scale(1.1);
+  z-index: 2;
+}
+
+.avatar-pill.av-1 { background: linear-gradient(135deg, #f4d685, #d3ab55); color: #040506; font-size: 0.78rem; font-weight: 800; }
+.avatar-pill.av-2 { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; font-size: 0.78rem; font-weight: 800; }
+.avatar-pill.av-3 { background: linear-gradient(135deg, #34d399, #10b981); color: #fff; font-size: 0.78rem; font-weight: 800; }
+.avatar-pill.av-4 { background: linear-gradient(135deg, #c084fc, #a855f7); color: #fff; font-size: 0.78rem; font-weight: 800; }
+.avatar-pill.av-5 { background: linear-gradient(135deg, #fb7185, #f43f5e); color: #fff; font-size: 0.78rem; font-weight: 800; }
+
+.trust-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  text-align: left;
 }
 
 .trust-logos {
@@ -1062,6 +1142,7 @@ button, input, textarea, select {
   height: 100%;
   position: relative;
   overflow: hidden;
+  text-align: left;
 }
 
 .pillar-card::before {
@@ -1113,12 +1194,14 @@ button, input, textarea, select {
   color: var(--text-primary);
   letter-spacing: -0.015em;
   line-height: 1.35;
+  text-align: left;
 }
 
 .pillar-card p {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.65;
+  text-align: left;
 }
 
 /* --- SERVICES SECTION --- */
@@ -1216,6 +1299,7 @@ button, input, textarea, select {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  text-align: left;
 }
 
 .service-card::before {
@@ -1264,6 +1348,7 @@ button, input, textarea, select {
   font-weight: 700;
   margin-bottom: 12px;
   letter-spacing: -0.015em;
+  text-align: left;
 }
 
 .service-desc {
@@ -1271,6 +1356,7 @@ button, input, textarea, select {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .service-features {
@@ -1279,21 +1365,25 @@ button, input, textarea, select {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  text-align: left;
 }
 
 .service-features li {
   font-size: 0.85rem;
   color: var(--text-secondary);
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
 }
 
 .service-features li::before {
-  content: '•';
+  content: '✓';
   color: var(--primary);
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.3;
+  flex-shrink: 0;
 }
 
 .service-link {
@@ -1970,6 +2060,7 @@ button, input, textarea, select {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  text-align: left;
 }
 
 .insight-metric-row {
@@ -1977,6 +2068,7 @@ button, input, textarea, select {
   align-items: baseline;
   gap: 12px;
   margin-bottom: 12px;
+  text-align: left;
 }
 
 .insight-stat-highlight {
@@ -1987,6 +2079,7 @@ button, input, textarea, select {
   -webkit-text-fill-color: transparent;
   line-height: 1;
   letter-spacing: -0.02em;
+  text-align: left;
 }
 
 .insight-stat-sub {
@@ -1995,6 +2088,7 @@ button, input, textarea, select {
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  text-align: left;
 }
 
 .insight-card-info h4 {
@@ -2003,6 +2097,7 @@ button, input, textarea, select {
   color: var(--text-primary);
   margin-bottom: 8px;
   line-height: 1.35;
+  text-align: left;
 }
 
 .insight-card-info p {
@@ -2010,6 +2105,7 @@ button, input, textarea, select {
   color: var(--text-secondary);
   line-height: 1.55;
   margin-bottom: 18px;
+  text-align: left;
 }
 
 .insight-tags {
@@ -2017,6 +2113,7 @@ button, input, textarea, select {
   flex-wrap: wrap;
   gap: 7px;
   margin-top: auto;
+  text-align: left;
 }
 
 .insight-tag {
@@ -2249,18 +2346,21 @@ button, input, textarea, select {
   padding: 40px;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .contact-info-card h3 {
   font-size: 1.8rem;
   font-weight: 800;
   margin-bottom: 12px;
+  text-align: left;
 }
 
 .info-intro {
   color: var(--text-secondary);
   font-size: 0.95rem;
   margin-bottom: 32px;
+  text-align: left;
 }
 
 .info-list {
@@ -2268,12 +2368,14 @@ button, input, textarea, select {
   flex-direction: column;
   gap: 24px;
   margin-bottom: 40px;
+  text-align: left;
 }
 
 .info-item {
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  text-align: left;
 }
 
 .info-icon {
@@ -2295,12 +2397,14 @@ button, input, textarea, select {
   letter-spacing: 0.05em;
   font-weight: 700;
   margin-bottom: 2px;
+  text-align: left;
 }
 
 .info-link, .info-text {
   font-size: 0.95rem;
   color: var(--text-primary);
   font-weight: 500;
+  text-align: left;
 }
 
 .info-link:hover {
@@ -2320,6 +2424,7 @@ button, input, textarea, select {
   font-size: 0.875rem;
   color: var(--text-secondary);
   font-weight: 600;
+  text-align: left;
 }
 
 .social-icons {
@@ -2354,6 +2459,7 @@ button, input, textarea, select {
   border-radius: var(--radius-lg);
   padding: 40px;
   box-shadow: var(--shadow-md);
+  text-align: left;
 }
 
 .contact-form {
@@ -2693,6 +2799,15 @@ button, input, textarea, select {
   grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
   gap: 40px;
   padding-bottom: 60px;
+  text-align: left;
+}
+
+.footer-col {
+  text-align: left;
+}
+
+.footer-brand-col {
+  text-align: left;
 }
 
 .footer-brand-col .footer-tagline {
@@ -2701,23 +2816,27 @@ button, input, textarea, select {
   margin-top: 16px;
   max-width: 320px;
   line-height: 1.6;
+  text-align: left;
 }
 
 .footer-heading {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .footer-links {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  text-align: left;
 }
 
 .footer-links a {
   color: var(--text-secondary);
   font-size: 0.9rem;
+  text-align: left;
 }
 
 .footer-links a:hover {
@@ -2725,10 +2844,15 @@ button, input, textarea, select {
   transform: translateX(3px);
 }
 
+.footer-newsletter {
+  text-align: left;
+}
+
 .footer-newsletter p {
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 16px;
+  text-align: left;
 }
 
 .newsletter-form {
@@ -2782,17 +2906,53 @@ button, input, textarea, select {
     gap: 40px;
   }
 
+  .hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-kinetic-ticker {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .hero-subtitle {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
   }
 
   .hero-cta-group {
     justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-trust {
     align-items: center;
+    text-align: center;
+  }
+
+  .trust-avatars {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .trust-text {
+    text-align: center;
   }
 
   .about-grid {
@@ -2904,6 +3064,12 @@ button, input, textarea, select {
     grid-template-columns: 1fr;
   }
 
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: left;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -2981,7 +3147,9 @@ button, input, textarea, select {
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
+  text-align: center;
+  max-width: 860px;
 }
 
 .page-hero-desc {
@@ -2989,7 +3157,8 @@ button, input, textarea, select {
   color: var(--text-secondary);
   line-height: 1.7;
   max-width: 720px;
-  margin: 0 auto 28px;
+  margin: 0 auto 28px auto;
+  text-align: center;
 }
 
 .page-hero-actions {
@@ -2998,6 +3167,7 @@ button, input, textarea, select {
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 /* Subpage Call to Action Banner */
@@ -3029,19 +3199,22 @@ button, input, textarea, select {
 .subpage-cta-title {
   font-size: 2.1rem;
   font-weight: 800;
-  margin-bottom: 14px;
+  margin: 0 auto 14px auto;
   position: relative;
   z-index: 1;
+  text-align: center;
+  max-width: 780px;
 }
 
 .subpage-cta-desc {
   font-size: 1.05rem;
   color: var(--text-secondary);
-  max-width: 620px;
-  margin: 0 auto 28px;
+  max-width: 640px;
+  margin: 0 auto 28px auto;
   line-height: 1.6;
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 .subpage-cta-actions {
@@ -3052,6 +3225,7 @@ button, input, textarea, select {
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 /* Feature Capabilities Grid (for Portfolio Breakdown) */
@@ -3070,6 +3244,7 @@ button, input, textarea, select {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  text-align: left;
 }
 
 .capability-card:hover {
@@ -3086,18 +3261,21 @@ button, input, textarea, select {
   -webkit-text-fill-color: transparent;
   margin-bottom: 14px;
   line-height: 1;
+  text-align: left;
 }
 
 .capability-card h4 {
   font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .capability-card p {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  text-align: left;
 }
 
 /* FAQ / Next Steps Grid (for Contact Page) */
@@ -3114,6 +3292,7 @@ button, input, textarea, select {
   border-radius: var(--radius-lg);
   padding: 28px;
   transition: border-color 0.3s ease;
+  text-align: left;
 }
 
 .faq-card:hover {
@@ -3128,6 +3307,7 @@ button, input, textarea, select {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-align: left;
 }
 
 .faq-card h4 svg {
@@ -3139,6 +3319,7 @@ button, input, textarea, select {
   font-size: 0.92rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  text-align: left;
 }
 
 @media (max-width: 992px) {
@@ -3658,6 +3839,10 @@ button, input, textarea, select {
   backdrop-filter: blur(16px);
 }
 
+.engine-content {
+  text-align: left;
+}
+
 .engine-tag {
   display: inline-block;
   font-size: 0.76rem;
@@ -3666,6 +3851,7 @@ button, input, textarea, select {
   color: var(--primary);
   text-transform: uppercase;
   margin-bottom: 12px;
+  text-align: left;
 }
 
 .engine-heading {
@@ -3674,6 +3860,7 @@ button, input, textarea, select {
   line-height: 1.25;
   color: var(--text-primary);
   margin-bottom: 16px;
+  text-align: left;
 }
 
 .engine-text {
@@ -3681,6 +3868,7 @@ button, input, textarea, select {
   color: var(--text-secondary);
   line-height: 1.65;
   margin-bottom: 24px;
+  text-align: left;
 }
 
 .engine-feature-list {
@@ -3688,12 +3876,14 @@ button, input, textarea, select {
   flex-direction: column;
   gap: 16px;
   margin-bottom: 28px;
+  text-align: left;
 }
 
 .engine-feature-item {
   display: flex;
   gap: 14px;
   align-items: flex-start;
+  text-align: left;
 }
 
 .feature-bullet {
@@ -3706,6 +3896,7 @@ button, input, textarea, select {
   font-weight: 700;
   margin-bottom: 4px;
   color: var(--text-primary);
+  text-align: left;
 }
 
 .engine-feature-item p {
@@ -3713,6 +3904,7 @@ button, input, textarea, select {
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.5;
+  text-align: left;
 }
 
 .engine-pane-actions {
@@ -4085,6 +4277,7 @@ button, input, textarea, select {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .card-traditional {
@@ -4108,6 +4301,7 @@ button, input, textarea, select {
   margin-bottom: 24px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--border-color);
+  text-align: left;
 }
 
 .comparison-tag {
@@ -4138,24 +4332,28 @@ button, input, textarea, select {
   font-weight: 800;
   margin-bottom: 6px;
   color: var(--text-primary);
+  text-align: left;
 }
 
 .comparison-subtitle {
   font-size: 0.88rem;
   color: var(--text-secondary);
   margin: 0;
+  text-align: left;
 }
 
 .comparison-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  text-align: left;
 }
 
 .comp-item {
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  text-align: left;
 }
 
 .comp-icon {
@@ -4220,6 +4418,7 @@ button, input, textarea, select {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .roadmap-step:hover {
@@ -4256,6 +4455,10 @@ button, input, textarea, select {
   100% { transform: scale(1.4); opacity: 0; }
 }
 
+.roadmap-content {
+  text-align: left;
+}
+
 .step-timing {
   display: inline-block;
   font-size: 0.76rem;
@@ -4264,6 +4467,7 @@ button, input, textarea, select {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 8px;
+  text-align: left;
 }
 
 .roadmap-content h4 {
@@ -4271,6 +4475,7 @@ button, input, textarea, select {
   font-weight: 800;
   margin-bottom: 10px;
   color: var(--text-primary);
+  text-align: left;
 }
 
 .roadmap-content p {
@@ -4278,6 +4483,7 @@ button, input, textarea, select {
   color: var(--text-secondary);
   line-height: 1.55;
   margin-bottom: 16px;
+  text-align: left;
 }
 
 .step-tag {
@@ -4657,25 +4863,32 @@ body.page-entering {
 
 /* Word-by-word reveal container */
 .reveal-text-container {
-  display: inline;
+  /* Retain natural display so text-align: center / left, line-height, and block margins work identically */
+  position: relative;
+}
+
+h1.reveal-text-container,
+h2.reveal-text-container,
+h3.reveal-text-container,
+h4.reveal-text-container,
+h5.reveal-text-container,
+h6.reveal-text-container,
+p.reveal-text-container {
+  display: block;
 }
 
 .reveal-word {
-  display: inline-block;
-  opacity: 0.18;
-  filter: blur(2px);
-  transform: translateY(5px);
+  display: inline;
+  opacity: 0.22;
+  filter: blur(1.5px);
   transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
-  white-space: pre;
+              filter 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter;
 }
 
 .reveal-word.is-revealed {
   opacity: 1;
   filter: blur(0px);
-  transform: translateY(0);
 }
 
 .reveal-word.gradient-word {
