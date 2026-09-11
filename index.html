@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5.2">
+  <link rel="stylesheet" href="styles.css?v=5.3">
 </head>
 <body>
   <!-- Interactive Futuristic Background Canvas -->
@@ -171,13 +171,25 @@
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </button>
-            <a href="#roiSimulator" class="btn btn-secondary btn-lg">
-              Test Growth Simulator
+            <a href="#howWeWork" class="btn btn-secondary btn-lg">
+              Explore How We Work
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
               </svg>
             </a>
+          </div>
+
+          <!-- Trust line -->
+          <div class="trust-avatars">
+            <div class="avatar-group">
+              <span class="avatar-pill av-1">★</span>
+              <span class="avatar-pill av-2">★</span>
+              <span class="avatar-pill av-3">★</span>
+              <span class="avatar-pill av-4">★</span>
+              <span class="avatar-pill av-5">★</span>
+            </div>
+            <span class="trust-text">Trusted by <strong>120+ Growth Brands & Creators</strong> Pan-India & Global</span>
           </div>
         </div>
 
@@ -281,476 +293,157 @@
       </div>
     </section>
 
-    <!-- SECTION 1: INTERACTIVE BRAND GROWTH & ROI SIMULATOR -->
-    <section class="section roi-simulator-section" id="roiSimulator">
+    <!-- SECTION 1: HOW WE WORK (VELOCITY SPRINT ROADMAP) -->
+    <section class="section roadmap-section" id="howWeWork">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-tag">DYNAMIC GROWTH SIMULATOR</span>
-          <h2 class="section-title">Project Your Brand's <span class="gradient-text">Growth Trajectory</span></h2>
+          <span class="section-tag">PROVEN VELOCITY ROADMAP</span>
+          <h2 class="section-title">How We Scale Your Brand in <span class="gradient-text">60 Days</span></h2>
           <p class="section-description">
-            Adjust your monthly parameters below to simulate projected organic reach expansion, target acquisition efficiency, and expected ROAS with the RK Growth Engine.
+            A battle-tested 4-phase agile growth sprint designed to eliminate ad spend guesswork, produce viral creative assets, and build predictable, scalable ROAS.
           </p>
         </div>
 
-        <div class="roi-simulator-container">
-          <div class="roi-controls-card">
-            <h3 class="roi-card-heading">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-              Step 1: Configure Your Parameters
-            </h3>
-
-            <!-- Slider 1: Ad Budget / Investment -->
-            <div class="roi-control-group">
-              <div class="roi-control-header">
-                <label for="roiBudgetSlider">Monthly Paid Media Budget / Capacity</label>
-                <span class="roi-slider-value" id="roiBudgetValue">₹1,00,000 / mo</span>
-              </div>
-              <input type="range" id="roiBudgetSlider" class="roi-range-input" min="25000" max="1000000" step="25000" value="100000" aria-label="Monthly Paid Media Budget">
-              <div class="roi-range-labels">
-                <span>₹25K</span>
-                <span>₹2.5L</span>
-                <span>₹5L</span>
-                <span>₹10L+</span>
-              </div>
+        <div class="roadmap-timeline">
+          <!-- Step 1 -->
+          <div class="roadmap-step">
+            <div class="roadmap-node">
+              <span class="node-num">01</span>
+              <div class="node-pulse"></div>
             </div>
-
-            <!-- Selector 2: Business Niche / Model -->
-            <div class="roi-control-group">
-              <div class="roi-control-header">
-                <label>Primary Business Model</label>
-              </div>
-              <div class="roi-pill-group" role="radiogroup" aria-label="Business Model">
-                <button type="button" class="roi-pill-btn active" data-model="d2c" role="radio" aria-checked="true">
-                  🛍️ D2C E-Commerce
-                </button>
-                <button type="button" class="roi-pill-btn" data-model="creator" role="radio" aria-checked="false">
-                  🎙️ Creator / Personal Brand
-                </button>
-                <button type="button" class="roi-pill-btn" data-model="b2b" role="radio" aria-checked="false">
-                  💼 B2B & High-Ticket
-                </button>
-                <button type="button" class="roi-pill-btn" data-model="startup" role="radio" aria-checked="false">
-                  🚀 Startup & Scaleup
-                </button>
-              </div>
-            </div>
-
-            <!-- Slider 3: Current Monthly Reach / Views -->
-            <div class="roi-control-group">
-              <div class="roi-control-header">
-                <label for="roiReachSlider">Current Monthly Reach / Views</label>
-                <span class="roi-slider-value" id="roiReachValue">150,000 Views / mo</span>
-              </div>
-              <input type="range" id="roiReachSlider" class="roi-range-input" min="10000" max="2000000" step="25000" value="150000" aria-label="Current Monthly Reach">
-              <div class="roi-range-labels">
-                <span>10K</span>
-                <span>500K</span>
-                <span>1M</span>
-                <span>2M+</span>
-              </div>
+            <div class="roadmap-content">
+              <span class="step-timing">Days 1 – 7</span>
+              <h4>Diagnostic & Hook Discovery</h4>
+              <p>We dissect your historical analytics, map competitor ad blind spots, identify high-intent buyer personas, and script 10+ high-retention hook angles.</p>
+              <div class="step-tag">Deliverable: 90-Day Growth Roadmap & Script Deck</div>
             </div>
           </div>
 
-          <!-- Dynamic Output Projection Dashboard -->
-          <div class="roi-results-card">
-            <div class="roi-results-header">
-              <div class="roi-live-badge">
-                <span class="pulse-dot"></span>
-                Calculated Growth Model
-              </div>
-              <span class="roi-benchmark-tag">Estimated 90-Day Outcome</span>
+          <!-- Step 2 -->
+          <div class="roadmap-step">
+            <div class="roadmap-node">
+              <span class="node-num">02</span>
+              <div class="node-pulse"></div>
             </div>
-
-            <div class="roi-metrics-grid">
-              <!-- Metric 1: Projected Reach -->
-              <div class="roi-metric-tile">
-                <span class="roi-tile-label">Projected Total Reach</span>
-                <div class="roi-tile-value" id="roiProjectedReach">680,000+</div>
-                <div class="roi-tile-badge badge-green" id="roiReachSurgeBadge">+353% Expansion</div>
-              </div>
-
-              <!-- Metric 2: Projected ROAS -->
-              <div class="roi-metric-tile">
-                <span class="roi-tile-label">Target Campaign ROAS</span>
-                <div class="roi-tile-value" id="roiProjectedRoas">4.4x – 5.8x</div>
-                <div class="roi-tile-badge badge-accent">Blended Return</div>
-              </div>
-
-              <!-- Metric 3: Target CAC Drop -->
-              <div class="roi-metric-tile">
-                <span class="roi-tile-label">Estimated CAC Efficiency</span>
-                <div class="roi-tile-value" id="roiProjectedCac">-42%</div>
-                <div class="roi-tile-badge badge-blue">Cost Reduction</div>
-              </div>
-
-              <!-- Metric 4: Projected Monthly Pipeline Impact -->
-              <div class="roi-metric-tile">
-                <span class="roi-tile-label">Projected Pipeline / GMV</span>
-                <div class="roi-tile-value" id="roiProjectedGmv">₹4.4L – ₹5.8L</div>
-                <div class="roi-tile-badge badge-purple">Monthly Run Rate</div>
-              </div>
+            <div class="roadmap-content">
+              <span class="step-timing">Days 8 – 21</span>
+              <h4>Studio Production & Alpha Testing</h4>
+              <p>Our creative pod produces 1080p master vertical video assets with kinetic typography, configures server-side CAPI tracking, and deploys rapid multi-variable tests.</p>
+              <div class="step-tag">Deliverable: Live Campaign Alpha & Initial Data</div>
             </div>
+          </div>
 
-            <div class="roi-results-footer">
-              <button type="button" class="btn btn-primary btn-full btn-lg" id="roiClaimRoadmapBtn">
-                Unlock My Custom Growth Roadmap
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </button>
-              <p class="roi-disclaimer">
-                ⚡ Based on median benchmarks achieved across 120+ client media campaigns managed by RK Marketing Media.
-              </p>
+          <!-- Step 3 -->
+          <div class="roadmap-step">
+            <div class="roadmap-node">
+              <span class="node-num">03</span>
+              <div class="node-pulse"></div>
+            </div>
+            <div class="roadmap-content">
+              <span class="step-timing">Days 22 – 45</span>
+              <h4>Winner Optimization & Budget Scale</h4>
+              <p>We aggressively scale daily spend behind validated winning creatives, prune underperformers, and optimize your checkout CRO for maximum profit margins.</p>
+              <div class="step-tag">Deliverable: Profitable Unit Economics & Scaling Engine</div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="roadmap-step">
+            <div class="roadmap-node">
+              <span class="node-num">04</span>
+              <div class="node-pulse"></div>
+            </div>
+            <div class="roadmap-content">
+              <span class="step-timing">Days 46 – 60+</span>
+              <h4>Omnichannel Dominance</h4>
+              <p>Expanding proven hooks across Meta, Google Search, YouTube Shorts, and automated retargeting funnels to lock in predictable, market-leading market share.</p>
+              <div class="step-tag">Deliverable: Multi-Channel Revenue Autopilot</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 2: THE 4 PROPRIETARY GROWTH ENGINES (INTERACTIVE TABBED SHOWCASE) -->
-    <section class="section engines-section" id="growthEngines">
+    <!-- SECTION 2: TESTIMONIALS & CLIENT CASE RESULTS -->
+    <section class="section testimonials-section" id="testimonials">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-tag">OUR METHODOLOGY</span>
-          <h2 class="section-title">The 4 Proprietary <span class="gradient-text">Growth Engines</span></h2>
+          <span class="section-tag">VERIFIED RESULTS</span>
+          <h2 class="section-title">What Founders Say About <span class="gradient-text">RK Marketing Media</span></h2>
           <p class="section-description">
-            Modular, battle-tested media systems engineered to turn viewers into high-intent buyers and scalable revenue.
+            Real founders, real metrics, and exponential growth. Here is how our creative and media buying strategy transformed brands into market leaders.
           </p>
         </div>
 
-        <!-- Interactive Engine Tabs -->
-        <div class="engine-tabs-nav" role="tablist" aria-label="Growth Engines">
-          <button class="engine-tab-btn active" role="tab" aria-selected="true" aria-controls="paneReels" id="tabReels" data-engine="reels">
-            <span class="tab-icon">🎬</span>
-            <span class="tab-title">01. Viral Short-Form</span>
-          </button>
-          <button class="engine-tab-btn" role="tab" aria-selected="false" aria-controls="paneAds" id="tabAds" data-engine="ads">
-            <span class="tab-icon">🎯</span>
-            <span class="tab-title">02. Algorithmic Media</span>
-          </button>
-          <button class="engine-tab-btn" role="tab" aria-selected="false" aria-controls="paneAuthority" id="tabAuthority" data-engine="authority">
-            <span class="tab-icon">👑</span>
-            <span class="tab-title">03. Brand Authority</span>
-          </button>
-          <button class="engine-tab-btn" role="tab" aria-selected="false" aria-controls="paneCro" id="tabCro" data-engine="cro">
-            <span class="tab-icon">⚡</span>
-            <span class="tab-title">04. Funnels & CRO</span>
-          </button>
-        </div>
-
-        <!-- Tab Content Panes -->
-        <div class="engine-panes-container">
-          <!-- Pane 1: Viral Short-Form -->
-          <div class="engine-pane active" id="paneReels" role="tabpanel" aria-labelledby="tabReels">
-            <div class="engine-pane-grid">
-              <div class="engine-pane-info">
-                <span class="engine-tag">RETENTION-DRIVEN PRODUCTION</span>
-                <h3 class="engine-heading">Engineered to Stop the Scroll in Under 3 Seconds</h3>
-                <p class="engine-text">
-                  We fuse psychological hooks, kinetic typography, micro-pacing cuts, and algorithmic audio trends into high-retention vertical reels that capture audience mindshare.
-                </p>
-                <div class="engine-feature-list">
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">⚡</div>
-                    <div>
-                      <h4>3-Second Hook Science</h4>
-                      <p>Eliminating up to 70% of standard reel drop-offs within the first critical frames.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">🎞️</div>
-                    <div>
-                      <h4>1080p Master Studio Grading</h4>
-                      <p>Full cinema-grade coloring, kinetic sound effects, and captions for silent-viewing retention.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">📈</div>
-                    <div>
-                      <h4>Cross-Platform Syndication</h4>
-                      <p>Simultaneously formatted and optimized for Instagram Reels, YouTube Shorts, and Facebook.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="engine-pane-actions">
-                  <a href="portfolio.html" class="btn btn-secondary">View Video Portfolio</a>
-                  <button type="button" class="btn btn-primary" onclick="document.getElementById('headerAuditBtn').click()">Request Creative Audit</button>
-                </div>
+        <div class="testimonials-grid">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-metric-badge">
+                <span class="metric-highlight">4.8x ROAS</span>
+                <span class="metric-context">+340% Revenue</span>
               </div>
-
-              <!-- Interactive Mockup: Reel Player & Retention Curve -->
-              <div class="engine-pane-visual">
-                <div class="visual-mock-card reel-mock-card">
-                  <div class="mock-header">
-                    <span class="mock-pill">Retention Curve Analysis</span>
-                    <span class="mock-live-indicator">92% Top Decile</span>
-                  </div>
-                  <div class="reel-preview-display">
-                    <div class="reel-wave-animation">
-                      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="reel-stat-overlay">
-                      <div class="overlay-stat">
-                        <span class="num">1.28M</span>
-                        <span class="label">Viral Views</span>
-                      </div>
-                      <div class="overlay-stat">
-                        <span class="num">84.2%</span>
-                        <span class="label">5s Hold Rate</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="retention-graph-mock">
-                    <div class="graph-label-row">
-                      <span>0s (Hook)</span>
-                      <span>15s (Core Value)</span>
-                      <span>30s (CTA)</span>
-                    </div>
-                    <div class="graph-curve-line">
-                      <div class="curve-point cp-1" title="Hook Hold: 84%"></div>
-                      <div class="curve-point cp-2" title="Mid Retention: 72%"></div>
-                      <div class="curve-point cp-3" title="CTA Click: 58%"></div>
-                    </div>
-                  </div>
-                </div>
+              <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                ★★★★★
+              </div>
+            </div>
+            <blockquote class="testimonial-quote">
+              "Before RK Marketing Media, we were burning ₹3L a month on Meta ads with creative fatigue every 10 days. Rakesh and his team completely revolutionized our vertical video strategy. In 90 days, we scaled to ₹28L/month at a 4.8x blended ROAS."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar-badge">KM</div>
+              <div class="author-info">
+                <h4 class="author-name">Kabir Mehra</h4>
+                <p class="author-role">Founder & CEO, Aura Lifestyle D2C</p>
+                <span class="verified-client-tag">✓ Verified Client • Gurugram</span>
               </div>
             </div>
           </div>
 
-          <!-- Pane 2: Algorithmic Media Buying -->
-          <div class="engine-pane" id="paneAds" role="tabpanel" aria-labelledby="tabAds" hidden>
-            <div class="engine-pane-grid">
-              <div class="engine-pane-info">
-                <span class="engine-tag">ALGORITHMIC MEDIA BUYING</span>
-                <h3 class="engine-heading">Multi-Variable Ad Testing on Meta & Google</h3>
-                <p class="engine-text">
-                  Stop burning ad budget on unoptimized ad sets. We deploy Conversions API (CAPI), audience exclusion matrixes, and iterative creative testing to lock in compounding ROAS.
-                </p>
-                <div class="engine-feature-list">
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">🎯</div>
-                    <div>
-                      <h4>Dynamic CAPI Server Tracking</h4>
-                      <p>100% data fidelity and accurate conversion tracking bypassing iOS tracking loss.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">📊</div>
-                    <div>
-                      <h4>Multi-Variant Testing Sprints</h4>
-                      <p>Testing 15+ hook, headline, and creative variations weekly to discover breakthrough winners.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">💰</div>
-                    <div>
-                      <h4>Aggressive Scale Protocols</h4>
-                      <p>Scaling daily budgets safely without audience fatigue or ROAS collapse.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="engine-pane-actions">
-                  <a href="services.html" class="btn btn-secondary">Explore Media Services</a>
-                  <button type="button" class="btn btn-primary" onclick="document.getElementById('headerAuditBtn').click()">Request Ad Account Audit</button>
-                </div>
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-metric-badge">
+                <span class="metric-highlight">3.2M Views</span>
+                <span class="metric-context">-48% CAC</span>
               </div>
-
-              <!-- Interactive Mockup: Ad Manager Dashboard -->
-              <div class="engine-pane-visual">
-                <div class="visual-mock-card ads-mock-card">
-                  <div class="mock-header">
-                    <span class="mock-pill">Meta & Google CAPI Feed</span>
-                    <span class="mock-live-indicator">Active Scaling</span>
-                  </div>
-                  <div class="ads-metric-board">
-                    <div class="ad-metric-item">
-                      <span class="label">Blended ROAS</span>
-                      <span class="value gradient-text">4.82x</span>
-                    </div>
-                    <div class="ad-metric-item">
-                      <span class="label">Cost Per Acquisition</span>
-                      <span class="value text-green">₹142.50</span>
-                    </div>
-                    <div class="ad-metric-item">
-                      <span class="label">Total Managed</span>
-                      <span class="value">₹1.5Cr+</span>
-                    </div>
-                    <div class="ad-metric-item">
-                      <span class="label">Conversion Lift</span>
-                      <span class="value text-green">+41.8%</span>
-                    </div>
-                  </div>
-                  <div class="ad-sprint-table">
-                    <div class="ad-table-row header-row">
-                      <span>Ad Set Variant</span>
-                      <span>Hook Angle</span>
-                      <span>ROAS</span>
-                      <span>Status</span>
-                    </div>
-                    <div class="ad-table-row">
-                      <span>Scale_Set_01</span>
-                      <span>Problem Agitation</span>
-                      <span class="text-green font-bold">5.2x</span>
-                      <span class="status-pill status-active">Scaled</span>
-                    </div>
-                    <div class="ad-table-row">
-                      <span>Scale_Set_02</span>
-                      <span>Behind-The-Scenes</span>
-                      <span class="text-green font-bold">4.6x</span>
-                      <span class="status-pill status-active">Scaled</span>
-                    </div>
-                    <div class="ad-table-row">
-                      <span>Test_Set_03</span>
-                      <span>Direct Comparison</span>
-                      <span class="text-secondary font-bold">2.1x</span>
-                      <span class="status-pill status-killed">Killed</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                ★★★★★
+              </div>
+            </div>
+            <blockquote class="testimonial-quote">
+              "Their vertical video hooks are absolute gold. RK Media doesn't just run ad sets; they produce viral short-form content that organically captures high-intent buyer attention before retargeting. Our customer acquisition cost dropped by 48% within 60 days."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar-badge">PS</div>
+              <div class="author-info">
+                <h4 class="author-name">Dr. Priya Sengupta</h4>
+                <p class="author-role">Chief Marketing Officer, Veda Organics</p>
+                <span class="verified-client-tag">✓ Verified Client • Mumbai</span>
               </div>
             </div>
           </div>
 
-          <!-- Pane 3: Brand Authority & Creator Engine -->
-          <div class="engine-pane" id="paneAuthority" role="tabpanel" aria-labelledby="tabAuthority" hidden>
-            <div class="engine-pane-grid">
-              <div class="engine-pane-info">
-                <span class="engine-tag">ORGANIC BRAND AUTHORITY</span>
-                <h3 class="engine-heading">Positioning Founders & Brands as Category Leaders</h3>
-                <p class="engine-text">
-                  Attention is fleeting, but authority commands trust and pricing power. We position founders and businesses as undeniable industry leaders through strategic storytelling and organic distribution.
-                </p>
-                <div class="engine-feature-list">
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">👑</div>
-                    <div>
-                      <h4>Executive Scripting & Direction</h4>
-                      <p>Thought leadership scripts written to preserve your authentic tone while optimizing for algorithmic resonance.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">🚀</div>
-                    <div>
-                      <h4>Algorithmic Distribution</h4>
-                      <p>Building organic compounding loops that drive steady inbound leads without constant ad dependency.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">🤝</div>
-                    <div>
-                      <h4>High-Ticket Inbound Pipeline</h4>
-                      <p>Converting passive viewers into booked calendar consultations and premium clients.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="engine-pane-actions">
-                  <a href="insights.html" class="btn btn-secondary">View Instagram Proof</a>
-                  <button type="button" class="btn btn-primary" onclick="document.getElementById('headerAuditBtn').click()">Audit Your Brand Profile</button>
-                </div>
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-top">
+              <div class="testimonial-metric-badge">
+                <span class="metric-highlight">12,400+ Leads</span>
+                <span class="metric-context">₹1.8 Cr Pipeline</span>
               </div>
-
-              <!-- Interactive Mockup: Verified Profile Card -->
-              <div class="engine-pane-visual">
-                <div class="visual-mock-card profile-mock-card">
-                  <div class="mock-header">
-                    <span class="mock-pill">Brand Authority Score</span>
-                    <span class="mock-live-indicator">Growth Engine Active</span>
-                  </div>
-                  <div class="profile-header-mock">
-                    <div class="profile-avatar-mock">RK</div>
-                    <div class="profile-info-mock">
-                      <div class="name-row">
-                        <strong>Category Leader Brand</strong>
-                        <span class="verified-badge">✓</span>
-                      </div>
-                      <span class="handle-tag">@brand_growth_engine</span>
-                    </div>
-                  </div>
-                  <div class="profile-stats-row">
-                    <div class="p-stat">
-                      <strong>+48.5K</strong>
-                      <span>Followers</span>
-                    </div>
-                    <div class="p-stat">
-                      <strong>2.84M</strong>
-                      <span>Quarterly Views</span>
-                    </div>
-                    <div class="p-stat">
-                      <strong>92%</strong>
-                      <span>Positive Sentiment</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                ★★★★★
               </div>
             </div>
-          </div>
-
-          <!-- Pane 4: Funnels & CRO -->
-          <div class="engine-pane" id="paneCro" role="tabpanel" aria-labelledby="tabCro" hidden>
-            <div class="engine-pane-grid">
-              <div class="engine-pane-info">
-                <span class="engine-tag">CONVERSION RATE OPTIMIZATION</span>
-                <h3 class="engine-heading">Frictionless Landing Pages Built to Convert</h3>
-                <p class="engine-text">
-                  Traffic is worthless if your landing page leaks buyers. We design mobile-first, sub-second loading sales pages with persuasive copy, frictionless checkout flow, and 1-click WhatsApp lead captures.
-                </p>
-                <div class="engine-feature-list">
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">⚡</div>
-                    <div>
-                      <h4>Sub-Second Load Times</h4>
-                      <p>95+ Google PageSpeed score ensuring zero ad bounce rates on mobile networks.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">🛒</div>
-                    <div>
-                      <h4>Frictionless Mobile Checkout</h4>
-                      <p>Optimized UX eliminating unnecessary fields to maximize completion velocity.</p>
-                    </div>
-                  </div>
-                  <div class="engine-feature-item">
-                    <div class="feature-bullet">🧪</div>
-                    <div>
-                      <h4>Continuous A/B CRO Sprints</h4>
-                      <p>Ongoing headline, offer, and CTA testing to continuously drive down cost per acquisition.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="engine-pane-actions">
-                  <a href="services.html" class="btn btn-secondary">Explore Funnel Solutions</a>
-                  <button type="button" class="btn btn-primary" onclick="document.getElementById('headerAuditBtn').click()">Request Funnel CRO Review</button>
-                </div>
-              </div>
-
-              <!-- Interactive Mockup: Funnel Architecture Visual -->
-              <div class="engine-pane-visual">
-                <div class="visual-mock-card funnel-mock-card">
-                  <div class="mock-header">
-                    <span class="mock-pill">Conversion Funnel Blueprint</span>
-                    <span class="mock-live-indicator">Optimized Flow</span>
-                  </div>
-                  <div class="funnel-steps-mock">
-                    <div class="funnel-step-bar">
-                      <span class="step-label">1. Traffic Acquisition</span>
-                      <div class="bar-fill bf-1"><span>100K Impressions</span></div>
-                    </div>
-                    <div class="funnel-step-bar">
-                      <span class="step-label">2. Landing Page Clicks</span>
-                      <div class="bar-fill bf-2"><span>18,400 Visitors (18.4%)</span></div>
-                    </div>
-                    <div class="funnel-step-bar">
-                      <span class="step-label">3. Cart & Lead Inquiries</span>
-                      <div class="bar-fill bf-3"><span>1,510 Actions (8.2%)</span></div>
-                    </div>
-                    <div class="funnel-step-bar">
-                      <span class="step-label">4. Retained Customers</span>
-                      <div class="bar-fill bf-4"><span>634 Customers (42%)</span></div>
-                    </div>
-                  </div>
-                  <div class="funnel-lift-callout">
-                    <span class="lift-icon">🚀</span>
-                    <span>Average Client Conversion Lift: <strong>+38.5% Post-Optimization</strong></span>
-                  </div>
-                </div>
+            <blockquote class="testimonial-quote">
+              "The level of precision in their CAPI tracking, copy testing, and rapid creative iteration is unmatched. We saw an immediate surge in high-intent demo bookings and qualified signups. They operate like an elite in-house SWAT growth department."
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar-badge">SV</div>
+              <div class="author-info">
+                <h4 class="author-name">Siddharth Verma</h4>
+                <p class="author-role">Co-Founder, NexaPay Solutions</p>
+                <span class="verified-client-tag">✓ Verified Client • Bengaluru</span>
               </div>
             </div>
           </div>
@@ -758,212 +451,183 @@
       </div>
     </section>
 
-    <!-- SECTION 2.5: DIGITAL MARKETING & VIDEO SCENE ENGINE -->
-    <section class="section marketing-video-section" id="marketingVideoShowcase">
-      <div class="cyber-grid-overlay" aria-hidden="true"></div>
+    <!-- SECTION 3: PARTNERS & ECOSYSTEM INTEGRATIONS -->
+    <section class="section partners-section" id="partners">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-tag">DIGITAL MARKETING IN MOTION</span>
-          <h2 class="section-title">Experience Our Growth Engine: <span class="gradient-text">Scroll to Switch Scenes</span></h2>
+          <span class="section-tag">CERTIFIED ECOSYSTEM</span>
+          <h2 class="section-title">Official Platform <span class="gradient-text">Partners & Networks</span></h2>
           <p class="section-description">
-            From 3-second viral video hooks to high-ROAS paid media funnels, experience our live creative media engine. Scroll the page to switch scenes automatically.
+            We hold certified partnerships across the world's leading advertising, commerce, and attribution platforms to give our clients an unfair competitive advantage.
           </p>
         </div>
 
-        <div class="video-scene-container">
-          <div class="portfolio-video-wrapper marketing-video-player" id="mainMarketingVideoWrapper">
-            <video class="portfolio-video-element marketing-video-element" poster="videos/video-poster.jpg" preload="metadata" playsinline muted loop>
-              <source src="videos/rk-reels-showcase.mp4" type="video/mp4">
-              Your browser does not support HTML5 video.
-            </video>
-            
-            <div class="video-overlay-play" role="button" tabindex="0" aria-label="Play Digital Marketing Video">
-              <div class="play-pulse-ring"></div>
-              <div class="play-btn-circle">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-              </div>
-              <span class="play-btn-text">Watch Marketing Reel</span>
+        <!-- Official Platform Badges Row -->
+        <div class="partners-platforms-row">
+          <div class="platform-badge">
+            <div class="platform-badge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
             </div>
-            
-            <div class="video-hud-badge top-left">
-              <span class="live-pulse-dot"></span>
-              <span>LIVE MARKETING SCENE</span>
-            </div>
-            <div class="video-hud-badge top-right">
-              <span>1080P HD / SCROLL SYNCED</span>
-            </div>
-
-            <!-- In-Video Kinetic Scroll Text HUD -->
-            <div class="video-scroll-hud-overlay" aria-live="polite">
-              <div class="scroll-hud-pill">
-                <span class="hud-live-spark"></span>
-                <span class="hud-step-tag">SCENE 01 / 05</span>
-              </div>
-              <div class="hud-scroll-text">
-                <span class="hud-hook-title">01 • The 3-Second Hook & Pattern Interrupt</span>
-                <span class="hud-hook-desc">Halt infinite scrolling in the first 90 frames to capture 85%+ audience attention</span>
-              </div>
-            </div>
-
-            <div class="video-custom-controls">
-              <button class="v-ctrl-btn v-play-btn" type="button" title="Play/Pause" aria-label="Play or Pause">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-play"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-pause" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-              </button>
-              <div class="v-progress-container" role="slider" aria-label="Video Progress" tabindex="0">
-                <div class="v-progress-filled"></div>
-              </div>
-              <span class="v-time">0:00 / 10:22</span>
-              <button class="v-ctrl-btn v-mute-btn" type="button" title="Mute/Unmute" aria-label="Mute or Unmute">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-vol" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-mute"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-              </button>
-              <button class="v-ctrl-btn v-fs-btn" type="button" title="Fullscreen" aria-label="Toggle Fullscreen">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-              </button>
+            <div class="platform-badge-text">
+              <span class="platform-name">Meta Business Partner</span>
+              <span class="platform-status">Verified Agency Tier</span>
             </div>
           </div>
 
-          <!-- Interactive 5-Scene Chapter Selector -->
-          <div class="video-scenes-nav">
-            <button type="button" class="video-scene-btn active" data-scene-idx="0">
-              <span class="scene-indicator"></span>
-              <span class="scene-num">01</span>
-              <span class="scene-name">Pattern Hook</span>
-            </button>
-            <button type="button" class="video-scene-btn" data-scene-idx="1">
-              <span class="scene-indicator"></span>
-              <span class="scene-num">02</span>
-              <span class="scene-name">Paid Ad Funnels</span>
-            </button>
-            <button type="button" class="video-scene-btn" data-scene-idx="2">
-              <span class="scene-indicator"></span>
-              <span class="scene-num">03</span>
-              <span class="scene-name">Viral Reels SFX</span>
-            </button>
-            <button type="button" class="video-scene-btn" data-scene-idx="3">
-              <span class="scene-indicator"></span>
-              <span class="scene-num">04</span>
-              <span class="scene-name">Conversion Tech</span>
-            </button>
-            <button type="button" class="video-scene-btn" data-scene-idx="4">
-              <span class="scene-indicator"></span>
-              <span class="scene-num">05</span>
-              <span class="scene-name">4.62x ROAS Scale</span>
-            </button>
+          <div class="platform-badge">
+            <div class="platform-badge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18h-2v-1.07A6 6 0 0 1 7 11h2a4 4 0 1 0 4-4V5a6 6 0 0 1 0 11.93z"/>
+              </svg>
+            </div>
+            <div class="platform-badge-text">
+              <span class="platform-name">Google Premier Partner</span>
+              <span class="platform-status">Search & YouTube Ads</span>
+            </div>
+          </div>
+
+          <div class="platform-badge">
+            <div class="platform-badge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4 4h16v16H4V4zm2 4v8h12V8H6z"/>
+              </svg>
+            </div>
+            <div class="platform-badge-text">
+              <span class="platform-name">Shopify Plus Partner</span>
+              <span class="platform-status">E-Com Funnels & CRO</span>
+            </div>
+          </div>
+
+          <div class="platform-badge">
+            <div class="platform-badge-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
+              </svg>
+            </div>
+            <div class="platform-badge-text">
+              <span class="platform-name">YouTube & Shorts Partner</span>
+              <span class="platform-status">High-Retention Creative</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partner Category / Client Sector Cards Grid -->
+        <div class="partners-grid">
+          <div class="partner-card">
+            <div class="partner-card-icon">🛍️</div>
+            <h4>D2C & E-Commerce</h4>
+            <p>Scaling direct-to-consumer apparel, beauty, and consumer electronics with viral video hooks and high-AOV bundles.</p>
+            <span class="partner-card-stat">₹45 Cr+ GMV Generated</span>
+          </div>
+
+          <div class="partner-card">
+            <div class="partner-card-icon">💼</div>
+            <h4>B2B & SaaS Scaleups</h4>
+            <p>Driving high-converting demo requests, pipeline velocity, and decision-maker lead acquisition through LinkedIn & Meta.</p>
+            <span class="partner-card-stat">35,000+ Qualified Leads</span>
+          </div>
+
+          <div class="partner-card">
+            <div class="partner-card-icon">🎙️</div>
+            <h4>Creators & Personal Brands</h4>
+            <p>Building organic audience flywheels, monetization funnels, and high-ticket mastermind conversion engines.</p>
+            <span class="partner-card-stat">150M+ Organic Views</span>
+          </div>
+
+          <div class="partner-card">
+            <div class="partner-card-icon">🏥</div>
+            <h4>Health & Nutraceuticals</h4>
+            <p>Compliance-first performance marketing, science-backed creative angles, and subscription retention loops.</p>
+            <span class="partner-card-stat">4.2x Avg. Retention ROAS</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 3: THE TRANSFORMATION MATRIX (TRADITIONAL VS RK) -->
-    <section class="section comparison-section" id="comparison">
-      <div class="container">
+    <!-- SECTION 4: FREQUENTLY ASKED QUESTIONS (F&Q) -->
+    <section class="section faq-section" id="faq">
+      <div class="container faq-container">
         <div class="section-header text-center">
-          <span class="section-tag">WHY BRANDS SWITCH</span>
-          <h2 class="section-title">Traditional Agencies vs. <span class="gradient-text">The RK Growth Engine</span></h2>
+          <span class="section-tag">COMMON QUESTIONS</span>
+          <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
           <p class="section-description">
-            Traditional agencies run on bloated retainers and junior account managers. We operate on sprint velocity, direct senior pods, and verified performance.
+            Everything you need to know about partnering with RK Marketing Media.
           </p>
         </div>
 
-        <div class="comparison-grid">
-          <!-- Card 1: The Old Way -->
-          <div class="comparison-card card-traditional">
-            <div class="card-comparison-header">
-              <span class="comparison-tag tag-old">The Old Agency Model</span>
-              <h3 class="comparison-title">Traditional Marketing Agencies</h3>
-              <p class="comparison-subtitle">Bloated retainers with disjointed execution</p>
+        <div class="faq-accordion" id="faqAccordion">
+          <!-- FAQ 1 -->
+          <div class="faq-item active">
+            <button class="faq-question" type="button" aria-expanded="true" aria-controls="faqAns1" id="faqBtn1">
+              <span>How quickly can we launch campaigns once we onboard?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faqAns1" role="region" aria-labelledby="faqBtn1">
+              <div class="faq-answer-inner">
+                Our onboarding protocol takes less than 48 hours. Within the first 7 business days, our creative pod will deliver your diagnostic audit, finalize hook scripts, and launch your initial multi-variable testing ad sets.
+              </div>
             </div>
-            <ul class="comparison-list">
-              <li class="comp-item comp-negative">
-                <span class="comp-icon">✕</span>
-                <div>
-                  <strong>Vanity Impression Reports</strong>
-                  <p>Reporting on vague impressions and views that never translate to actual bank deposits.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-negative">
-                <span class="comp-icon">✕</span>
-                <div>
-                  <strong>3–4 Week Sluggish Turnarounds</strong>
-                  <p>By the time a creative script is approved and filmed, the market trend has already expired.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-negative">
-                <span class="comp-icon">✕</span>
-                <div>
-                  <strong>Pitched by Seniors, Run by Interns</strong>
-                  <p>You meet founders in the sales pitch, then get handed off to junior account managers.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-negative">
-                <span class="comp-icon">✕</span>
-                <div>
-                  <strong>Siloed Creative & Media Teams</strong>
-                  <p>Video editors have zero idea how ads are performing, and media buyers blame the creative.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-negative">
-                <span class="comp-icon">✕</span>
-                <div>
-                  <strong>Rigid 6-Month Lock-in Contracts</strong>
-                  <p>Long legal contracts with zero performance accountability or shared incentive to win.</p>
-                </div>
-              </li>
-            </ul>
           </div>
 
-          <!-- Card 2: The RK Engine -->
-          <div class="comparison-card card-rk highlighted-card">
-            <div class="card-comparison-header">
-              <span class="comparison-tag tag-new">The High-Velocity Model</span>
-              <h3 class="comparison-title">The RK Marketing Media Engine</h3>
-              <p class="comparison-subtitle">Engineered for pure ROAS, velocity, and compounding growth</p>
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAns2" id="faqBtn2">
+              <span>What exactly do we get in the Free 24-Hour Growth Audit?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faqAns2" role="region" aria-labelledby="faqBtn2" hidden>
+              <div class="faq-answer-inner">
+                You receive a bespoke, screen-recorded video walkthrough and executive summary detailing your current video retention drop-offs, ad spend inefficiencies, and a 3-step actionable roadmap to increase ROAS. It is 100% complimentary with zero sales pressure.
+              </div>
             </div>
-            <ul class="comparison-list">
-              <li class="comp-item comp-positive">
-                <span class="comp-icon">✓</span>
-                <div>
-                  <strong>Pure Revenue & ROAS Attribution</strong>
-                  <p>Real-time client dashboards tracking true customer acquisition cost and net return on ad spend.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-positive">
-                <span class="comp-icon">✓</span>
-                <div>
-                  <strong>Weekly Creative Testing Sprints</strong>
-                  <p>Fresh 3-second hooks and vertical reel variations scripted, filmed, and tested every 7 days.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-positive">
-                <span class="comp-icon">✓</span>
-                <div>
-                  <strong>Direct Senior Strategist Pods</strong>
-                  <p>Direct communication via dedicated Slack/WhatsApp with senior media buyers and directors.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-positive">
-                <span class="comp-icon">✓</span>
-                <div>
-                  <strong>Unified In-House Creative & Media</strong>
-                  <p>Creative directors analyze ad metrics daily to engineer winning scripts based on data.</p>
-                </div>
-              </li>
-              <li class="comp-item comp-positive">
-                <span class="comp-icon">✓</span>
-                <div>
-                  <strong>Agile Performance Partnerships</strong>
-                  <p>Flexible retainers aligned with your business milestones and demonstrable return on investment.</p>
-                </div>
-              </li>
-            </ul>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAns3" id="faqBtn3">
+              <span>Do you handle video production or do we need to provide footage?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faqAns3" role="region" aria-labelledby="faqBtn3" hidden>
+              <div class="faq-answer-inner">
+                We support both models. If you have raw footage or shoot in-house, we provide scripts and master the editing with kinetic sound and typography. Alternatively, our in-house studio can manage the end-to-end creative production from scripting to filming.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAns4" id="faqBtn4">
+              <span>Do you work with brands outside India?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faqAns4" role="region" aria-labelledby="faqBtn4" hidden>
+              <div class="faq-answer-inner">
+                Yes. While headquartered in Gurugram, India, we currently manage campaigns and video production for partner brands in Dubai (UAE), the United States, and the UK, operating across multiple currencies and time zones.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAns5" id="faqBtn5">
+              <span>How do your pricing and partnership retainers work?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer" id="faqAns5" role="region" aria-labelledby="faqBtn5" hidden>
+              <div class="faq-answer-inner">
+                We offer transparent monthly growth retainers tailored to your specific scale, with optional performance-aligned incentives linked directly to revenue milestones. There are no lock-in contracts; our partnerships thrive on proven results.
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 4: HIGH-CONVERTING CLOSING CALL TO ACTION -->
+
+    <!-- SECTION 5: HIGH-CONVERTING CLOSING CALL TO ACTION -->
     <section class="section cta-section" style="padding-top: 30px; padding-bottom: 90px;">
       <div class="container">
         <div class="subpage-cta-banner cyber-cta-box" style="margin: 0;">
@@ -1147,6 +811,6 @@
     </div>
   </aside>
 
-  <script src="script.js?v=5.2"></script>
+  <script src="script.js?v=5.3"></script>
 </body>
 </html>

@@ -4608,7 +4608,257 @@ button, input, textarea, select {
   line-height: 1.65;
 }
 
-/* 7. Cyber CTA Box & Trust Note */
+/* 7. Client Testimonials & Case Results */
+.testimonials-section {
+  padding-top: 55px;
+  padding-bottom: 55px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 45px;
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  position: relative;
+  backdrop-filter: blur(14px);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(211, 171, 85, 0.55);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 24px rgba(211, 171, 85, 0.15);
+}
+
+.testimonial-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.testimonial-metric-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.metric-highlight {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-context {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.testimonial-stars {
+  color: #f59e0b;
+  font-size: 1.05rem;
+  letter-spacing: 2px;
+}
+
+.testimonial-quote {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 26px 0;
+  flex-grow: 1;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-color);
+}
+
+.author-avatar-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(211, 171, 85, 0.3);
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 2px 0;
+}
+
+.author-role {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 4px 0;
+}
+
+.verified-client-tag {
+  font-size: 0.74rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* 8. Official Platform Partners & Ecosystem */
+.partners-section {
+  padding-top: 55px;
+  padding-bottom: 55px;
+}
+
+.partners-platforms-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 40px;
+  margin-bottom: 32px;
+}
+
+.platform-badge {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: var(--transition);
+}
+
+.platform-badge:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.platform-badge-icon {
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.platform-badge-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.platform-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.platform-status {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.partner-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.partner-card:hover {
+  border-color: rgba(211, 171, 85, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.partner-card-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.partner-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.partner-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0 0 16px 0;
+  flex-grow: 1;
+}
+
+.partner-card-stat {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(211, 171, 85, 0.1);
+  border: 1px solid rgba(211, 171, 85, 0.25);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
+}
+
+/* Light Mode Overrides for Testimonials & Partners */
+[data-theme="light"] .testimonial-card,
+[data-theme="light"] .platform-badge,
+[data-theme="light"] .partner-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .testimonial-card:hover,
+[data-theme="light"] .platform-badge:hover,
+[data-theme="light"] .partner-card:hover {
+  border-color: rgba(181, 136, 50, 0.45);
+  box-shadow: 0 12px 30px rgba(211, 171, 85, 0.15);
+}
+
+/* 9. Cyber CTA Box & Trust Note */
 .cyber-cta-box {
   background: linear-gradient(135deg, rgba(211, 171, 85, 0.16) 0%, rgba(18, 22, 30, 0.92) 100%);
   border: 1px solid rgba(211, 171, 85, 0.5);
@@ -4629,13 +4879,15 @@ button, input, textarea, select {
 
 /* --- Responsive Media Queries for Home Page --- */
 @media (max-width: 1024px) {
-  .roi-simulator-container,
-  .engine-pane-grid,
-  .comparison-grid {
+  .testimonials-grid {
     grid-template-columns: 1fr;
   }
 
-  .engine-tabs-nav {
+  .partners-platforms-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .partners-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -4645,31 +4897,16 @@ button, input, textarea, select {
 }
 
 @media (max-width: 640px) {
-  .engine-tabs-nav {
-    grid-template-columns: 1fr;
-  }
-
   .roadmap-timeline {
     grid-template-columns: 1fr;
   }
 
-  .roi-pill-group {
+  .partners-platforms-row {
     grid-template-columns: 1fr;
   }
 
-  .roi-metrics-grid {
+  .partners-grid {
     grid-template-columns: 1fr;
-  }
-
-  .roi-controls-card,
-  .roi-results-card,
-  .engine-pane-grid,
-  .comparison-card {
-    padding: 24px 20px;
-  }
-
-  .engine-heading {
-    font-size: 1.45rem;
   }
 }
 
