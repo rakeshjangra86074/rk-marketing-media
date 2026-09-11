@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageTransitions();
   initVideoScrollTextReveal();
   initSiteWideTextRevealOnScroll();
-  initScrollVideoShowcase();
 });
 
 /* --------------------------------------------------------------------------
@@ -1918,96 +1917,353 @@ function initPageTransitions() {
 /* --------------------------------------------------------------------------
    23. In-Video & Section Kinetic Scroll Text Reveal (One-by-One)
    -------------------------------------------------------------------------- */
-function initVideoScrollTextReveal() {
-  const hudStepTag = document.getElementById('hudScrollStepTag');
-  const hudHookTitle = document.getElementById('hudHookTitle');
-  const hudHookDesc = document.getElementById('hudHookDesc');
+/* --------------------------------------------------------------------------
+   23. Digital Marketing Scroll-Driven Video Scene Engine (Active on Every Page)
+   -------------------------------------------------------------------------- */
+const MARKETING_SCENES = [
+  {
+    step: 'SCENE 01 / 05',
+    title: '01 • The 3-Second Hook & Pattern Interrupt',
+    desc: 'Disrupting pattern fatigue in the first 90 frames to capture 85%+ audience attention',
+    time: 2.5,
+    tag: 'PATTERN HOOK'
+  },
+  {
+    step: 'SCENE 02 / 05',
+    title: '02 • Algorithmic Media Buying & Ad Funnels',
+    desc: 'High-ROAS Meta and Google ad campaigns engineered for profitable customer acquisition',
+    time: 16.0,
+    tag: 'PAID AD FUNNELS'
+  },
+  {
+    step: 'SCENE 03 / 05',
+    title: '03 • High-Retention Video & Kinetic Motion SFX',
+    desc: 'Micro-cut pacing, dynamic subtitles and beat-matched SFX keeping viewers locked in',
+    time: 32.0,
+    tag: 'VIRAL REELS SFX'
+  },
+  {
+    step: 'SCENE 04 / 05',
+    title: '04 • Full-Funnel Conversion Architecture',
+    desc: 'Automated DM funnels, landing page optimization, and high-converting retargeting pipelines',
+    time: 48.0,
+    tag: 'CONVERSION TECH'
+  },
+  {
+    step: 'SCENE 05 / 05',
+    title: '05 • 4.62x Client ROAS & Predictable Revenue',
+    desc: 'Turning raw attention into verified multi-million reach and scalable bottom-line revenue',
+    time: 64.0,
+    tag: '4.62X ROAS SCALE'
+  }
+];
+
+function initDigitalMarketingScrollVideo() {
+  const videoWrappers = document.querySelectorAll('.portfolio-video-wrapper');
+  const pod = document.getElementById('floatingVideoScenePod');
+  const podVideo = pod ? pod.querySelector('video') : null;
+  const podToggleBtn = document.getElementById('podToggleBtn');
+  const podMuteBtn = document.getElementById('podMuteBtn');
+  const podSceneTag = document.getElementById('podSceneTag');
+  const podSceneTitle = document.getElementById('podSceneTitle');
+  const podProgress = document.getElementById('podProgressFilled');
+  const sceneButtons = document.querySelectorAll('.video-scene-btn');
   const capabilityCards = document.querySelectorAll('#videoCapabilitiesGrid .capability-card');
 
-  const videoSteps = [
-    {
-      step: 'FRAME 01 / 04',
-      title: '01 • The 3-Second Hook',
-      desc: 'Disrupting pattern fatigue in the first 90 frames to stop 85%+ swipe-aways'
-    },
-    {
-      step: 'FRAME 02 / 04',
-      title: '02 • Micro-Cut Pacing',
-      desc: 'Strategic B-roll transitions and dynamic zoom-ins keeping rhythm fast'
-    },
-    {
-      step: 'FRAME 03 / 04',
-      title: '03 • Kinetic Sound & SFX',
-      desc: 'Custom beat-matched audio cues and sonic drops driving emotional retention'
-    },
-    {
-      step: 'FRAME 04 / 04',
-      title: '04 • Seamless Conversion',
-      desc: 'Natural CTA mechanics funneling viewers into saves and consultation DMs'
+  // Collect all video elements on the page (in-page wrappers + floating pod)
+  const allVideos = [];
+  videoWrappers.forEach(wrap => {
+    const v = wrap.querySelector('video');
+    if (v && !allVideos.includes(v)) allVideos.push(v);
+  });
+  if (podVideo && !allVideos.includes(podVideo)) {
+    allVideos.push(podVideo);
+  }
+
+  // Setup controls for each in-page video wrapper
+  videoWrappers.forEach(wrap => {
+    const video = wrap.querySelector('video');
+    const playOverlay = wrap.querySelector('.video-overlay-play');
+    const playBtn = wrap.querySelector('.v-play-btn') || wrap.querySelector('#vPlayToggle');
+    const progressBar = wrap.querySelector('.v-progress-container') || wrap.querySelector('#vProgressBar');
+    const progressFilled = wrap.querySelector('.v-progress-filled') || wrap.querySelector('#vProgressFilled');
+    const timeDisplay = wrap.querySelector('.v-time') || wrap.querySelector('#vTimeDisplay');
+    const muteBtn = wrap.querySelector('.v-mute-btn') || wrap.querySelector('#vMuteToggle');
+    const fsBtn = wrap.querySelector('.v-fs-btn') || wrap.querySelector('#vFullscreenBtn');
+
+    if (!video) return;
+
+    function formatTime(seconds) {
+      if (isNaN(seconds) || seconds < 0) return '0:00';
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
-  ];
 
-  let currentStepIdx = -1;
-  let ticking = false;
-
-  function updateVideoScrollHUD() {
-    const videoSection = document.getElementById('videoShowcase');
-    if (videoSection && hudStepTag && hudHookTitle && hudHookDesc) {
-      const rect = videoSection.getBoundingClientRect();
-      const winH = window.innerHeight;
-      
-      // Calculate how far through the video section the user has scrolled
-      const start = winH * 0.75;
-      const totalDist = rect.height;
-      const scrolled = start - rect.top;
-      const progress = Math.min(Math.max(scrolled / totalDist, 0), 0.999);
-
-      const stepIdx = Math.floor(progress * videoSteps.length);
-
-      if (stepIdx !== currentStepIdx && stepIdx >= 0 && stepIdx < videoSteps.length) {
-        currentStepIdx = stepIdx;
-        const data = videoSteps[stepIdx];
-
-        hudHookTitle.style.opacity = '0';
-        hudHookDesc.style.opacity = '0';
-        hudHookTitle.style.transform = 'translateY(4px)';
-        hudHookDesc.style.transform = 'translateY(4px)';
-
-        setTimeout(() => {
-          hudStepTag.textContent = data.step;
-          hudHookTitle.textContent = data.title;
-          hudHookDesc.textContent = data.desc;
-
-          hudHookTitle.style.opacity = '1';
-          hudHookDesc.style.opacity = '1';
-          hudHookTitle.style.transform = 'translateY(0)';
-          hudHookDesc.style.transform = 'translateY(0)';
-        }, 120);
-
-        // Highlight capability cards one by one
-        capabilityCards.forEach((card, idx) => {
-          if (idx <= stepIdx) {
-            card.classList.add('scroll-active');
-            const words = card.querySelectorAll('.reveal-word');
-            words.forEach(w => w.classList.add('is-revealed'));
-          } else {
-            card.classList.remove('scroll-active');
+    function togglePlay() {
+      if (video.paused || video.ended) {
+        video.play().then(() => {
+          wrap.classList.add('is-playing');
+          if (playBtn) {
+            const p = playBtn.querySelector('.icon-play');
+            const pa = playBtn.querySelector('.icon-pause');
+            if (p) p.style.display = 'none';
+            if (pa) pa.style.display = 'block';
           }
-        });
+        }).catch(() => {});
+      } else {
+        video.pause();
+        wrap.classList.remove('is-playing');
+        if (playBtn) {
+          const p = playBtn.querySelector('.icon-play');
+          const pa = playBtn.querySelector('.icon-pause');
+          if (p) p.style.display = 'block';
+          if (pa) pa.style.display = 'none';
+        }
       }
     }
 
-    ticking = false;
+    if (playOverlay) {
+      playOverlay.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlay();
+      });
+    }
+
+    if (playBtn) {
+      playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlay();
+      });
+    }
+
+    video.addEventListener('click', () => {
+      togglePlay();
+    });
+
+    video.addEventListener('timeupdate', () => {
+      if (!video.duration) return;
+      const pct = (video.currentTime / video.duration) * 100;
+      if (progressFilled) progressFilled.style.width = `${pct}%`;
+      if (timeDisplay) {
+        timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      }
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+      if (timeDisplay && video.duration) {
+        timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
+      }
+    });
+
+    if (progressBar) {
+      progressBar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const rect = progressBar.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        if (video.duration) {
+          video.currentTime = Math.max(0, Math.min(pos * video.duration, video.duration));
+        }
+      });
+    }
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        const iconVol = muteBtn.querySelector('.icon-vol');
+        const iconMute = muteBtn.querySelector('.icon-mute');
+        if (iconVol && iconMute) {
+          iconVol.style.display = video.muted ? 'none' : 'block';
+          iconMute.style.display = video.muted ? 'block' : 'none';
+        }
+      });
+    }
+
+    if (fsBtn) {
+      fsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!document.fullscreenElement) {
+          wrap.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+    }
+  });
+
+  // Setup Floating Pod Controls
+  if (pod) {
+    if (podToggleBtn) {
+      podToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        pod.classList.toggle('minimized');
+        const minIcon = podToggleBtn.querySelector('.pod-icon-min');
+        const expIcon = podToggleBtn.querySelector('.pod-icon-expand');
+        const isMin = pod.classList.contains('minimized');
+        if (minIcon) minIcon.style.display = isMin ? 'none' : 'block';
+        if (expIcon) expIcon.style.display = isMin ? 'block' : 'none';
+      });
+    }
+
+    if (podMuteBtn && podVideo) {
+      podMuteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        podVideo.muted = !podVideo.muted;
+        const iconMute = podMuteBtn.querySelector('.pod-icon-mute');
+        const iconVol = podMuteBtn.querySelector('.pod-icon-vol');
+        if (iconMute && iconVol) {
+          iconMute.style.display = podVideo.muted ? 'block' : 'none';
+          iconVol.style.display = podVideo.muted ? 'none' : 'block';
+        }
+      });
+    }
+
+    const podPreview = pod.querySelector('.pod-video-preview');
+    if (podPreview) {
+      podPreview.addEventListener('click', () => {
+        if (pod.classList.contains('minimized')) {
+          pod.classList.remove('minimized');
+          const minIcon = podToggleBtn ? podToggleBtn.querySelector('.pod-icon-min') : null;
+          const expIcon = podToggleBtn ? podToggleBtn.querySelector('.pod-icon-expand') : null;
+          if (minIcon) minIcon.style.display = 'block';
+          if (expIcon) expIcon.style.display = 'none';
+          return;
+        }
+        const inPageVideoSec = document.querySelector('.marketing-video-section') || document.getElementById('videoShowcase');
+        if (inPageVideoSec) {
+          inPageVideoSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  }
+
+  // Handle Chapter Scene Button Clicks
+  sceneButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.sceneIdx, 10);
+      if (!isNaN(idx) && idx >= 0 && idx < MARKETING_SCENES.length) {
+        applyScene(idx);
+      }
+    });
+  });
+
+  let currentSceneIdx = -1;
+  let isScrollTicking = false;
+
+  function applyScene(idx) {
+    if (idx < 0 || idx >= MARKETING_SCENES.length) return;
+    currentSceneIdx = idx;
+    const scene = MARKETING_SCENES[idx];
+
+    // 1. Seek all video instances to this scene's timestamp
+    allVideos.forEach(v => {
+      if (Math.abs(v.currentTime - scene.time) > 1.2) {
+        v.currentTime = scene.time;
+      }
+      if (v.paused) {
+        v.play().catch(() => {});
+      }
+    });
+
+    // 2. Update HUD overlay on all video wrappers
+    document.querySelectorAll('.video-scroll-hud-overlay').forEach(hud => {
+      const tag = hud.querySelector('.hud-step-tag') || hud.querySelector('#hudScrollStepTag');
+      const title = hud.querySelector('.hud-hook-title') || hud.querySelector('#hudHookTitle');
+      const desc = hud.querySelector('.hud-hook-desc') || hud.querySelector('#hudHookDesc');
+
+      if (title && desc) {
+        title.style.opacity = '0';
+        desc.style.opacity = '0';
+        title.style.transform = 'translateY(4px)';
+        desc.style.transform = 'translateY(4px)';
+
+        setTimeout(() => {
+          if (tag) tag.textContent = scene.step;
+          title.textContent = scene.title;
+          desc.textContent = scene.desc;
+
+          title.style.opacity = '1';
+          desc.style.opacity = '1';
+          title.style.transform = 'translateY(0)';
+          desc.style.transform = 'translateY(0)';
+        }, 90);
+      }
+    });
+
+    // 3. Highlight active chapter scene buttons
+    sceneButtons.forEach(btn => {
+      const bIdx = parseInt(btn.dataset.sceneIdx, 10);
+      if (bIdx === idx) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // 4. Highlight capability cards if on portfolio page
+    capabilityCards.forEach((card, cIdx) => {
+      if (cIdx <= idx) {
+        card.classList.add('scroll-active');
+        const words = card.querySelectorAll('.reveal-word');
+        words.forEach(w => w.classList.add('is-revealed'));
+      } else {
+        card.classList.remove('scroll-active');
+      }
+    });
+
+    // 5. Update Floating Pod HUD
+    if (podSceneTag) podSceneTag.textContent = `${scene.step} • ${scene.tag}`;
+    if (podSceneTitle) podSceneTitle.textContent = scene.title;
+  }
+
+  function onScrollUpdate() {
+    const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const progress = scrollMax > 0 ? Math.min(Math.max(scrollY / scrollMax, 0), 0.999) : 0;
+
+    // Calculate which of the 5 scenes matches the scroll position
+    const sceneIdx = Math.floor(progress * MARKETING_SCENES.length);
+
+    if (sceneIdx !== currentSceneIdx) {
+      applyScene(sceneIdx);
+    }
+
+    // Update floating pod progress bar
+    if (podProgress) {
+      podProgress.style.width = `${(progress * 100).toFixed(1)}%`;
+    }
+
+    // Auto-dim floating pod when in-page main video is directly in viewport
+    const inPageWrapper = document.querySelector('.marketing-video-player') || document.getElementById('portfolioVideoWrapper');
+    if (inPageWrapper && pod) {
+      const rect = inPageWrapper.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+      if (inView) {
+        pod.style.opacity = '0.35';
+        pod.style.transform = 'scale(0.92)';
+      } else {
+        pod.style.opacity = '1';
+        pod.style.transform = 'scale(1)';
+      }
+    }
+
+    isScrollTicking = false;
   }
 
   window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateVideoScrollHUD);
-      ticking = true;
+    if (!isScrollTicking) {
+      window.requestAnimationFrame(onScrollUpdate);
+      isScrollTicking = true;
     }
   }, { passive: true });
 
-  updateVideoScrollHUD();
+  // Initial call to set Scene 0
+  onScrollUpdate();
+}
+
+function initVideoScrollTextReveal() {
+  initDigitalMarketingScrollVideo();
 }
 
 /* --------------------------------------------------------------------------
@@ -2173,75 +2429,4 @@ function initSiteWideTextRevealOnScroll() {
 
   // Initial calculation on load
   updateTextReveal();
-}
-
-/* --------------------------------------------------------------------------
-   SCROLL VIDEO SHOWCASE — switches digital marketing video on scroll (v4.2)
-   -------------------------------------------------------------------------- */
-function initScrollVideoShowcase() {
-  const showcases = document.querySelectorAll('.scroll-video-showcase');
-  if (!showcases.length) return;
-
-  showcases.forEach(showcase => {
-    const videoEl    = showcase.querySelector('.svs-video-el');
-    const chapters   = showcase.querySelectorAll('.svs-chapter');
-    const captTitle  = showcase.querySelector('.svs-caption-title');
-    const captDesc   = showcase.querySelector('.svs-caption-desc');
-
-    if (!videoEl || !chapters.length) return;
-
-    let currentIndex = -1;
-    let switchTimeout = null;
-
-    function activateChapter(idx) {
-      if (idx === currentIndex) return;
-      currentIndex = idx;
-
-      const ch = chapters[idx];
-      const newSrc   = ch.dataset.videoSrc  || '';
-      const newTitle = ch.dataset.capTitle  || '';
-      const newDesc  = ch.dataset.capDesc   || '';
-
-      // Fade out, swap src, fade in
-      videoEl.classList.add('svs-fade-out');
-      clearTimeout(switchTimeout);
-      switchTimeout = setTimeout(() => {
-        if (videoEl.src !== newSrc) {
-          videoEl.src = newSrc;
-          videoEl.load();
-          videoEl.play().catch(() => {});
-        }
-        if (captTitle) captTitle.textContent = newTitle;
-        if (captDesc)  captDesc.textContent  = newDesc;
-        videoEl.classList.remove('svs-fade-out');
-      }, 280);
-
-      // Update active state on chapters
-      chapters.forEach((c, i) => {
-        c.classList.toggle('svs-active', i === idx);
-      });
-    }
-
-    // Click to jump to chapter manually
-    chapters.forEach((ch, idx) => {
-      ch.addEventListener('click', () => activateChapter(idx));
-    });
-
-    // IntersectionObserver — activate chapter when it crosses the viewport midline
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const idx = Array.from(chapters).indexOf(entry.target);
-        if (idx !== -1) activateChapter(idx);
-      });
-    }, {
-      rootMargin: '-30% 0px -30% 0px',
-      threshold: 0
-    });
-
-    chapters.forEach(ch => io.observe(ch));
-
-    // Activate first chapter immediately
-    activateChapter(0);
-  });
 }

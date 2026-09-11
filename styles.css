@@ -5080,251 +5080,270 @@ p.reveal-text-container {
 }
 
 /* ==========================================================================
-   SCROLL VIDEO SHOWCASE — Digital Marketing Video Switcher (v4.2)
+   DIGITAL MARKETING VIDEO SHOWCASE & SCROLL-DRIVEN SCENE ENGINE
    ========================================================================== */
 
-.scroll-video-showcase {
-  padding: 90px 0 100px;
-  background: var(--bg-primary);
+.marketing-video-section {
+  padding: 96px 0;
+  position: relative;
   overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, rgba(211, 171, 85, 0.08) 0%, transparent 70%);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.video-scene-container {
+  max-width: 980px;
+  margin: 0 auto;
   position: relative;
 }
 
-.scroll-video-showcase::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(var(--accent-rgb, 212, 175, 55), 0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.svs-header {
-  text-align: center;
-  margin-bottom: 64px;
-}
-
-.svs-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: start;
+.marketing-video-player {
   position: relative;
-}
-
-/* Sticky video pane */
-.svs-video-pane {
-  position: sticky;
-  top: 100px;
-  border-radius: 20px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(211, 171, 85, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(211, 171, 85, 0.18);
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255,255,255,0.06);
-  background: #000;
+  background: #000000;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.svs-video-wrap {
+.marketing-video-player:hover {
+  border-color: rgba(211, 171, 85, 0.65);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(211, 171, 85, 0.28);
+}
+
+/* Scene Navigation Bar */
+.video-scenes-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.video-scene-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 20, 26, 0.88);
+  border: 1px solid rgba(211, 171, 85, 0.28);
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+}
+
+.video-scene-btn:hover {
+  border-color: rgba(211, 171, 85, 0.7);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.video-scene-btn.active {
+  background: rgba(211, 171, 85, 0.18);
+  border-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(211, 171, 85, 0.32);
+}
+
+.video-scene-btn .scene-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.video-scene-btn.active .scene-indicator {
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  transform: scale(1.25);
+}
+
+.video-scene-btn .scene-num {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 0.75rem;
+}
+
+[data-theme="light"] .video-scene-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(181, 136, 50, 0.35);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .video-scene-btn.active {
+  background: rgba(181, 136, 50, 0.15);
+  border-color: var(--primary);
+  color: #0a0b0d;
+}
+
+/* Floating Digital Marketing Video Scene Pod */
+.floating-video-scene-pod {
+  position: fixed;
+  bottom: 28px;
+  right: 84px;
+  z-index: 999;
+  width: 260px;
+  background: rgba(10, 12, 16, 0.94);
+  border: 1px solid rgba(211, 171, 85, 0.5);
+  border-radius: var(--radius-md);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 28px rgba(211, 171, 85, 0.22);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .floating-video-scene-pod {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(181, 136, 50, 0.5);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18), 0 0 20px rgba(181, 136, 50, 0.2);
+}
+
+.floating-video-scene-pod.minimized {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(211, 171, 85, 0.35);
+  cursor: pointer;
+}
+
+.floating-video-scene-pod.minimized .pod-info,
+.floating-video-scene-pod.minimized .pod-controls .pod-mute-btn {
+  display: none !important;
+}
+
+.floating-video-scene-pod.minimized .pod-video-preview {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.floating-video-scene-pod.minimized .pod-controls {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  right: auto;
+}
+
+.pod-video-preview {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #0a0a0a;
+  background: #000;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.svs-video-el {
+.pod-video-preview video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 0.55s ease;
 }
 
-.svs-video-el.svs-fade-out {
-  opacity: 0;
+.pod-info {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: inherit;
 }
 
-.svs-video-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 100px;
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 600;
+.pod-scene-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.svs-video-badge .pulse-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #d4af37;
-  animation: svsLivePulse 1.6s ease-in-out infinite;
-}
-
-@keyframes svsLivePulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.7); }
-}
-
-.svs-video-caption {
-  padding: 18px 20px;
-  background: var(--bg-secondary, #111);
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-.svs-caption-title {
-  font-size: 0.88rem;
+.pod-scene-title {
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--text-primary, #fff);
-  margin: 0 0 3px;
-}
-
-.svs-caption-desc {
-  font-size: 0.78rem;
-  color: var(--text-secondary, rgba(255,255,255,0.55));
-  margin: 0;
-}
-
-/* Chapter list pane */
-.svs-chapters {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0;
-}
-
-.svs-chapter {
-  padding: 28px 24px 28px 32px;
-  border-left: 3px solid rgba(255,255,255,0.08);
-  cursor: pointer;
-  transition: border-color 0.35s ease, background 0.35s ease;
-  border-radius: 0 14px 14px 0;
-  position: relative;
-}
-
-.svs-chapter:hover {
-  background: rgba(255,255,255,0.03);
-  border-left-color: rgba(212, 175, 55, 0.4);
-}
-
-.svs-chapter.svs-active {
-  border-left-color: #d4af37;
-  background: rgba(212, 175, 55, 0.05);
-}
-
-.svs-chapter.svs-active .svs-chapter-num {
-  color: #d4af37;
-}
-
-.svs-chapter.svs-active .svs-chapter-title {
-  color: var(--text-primary, #fff);
-}
-
-.svs-chapter-num {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-secondary, rgba(255,255,255,0.38));
-  margin-bottom: 6px;
-  display: block;
-  transition: color 0.35s ease;
-}
-
-.svs-chapter-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-secondary, rgba(255,255,255,0.7));
-  margin: 0 0 6px;
-  transition: color 0.35s ease;
-}
-
-.svs-chapter-body {
-  font-size: 0.84rem;
-  color: var(--text-secondary, rgba(255,255,255,0.5));
-  line-height: 1.65;
-  margin: 0;
-}
-
-/* Progress bar inside active chapter */
-.svs-chapter-progress {
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: transparent;
+  color: #ffffff;
+  white-space: nowrap;
   overflow: hidden;
-  border-radius: 0;
+  text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
-.svs-chapter.svs-active .svs-chapter-progress::after {
-  content: '';
-  position: absolute;
-  left: 0; top: 0;
+[data-theme="light"] .pod-scene-title {
+  color: #0a0b0d;
+}
+
+.pod-progress-bar {
   width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-top: 6px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.pod-progress-filled {
   height: 100%;
-  background: #d4af37;
-  animation: svsProgress 8s linear infinite;
+  background: linear-gradient(90deg, #fff5c5, #d3ab55);
+  width: 0%;
+  transition: width 0.15s ease-out;
 }
 
-@keyframes svsProgress {
-  from { transform: scaleY(0); transform-origin: top; }
-  to { transform: scaleY(1); transform-origin: top; }
+.pod-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .svs-layout {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
+.pod-btn {
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(211, 171, 85, 0.4);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-  .svs-video-pane {
-    position: static;
-  }
+.pod-btn:hover {
+  background: var(--primary);
+  color: #000000;
+}
 
-  .svs-chapters {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
+@media (max-width: 768px) {
+  .floating-video-scene-pod {
+    bottom: 76px;
+    right: 16px;
+    width: 200px;
   }
-
-  .svs-chapter {
-    border-left: none;
-    border-bottom: 3px solid rgba(255,255,255,0.08);
-    border-radius: 14px 14px 0 0;
-    flex: 1 1 calc(50% - 6px);
-    padding: 18px 18px 18px 18px;
+  .floating-video-scene-pod.minimized {
+    width: 46px;
+    height: 46px;
+    bottom: 76px;
+    right: 16px;
   }
-
-  .svs-chapter.svs-active {
-    border-bottom-color: #d4af37;
-    border-left: none;
+  .video-scenes-nav {
+    gap: 8px;
   }
-
-  .svs-chapter-progress {
-    width: 100%; height: 3px;
-    top: auto; left: 0; right: 0; bottom: 0;
-  }
-
-  .svs-chapter.svs-active .svs-chapter-progress::after {
-    animation: svsProgressH 8s linear infinite;
-  }
-
-  @keyframes svsProgressH {
-    from { transform: scaleX(0); transform-origin: left; }
-    to { transform: scaleX(1); transform-origin: left; }
+  .video-scene-btn {
+    padding: 6px 12px;
+    font-size: 0.76rem;
   }
 }
 
-@media (max-width: 540px) {
-  .svs-chapter {
-    flex: 1 1 100%;
-  }
-}
+
+
 
