@@ -4651,5 +4651,180 @@ body.page-entering {
   }
 }
 
+/* ==========================================================================
+   SCROLL-LINKED TEXT REVEAL ANIMATIONS (ONE-BY-ONE)
+   ========================================================================== */
+
+/* Word-by-word reveal container */
+.reveal-text-container {
+  display: inline;
+}
+
+.reveal-word {
+  display: inline-block;
+  opacity: 0.2;
+  filter: blur(2.5px);
+  transform: translateY(6px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+  white-space: pre;
+}
+
+.reveal-word.is-revealed {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+.reveal-word.gradient-word {
+  background: linear-gradient(135deg, #fff5c5 0%, #f4d685 40%, #d3ab55 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .reveal-word.gradient-word {
+  background: linear-gradient(135deg, #8a651a 0%, #b58832 50%, #d3ab55 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* In-Video Kinetic Scroll Subtitle HUD Overlay */
+.video-scroll-hud-overlay {
+  position: absolute;
+  bottom: 65px;
+  left: 20px;
+  right: 20px;
+  z-index: 8;
+  background: rgba(4, 5, 6, 0.88);
+  border: 1px solid rgba(211, 171, 85, 0.5);
+  border-radius: var(--radius-md);
+  padding: 14px 22px;
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 24px rgba(211, 171, 85, 0.25);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+[data-theme="light"] .video-scroll-hud-overlay {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(181, 136, 50, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 18px rgba(181, 136, 50, 0.2);
+}
+
+.scroll-hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(211, 171, 85, 0.18);
+  border: 1px solid rgba(211, 171, 85, 0.4);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.hud-live-spark {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: pulseCyan 1.5s infinite;
+}
+
+@keyframes pulseCyan {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.hud-step-tag {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hud-scroll-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.hud-hook-title {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+[data-theme="light"] .hud-hook-title {
+  color: #0a0b0d;
+}
+
+.hud-hook-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Capability Cards Scroll Reveal in Portfolio */
+.capability-card {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.capability-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.capability-card.scroll-active {
+  border-color: rgba(211, 171, 85, 0.7);
+  background: rgba(26, 30, 38, 0.95);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(211, 171, 85, 0.2);
+}
+
+[data-theme="light"] .capability-card.scroll-active {
+  background: #ffffff;
+  border-color: rgba(181, 136, 50, 0.65);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08), 0 0 20px rgba(181, 136, 50, 0.15);
+}
+
+.capability-card.scroll-active::before {
+  opacity: 1;
+}
+
+.capability-card.scroll-active .capability-number {
+  transform: scale(1.1);
+}
+
+@media (max-width: 640px) {
+  .video-scroll-hud-overlay {
+    flex-direction: column;
+    align-items: flex-start;
+    bottom: 55px;
+    left: 10px;
+    right: 10px;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+}
+
 
 

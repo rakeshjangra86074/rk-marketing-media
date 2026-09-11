@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initBackToTop();
   initPageTransitions();
+  initVideoScrollTextReveal();
+  initSiteWideTextRevealOnScroll();
 });
 
 /* --------------------------------------------------------------------------
@@ -1904,4 +1906,197 @@ function initPageTransitions() {
       }, 350);
     }
   });
+}
+
+/* --------------------------------------------------------------------------
+   23. In-Video & Section Kinetic Scroll Text Reveal (One-by-One)
+   -------------------------------------------------------------------------- */
+function initVideoScrollTextReveal() {
+  const hudStepTag = document.getElementById('hudScrollStepTag');
+  const hudHookTitle = document.getElementById('hudHookTitle');
+  const hudHookDesc = document.getElementById('hudHookDesc');
+  const capabilityCards = document.querySelectorAll('#videoCapabilitiesGrid .capability-card');
+
+  const videoSteps = [
+    {
+      step: 'FRAME 01 / 04',
+      title: '01 • The 3-Second Hook',
+      desc: 'Disrupting pattern fatigue in the first 90 frames to stop 85%+ swipe-aways'
+    },
+    {
+      step: 'FRAME 02 / 04',
+      title: '02 • Micro-Cut Pacing',
+      desc: 'Strategic B-roll transitions and dynamic zoom-ins keeping rhythm fast'
+    },
+    {
+      step: 'FRAME 03 / 04',
+      title: '03 • Kinetic Sound & SFX',
+      desc: 'Custom beat-matched audio cues and sonic drops driving emotional retention'
+    },
+    {
+      step: 'FRAME 04 / 04',
+      title: '04 • Seamless Conversion',
+      desc: 'Natural CTA mechanics funneling viewers into saves and consultation DMs'
+    }
+  ];
+
+  let currentStepIdx = -1;
+  let ticking = false;
+
+  function updateVideoScrollHUD() {
+    const videoSection = document.getElementById('videoShowcase');
+    if (videoSection && hudStepTag && hudHookTitle && hudHookDesc) {
+      const rect = videoSection.getBoundingClientRect();
+      const winH = window.innerHeight;
+      
+      // Calculate how far through the video section the user has scrolled
+      const start = winH * 0.75;
+      const totalDist = rect.height;
+      const scrolled = start - rect.top;
+      const progress = Math.min(Math.max(scrolled / totalDist, 0), 0.999);
+
+      const stepIdx = Math.floor(progress * videoSteps.length);
+
+      if (stepIdx !== currentStepIdx && stepIdx >= 0 && stepIdx < videoSteps.length) {
+        currentStepIdx = stepIdx;
+        const data = videoSteps[stepIdx];
+
+        hudHookTitle.style.opacity = '0';
+        hudHookDesc.style.opacity = '0';
+        hudHookTitle.style.transform = 'translateY(4px)';
+        hudHookDesc.style.transform = 'translateY(4px)';
+
+        setTimeout(() => {
+          hudStepTag.textContent = data.step;
+          hudHookTitle.textContent = data.title;
+          hudHookDesc.textContent = data.desc;
+
+          hudHookTitle.style.opacity = '1';
+          hudHookDesc.style.opacity = '1';
+          hudHookTitle.style.transform = 'translateY(0)';
+          hudHookDesc.style.transform = 'translateY(0)';
+        }, 120);
+
+        // Highlight capability cards one by one
+        capabilityCards.forEach((card, idx) => {
+          if (idx <= stepIdx) {
+            card.classList.add('scroll-active');
+            const words = card.querySelectorAll('.reveal-word');
+            words.forEach(w => w.classList.add('is-revealed'));
+          } else {
+            card.classList.remove('scroll-active');
+          }
+        });
+      }
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateVideoScrollHUD);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateVideoScrollHUD();
+}
+
+/* --------------------------------------------------------------------------
+   24. Site-Wide Text Reveal on Scroll (Word-by-Word One-by-One)
+   -------------------------------------------------------------------------- */
+function initSiteWideTextRevealOnScroll() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const targetSelectors = [
+    '.section-title',
+    '.page-hero-title',
+    '.hero-title',
+    '.section-description',
+    '.page-hero-desc',
+    '.hero-subtitle',
+    '.subpage-cta-title',
+    '.engine-heading',
+    '.capability-card h4',
+    '.capability-card p'
+  ];
+
+  const elements = document.querySelectorAll(targetSelectors.join(', '));
+  if (!elements.length) return;
+
+  elements.forEach(el => {
+    if (el.dataset.textRevealInit) return;
+    el.dataset.textRevealInit = 'true';
+
+    // Wrap words in text nodes while preserving gradient-text and child tags
+    function wrapWordsInNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent;
+        if (!text.trim()) return null;
+
+        const words = text.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+
+        words.forEach(word => {
+          if (!word) return;
+          if (/^\s+$/.test(word)) {
+            frag.appendChild(document.createTextNode(word));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'reveal-word';
+            span.textContent = word;
+            frag.appendChild(span);
+          }
+        });
+
+        return frag;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const isGradient = node.classList.contains('gradient-text');
+        const childNodes = Array.from(node.childNodes);
+        childNodes.forEach(child => {
+          const replacement = wrapWordsInNode(child);
+          if (replacement) {
+            node.replaceChild(replacement, child);
+          }
+        });
+        if (isGradient) {
+          node.querySelectorAll('.reveal-word').forEach(w => w.classList.add('gradient-word'));
+        }
+        return null;
+      }
+      return null;
+    }
+
+    const childNodes = Array.from(el.childNodes);
+    childNodes.forEach(child => {
+      const replacement = wrapWordsInNode(child);
+      if (replacement) {
+        el.replaceChild(replacement, child);
+      }
+    });
+
+    el.classList.add('reveal-text-container');
+  });
+
+  // IntersectionObserver to reveal words one by one as they scroll into view
+  const revealObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const words = entry.target.querySelectorAll('.reveal-word');
+        words.forEach((word, idx) => {
+          setTimeout(() => {
+            word.classList.add('is-revealed');
+          }, idx * 28);
+        });
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  elements.forEach(el => revealObserver.observe(el));
 }

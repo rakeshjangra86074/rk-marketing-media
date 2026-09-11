@@ -210,6 +210,17 @@
               <div class="video-hud-badge top-right">
                 <span>1080P HD / 10+ MINS</span>
               </div>
+              <!-- In-Video Kinetic Scroll Text HUD (Reveals One-By-One while scrolling) -->
+              <div class="video-scroll-hud-overlay" id="videoScrollHudOverlay" aria-live="polite">
+                <div class="scroll-hud-pill">
+                  <span class="hud-live-spark"></span>
+                  <span class="hud-step-tag" id="hudScrollStepTag">FRAME 01 / 04</span>
+                </div>
+                <div class="hud-scroll-text" id="hudScrollText">
+                  <span class="hud-hook-title" id="hudHookTitle">01 • The 3-Second Hook</span>
+                  <span class="hud-hook-desc" id="hudHookDesc">Disrupting pattern fatigue in the first 90 frames to stop 85%+ swipe-aways</span>
+                </div>
+              </div>
               <div class="video-custom-controls" id="videoCustomControls">
                 <button class="v-ctrl-btn" id="vPlayToggle" type="button" title="Play/Pause" aria-label="Play or Pause">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon-play"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
@@ -241,7 +252,7 @@
             </p>
           </div>
 
-          <div class="capabilities-grid">
+          <div class="capabilities-grid" id="videoCapabilitiesGrid">
             <div class="capability-card">
               <div class="capability-number">01</div>
               <h4>The 3-Second Hook</h4>
