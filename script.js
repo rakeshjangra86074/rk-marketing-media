@@ -2076,6 +2076,8 @@ function initSiteWideTextRevealOnScroll() {
           }
         });
         if (isGradient) {
+          node.style.background = 'none';
+          node.style.webkitTextFillColor = 'initial';
           node.querySelectorAll('.reveal-word').forEach(w => w.classList.add('gradient-word'));
         }
         return null;
