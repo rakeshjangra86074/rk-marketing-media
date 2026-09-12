@@ -260,6 +260,11 @@ button, input, textarea, select {
   -webkit-text-fill-color: initial !important;
 }
 
+.title-line-break {
+  display: block !important;
+  margin-top: 4px;
+}
+
 /* --- Section Utilities --- */
 .section {
   padding: 96px 0;
