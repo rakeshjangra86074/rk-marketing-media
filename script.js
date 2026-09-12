@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoScrollTextReveal();
   initSiteWideTextRevealOnScroll();
   initBidirectionalScrollAnimations();
+  initOryzoAnimations();
 });
 
 /* --------------------------------------------------------------------------
@@ -2551,4 +2552,95 @@ function initBidirectionalScrollAnimations() {
     }
   }, { passive: true });
 }
+
+/* --------------------------------------------------------------------------
+   25. Oryzo.ai Signature Animation Suite & Magnetic Micro-Interactions
+   -------------------------------------------------------------------------- */
+function initOryzoAnimations() {
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1. Automatically register target cards for Oryzo Magnetic Spotlight
+  const autoTargetCards = [
+    '.roadmap-step',
+    '.testimonial-card',
+    '.partner-card',
+    '.faq-item',
+    '.service-card',
+    '.portfolio-card',
+    '.insight-card',
+    '.pillar-card',
+    '.contact-card',
+    '.advantage-card',
+    '.framework-card',
+    '.industry-card',
+    '.subpage-cta-banner',
+    '.roi-controls-card',
+    '.roi-results-card'
+  ];
+
+  const cards = document.querySelectorAll(autoTargetCards.join(', '));
+  cards.forEach(card => {
+    card.classList.add('oryzo-glow-card');
+  });
+
+  // 2. Attach Pointer Move listener to update dynamic spotlight and micro-tilt
+  const glowCards = document.querySelectorAll('.oryzo-glow-card');
+
+  glowCards.forEach(card => {
+    let animFrameId = null;
+
+    card.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Update CSS variables for radial spotlight and illuminated border
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+
+      if (!prefersReduced && !isTouchDevice) {
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+        animFrameId = requestAnimationFrame(() => {
+          const normX = (x / rect.width) * 2 - 1;
+          const normY = (y / rect.height) * 2 - 1;
+          card.style.setProperty('--tilt-x', normX.toFixed(3));
+          card.style.setProperty('--tilt-y', normY.toFixed(3));
+        });
+      }
+    });
+
+    card.addEventListener('pointerleave', () => {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      card.style.removeProperty('--tilt-x');
+      card.style.removeProperty('--tilt-y');
+    });
+  });
+
+  // 3. Enhance primary & CTA buttons with Oryzo glass shimmer reflection
+  const primaryButtons = document.querySelectorAll('.btn-primary, .cta-banner .btn, .subpage-cta-banner .btn');
+  primaryButtons.forEach(btn => {
+    btn.classList.add('btn-oryzo-shimmer');
+  });
+
+  // 4. Wrap elements with .oryzo-halo-glow if specified or ensure halo layers exist
+  const haloContainers = document.querySelectorAll('.oryzo-halo-glow');
+  haloContainers.forEach(container => {
+    if (!container.querySelector('.oryzo-halo-layer')) {
+      const haloLayer = document.createElement('div');
+      haloLayer.className = 'oryzo-halo-layer';
+      haloLayer.setAttribute('aria-hidden', 'true');
+      container.prepend(haloLayer);
+    }
+    if (!container.querySelector('.oryzo-border-ring')) {
+      const borderRing = document.createElement('div');
+      borderRing.className = 'oryzo-border-ring';
+      borderRing.setAttribute('aria-hidden', 'true');
+      container.prepend(borderRing);
+    }
+  });
+}
+
 
