@@ -980,9 +980,11 @@ button, input, textarea, select {
   right: -24px;
 }
 
-.badge-bottom-left {
+.badge-bottom-left,
+.badge-bottom-right {
   bottom: -24px;
-  left: -24px;
+  right: -24px;
+  left: auto;
   animation-delay: -2s;
 }
 
@@ -3110,9 +3112,11 @@ button, input, textarea, select {
     right: 0;
   }
 
-  .badge-bottom-left {
+  .badge-bottom-left,
+  .badge-bottom-right {
     bottom: -10px;
-    left: 0;
+    right: 0;
+    left: auto;
   }
 
   .footer-bottom-inner {
