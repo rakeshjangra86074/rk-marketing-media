@@ -2854,10 +2854,11 @@ button, input, textarea, select {
 
 /* --- FOOTER --- */
 .site-footer {
-  background: #090b0f;
-  background: linear-gradient(180deg, #0d0f15 0%, #060709 100%);
-  border-top: 1px solid rgba(211, 171, 85, 0.28);
-  box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.65);
+  background: #eaedf2;
+  background: linear-gradient(180deg, #f2f4f8 0%, #e5e9ef 100%);
+  color: #111827;
+  border-top: 1.5px solid rgba(211, 171, 85, 0.45);
+  box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.22);
   position: relative;
   z-index: 5;
   padding-top: 72px;
@@ -2871,10 +2872,52 @@ button, input, textarea, select {
   transform: translateX(-50%);
   width: 65%;
   max-width: 680px;
-  height: 1.5px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, var(--primary), transparent);
-  box-shadow: 0 0 16px var(--primary-glow);
+  box-shadow: 0 0 14px rgba(211, 171, 85, 0.55);
   pointer-events: none;
+}
+
+.site-footer .brand-logo {
+  color: #0f141c;
+}
+
+.site-footer .footer-tagline {
+  color: #4b5565;
+}
+
+.site-footer .footer-heading {
+  color: #0f141c;
+  font-weight: 800;
+}
+
+.site-footer .footer-links a {
+  color: #4b5565;
+  font-weight: 500;
+}
+
+.site-footer .footer-links a:hover {
+  color: #b58832;
+}
+
+.site-footer .footer-newsletter p {
+  color: #4b5565;
+}
+
+.site-footer .newsletter-form input {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: #0f141c;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.site-footer .newsletter-form input::placeholder {
+  color: #94a3b8;
+}
+
+.site-footer .newsletter-form input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
 }
 
 .footer-container {
@@ -2894,7 +2937,7 @@ button, input, textarea, select {
 }
 
 .footer-brand-col .footer-tagline {
-  color: var(--text-secondary);
+  color: #4b5565;
   font-size: 0.925rem;
   margin-top: 16px;
   max-width: 320px;
@@ -2917,7 +2960,7 @@ button, input, textarea, select {
 }
 
 .footer-links a {
-  color: var(--text-secondary);
+  color: #4b5565;
   font-size: 0.9rem;
   text-align: left;
 }
@@ -2933,7 +2976,7 @@ button, input, textarea, select {
 
 .footer-newsletter p {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: #4b5565;
   margin-bottom: 16px;
   text-align: left;
 }
@@ -2943,24 +2986,9 @@ button, input, textarea, select {
   gap: 8px;
 }
 
-.newsletter-form input {
-  flex: 1;
-  background: var(--input-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 8px 14px;
-  font-size: 0.875rem;
-  color: var(--text-primary);
-  outline: none;
-}
-
-.newsletter-form input:focus {
-  border-color: var(--primary);
-}
-
 .footer-bottom {
-  background: #040507;
-  border-top: 1px solid rgba(211, 171, 85, 0.14);
+  background: #dbe0e8;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   padding: 24px 0;
 }
 
@@ -2969,7 +2997,7 @@ button, input, textarea, select {
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: #4b5565;
 }
 
 .footer-legal {
@@ -2978,25 +3006,27 @@ button, input, textarea, select {
   align-items: center;
 }
 
+.footer-legal a {
+  color: #4b5565;
+}
+
 .footer-legal a:hover {
-  color: var(--text-primary);
+  color: #0f141c;
+}
+
+.footer-legal .sep {
+  color: #94a3b8;
 }
 
 [data-theme="light"] .site-footer {
-  background: #ede7d9;
-  background: linear-gradient(180deg, #f2ede1 0%, #e6dfcf 100%);
-  border-top: 1px solid rgba(181, 136, 50, 0.32);
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .site-footer::before {
-  background: linear-gradient(90deg, transparent, var(--accent-gold-deep), transparent);
-  box-shadow: 0 0 12px rgba(181, 136, 50, 0.35);
+  background: #eaedf2;
+  background: linear-gradient(180deg, #f2f4f8 0%, #e5e9ef 100%);
+  border-top: 1.5px solid rgba(181, 136, 50, 0.4);
 }
 
 [data-theme="light"] .footer-bottom {
-  background: #ded7c6;
-  border-top: 1px solid rgba(181, 136, 50, 0.18);
+  background: #dbe0e8;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* --- RESPONSIVE MEDIA QUERIES --- */
