@@ -977,15 +977,25 @@ button, input, textarea, select {
 
 .badge-top-right {
   top: -20px;
-  right: -24px;
+  right: -125px;
 }
 
 .badge-bottom-left,
 .badge-bottom-right {
   bottom: -24px;
-  right: -24px;
+  right: -125px;
   left: auto;
   animation-delay: -2s;
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .badge-top-right {
+    right: -80px;
+  }
+  .badge-bottom-left,
+  .badge-bottom-right {
+    right: -80px;
+  }
 }
 
 @keyframes floatBounce {
