@@ -1224,8 +1224,10 @@ function initFloatingSocialCursorTracking() {
   const cardData = [
     { el: document.querySelector('.card-instagram'), depthX: -0.16, depthY: -0.14, speed: 0.0016, ampX: 22, ampY: 26, phase: 0 },
     { el: document.querySelector('.card-youtube'),   depthX: 0.20,  depthY: 0.16,  speed: 0.0014, ampX: 25, ampY: 30, phase: 1.8 },
+    { el: document.querySelector('.card-meta'),      depthX: 0.14,  depthY: -0.15, speed: 0.0012, ampX: 20, ampY: 22, phase: 0.8 },
     { el: document.querySelector('.card-facebook'),  depthX: -0.18, depthY: 0.18,  speed: 0.0015, ampX: 20, ampY: 24, phase: 3.2 },
     { el: document.querySelector('.card-linkedin'),  depthX: 0.17,  depthY: -0.17, speed: 0.0013, ampX: 24, ampY: 28, phase: 4.5 },
+    { el: document.querySelector('.card-analytics'), depthX: -0.13, depthY: 0.14,  speed: 0.0018, ampX: 22, ampY: 25, phase: 3.9 },
     { el: document.querySelector('.card-twitter'),   depthX: -0.22, depthY: -0.14, speed: 0.0017, ampX: 18, ampY: 26, phase: 2.3 },
     { el: document.querySelector('.card-viral'),     depthX: 0.18,  depthY: 0.20,  speed: 0.0015, ampX: 22, ampY: 25, phase: 5.1 }
   ].filter(item => item.el !== null);

@@ -184,41 +184,53 @@ body {
   filter: drop-shadow(0 0 8px rgba(181, 136, 50, 0.35));
 }
 
-/* Placements Across Viewport */
+/* Placements Across Whole Viewport (Distributed across whole page: center, mid, diagonals, background) */
 .card-instagram {
-  top: 13%;
-  left: 3%;
+  top: 12%;
+  left: 8%;
   opacity: 0.65;
 }
 
 .card-youtube {
-  top: 24%;
-  right: 3%;
+  top: 18%;
+  right: 10%;
   opacity: 0.62;
 }
 
+.card-meta {
+  top: 8%;
+  left: 52%;
+  opacity: 0.55;
+}
+
 .card-facebook {
-  top: 46%;
-  left: 3.5%;
-  opacity: 0.60;
-}
-
-.card-linkedin {
-  top: 64%;
-  right: 3.5%;
-  opacity: 0.64;
-}
-
-.card-twitter {
-  top: 78%;
-  left: 3%;
+  top: 36%;
+  left: 26%;
   opacity: 0.58;
 }
 
-.card-viral {
-  top: 88%;
-  right: 4%;
+.card-linkedin {
+  top: 52%;
+  right: 22%;
   opacity: 0.60;
+}
+
+.card-analytics {
+  top: 62%;
+  left: 54%;
+  opacity: 0.55;
+}
+
+.card-twitter {
+  top: 72%;
+  left: 18%;
+  opacity: 0.56;
+}
+
+.card-viral {
+  top: 84%;
+  right: 16%;
+  opacity: 0.58;
 }
 
 a {
