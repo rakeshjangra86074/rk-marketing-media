@@ -328,11 +328,19 @@ button, input, textarea, select {
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.25;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   text-align: center;
   max-width: 820px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.section-header .section-title {
+  margin-bottom: 6px;
+}
+
+.section-header .oryzo-dashline {
+  margin: 6px auto 10px auto !important;
 }
 
 .section-description {
@@ -343,6 +351,7 @@ button, input, textarea, select {
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
 }
 
 /* --- Buttons --- */
@@ -6139,7 +6148,7 @@ p.reveal-text-container {
     var(--dash-color) 0 3px,
     transparent 0 7px
   );
-  margin: 18px 0;
+  margin: 10px 0;
   background-size: 28px 100%;
   animation: oryzoDashFlow 12s linear infinite;
   opacity: 0.85;
