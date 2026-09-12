@@ -339,7 +339,8 @@ button, input, textarea, select {
   margin-bottom: 6px;
 }
 
-.section-header .oryzo-dashline {
+.section-header .oryzo-dashline,
+.section-header .section-line-anim {
   margin: 6px auto 10px auto !important;
 }
 
@@ -6138,24 +6139,143 @@ p.reveal-text-container {
   animation: oryzoSheenSweep 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-/* 6. Precision Cyber Dashline Dividers (.oryzo-dashline) */
+/* 6. Precision Animated Cyber & Gold Line Dividers (.section-line-anim / .oryzo-dashline) */
+.section-line-anim,
 .oryzo-dashline {
-  --dash-color: rgba(211, 171, 85, 0.32);
-  height: 1.5px;
+  position: relative;
   width: 100%;
-  background: repeating-linear-gradient(
+  max-width: 140px;
+  height: 2px;
+  margin: 6px auto 10px auto !important;
+  background: linear-gradient(
     90deg,
-    var(--dash-color) 0 3px,
-    transparent 0 7px
+    transparent 0%,
+    rgba(211, 171, 85, 0.28) 20%,
+    rgba(211, 171, 85, 0.65) 50%,
+    rgba(211, 171, 85, 0.28) 80%,
+    transparent 100%
   );
-  margin: 10px 0;
-  background-size: 28px 100%;
-  animation: oryzoDashFlow 12s linear infinite;
-  opacity: 0.85;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(211, 171, 85, 0.2);
+  display: block;
+  overflow: visible;
 }
 
+/* Sweeping high-velocity laser light head */
+.section-line-anim::after,
+.oryzo-dashline::after {
+  content: "";
+  position: absolute;
+  top: -1.5px;
+  left: -45px;
+  width: 45px;
+  height: 5px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.95) 45%,
+    var(--primary-hover) 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px var(--primary-hover), 0 0 20px rgba(211, 171, 85, 0.95);
+  animation: lineLaserTravel 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Pulsing kinetic center glowing node */
+.section-line-anim::before,
+.oryzo-dashline::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff, 0 0 16px var(--primary-hover), 0 0 24px rgba(211, 171, 85, 0.9);
+  animation: lineCenterPulse 2.4s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes lineLaserTravel {
+  0% {
+    left: -45px;
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% + 5px);
+    opacity: 0;
+  }
+}
+
+@keyframes lineCenterPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 1;
+    box-shadow: 0 0 10px #ffffff, 0 0 18px #f4d685, 0 0 28px rgba(211, 171, 85, 0.95);
+  }
+}
+
+[data-theme="light"] .section-line-anim,
 [data-theme="light"] .oryzo-dashline {
-  --dash-color: rgba(181, 136, 50, 0.3);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(181, 136, 50, 0.28) 20%,
+    rgba(181, 136, 50, 0.65) 50%,
+    rgba(181, 136, 50, 0.28) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(181, 136, 50, 0.15);
+}
+
+[data-theme="light"] .section-line-anim::after,
+[data-theme="light"] .oryzo-dashline::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.95) 45%,
+    #d3ab55 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px #d3ab55, 0 0 16px rgba(181, 136, 50, 0.75);
+}
+
+[data-theme="light"] .section-line-anim::before,
+[data-theme="light"] .oryzo-dashline::before {
+  background: #b58832;
+  box-shadow: 0 0 6px #b58832, 0 0 12px rgba(181, 136, 50, 0.7);
+}
+
+/* Specific context alignment overrides */
+.section-header.text-left .section-line-anim,
+.section-header.text-left .oryzo-dashline {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.subpage-cta-banner .section-line-anim,
+.subpage-cta-banner .oryzo-dashline {
+  margin: 6px auto 14px auto !important;
+}
+
+.audit-modal-header .section-line-anim,
+.audit-modal-header .oryzo-dashline {
+  margin: 6px auto 12px auto !important;
 }
 
 /* 7. Pulsing Kinetic Dot Accent (.oryzo-dot-pulse) */
@@ -6175,7 +6295,10 @@ p.reveal-text-container {
   .oryzo-halo-glow .oryzo-halo-layer,
   .oryzo-halo-glow .oryzo-border-ring,
   .btn-oryzo-shimmer:hover::before,
-  .oryzo-dashline,
+  .section-line-anim::after,
+  .section-line-anim::before,
+  .oryzo-dashline::after,
+  .oryzo-dashline::before,
   .oryzo-dot-pulse {
     animation: none !important;
   }
